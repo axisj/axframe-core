@@ -37,8 +37,7 @@ export function getAppData(): AppData | null {
       );
 
       // console.log("state", state.me);
-    } finally {
-    }
+    } finally { /* empty */ }
   }
 
   return null;
