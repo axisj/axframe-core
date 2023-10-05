@@ -8,7 +8,7 @@ interface AppData {
 }
 
 export function setAppData(values: AppData) {
-  sessionStorage.setItem(
+  localStorage.setItem(
     "appData",
     LZUTF8.compress(JSON.stringify(values), {
       outputEncoding: "StorageBinaryString",
@@ -17,17 +17,17 @@ export function setAppData(values: AppData) {
 }
 
 export function clearAppData() {
-  sessionStorage.removeItem("appData");
+  localStorage.removeItem("appData");
 }
 
 export function updateAppData(key: keyof AppData, value: string) {
-  const appData = sessionStorage.getItem("appData") ?? {};
+  const appData = localStorage.getItem("appData") ?? {};
   appData[key] = value;
   setAppData(appData as AppData);
 }
 
 export function getAppData(): AppData | null {
-  const appData = sessionStorage.getItem("appData");
+  const appData = localStorage.getItem("appData");
   if (appData) {
     try {
       return JSON.parse(

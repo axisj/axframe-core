@@ -29,22 +29,33 @@ export function getPersistSerializer<T>(
   return {
     version: storeVersion,
     name: `store-${storeName}`,
+    migrate: async (state: any, version: number) => {
+      console.log(`store-${storeName} migrate`, version);
+      return state;
+    },
     storage: {
       getItem: async (name) => {
         const value: string | undefined = await get(name);
-        const storageValue = JSON.parse(
-          LZUTF8.decompress(value, {
-            inputEncoding: "StorageBinaryString",
-          }),
-          reviver,
-        );
 
-        storageValue.state.loaded = false;
+        try {
+          const storageValue = value ? JSON.parse(
+            LZUTF8.decompress(value, {
+              inputEncoding: "StorageBinaryString",
+            }),
+            reviver,
+          ) : { state: {} }
 
-        if (deserializeFallback) {
-          return deserializeFallback(storageValue);
+          storageValue.state.loaded = false;
+
+          if (deserializeFallback) {
+            return deserializeFallback(storageValue);
+          }
+
+          return storageValue;
+        } catch (e) {
+          console.error(`store-${storeName} getItem`, name, e);
+          return null;
         }
-        return storageValue;
       },
       setItem: async (name, value) => {
         const storageValue = LZUTF8.compress(JSON.stringify(value, replacer), {
@@ -52,6 +63,8 @@ export function getPersistSerializer<T>(
         });
 
         await set(name, storageValue);
+
+
       },
       removeItem: async (name) => {
         await del(name);
