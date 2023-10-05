@@ -73,7 +73,7 @@ function FormSet({ form }: Props) {
     try {
       form.setFieldsValue(convertToDate(saveRequestValue, ["cnsltDt", "birthDt"]));
     } catch (err) {
-      errorDialog(err as any);
+      errorDialog(err as any).then();
     }
   });
 
