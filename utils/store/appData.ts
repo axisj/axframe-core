@@ -15,7 +15,7 @@ export function setAppData(values: AppData) {
 }
 
 export function clearAppData() {
-  localStorage.removeItem("appData");
+  setCookie("appData", "", -1);
 }
 
 export function getAppData(): AppData | null {
