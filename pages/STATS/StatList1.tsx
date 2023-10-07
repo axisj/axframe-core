@@ -12,6 +12,8 @@ interface Props {}
 
 function StatList1({}: Props) {
   const { t } = useI18n();
+  const _t = t.example;
+
   const listData = use$STATS$Store((s) => s.listData);
   const spinning = use$STATS$Store((s) => s.spinning);
   const _colGroups = use$STATS$Store((s) => s.colGroupsPg1);
@@ -49,7 +51,7 @@ function StatList1({}: Props) {
         headColumns={[
           {
             children: [
-              { label: t.pages.example.stats.title, rowspan: 2 },
+              { label: _t.title.stats, rowspan: 2 },
               { label: "기타", colspan: 9 },
             ],
           },

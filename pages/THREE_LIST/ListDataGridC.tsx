@@ -16,6 +16,9 @@ interface Props {
 }
 
 function ListDataGridC({ onClick }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const listCColWidths = use$THREE_LIST$Store((s) => s.listCColWidths);
   const setListCColWidths = use$THREE_LIST$Store((s) => s.setListCColWidths);
   const listCSelectedRowKey = use$THREE_LIST$Store((s) => s.listCSelectedRowKey);
@@ -28,7 +31,6 @@ function ListDataGridC({ onClick }: Props) {
   const delListCData = use$THREE_LIST$Store((s) => s.delListCData);
   const setListCData = use$THREE_LIST$Store((s) => s.setListCData);
 
-  const { t } = useI18n();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -99,7 +101,7 @@ function ListDataGridC({ onClick }: Props) {
   return (
     <>
       <Header>
-        <div>{t.pages.example.list.title}</div>
+        <div>{_t.title.list}</div>
         <ButtonGroup compact>
           <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
           <Button onClick={handleDelSubItem}>{t.button.del}</Button>

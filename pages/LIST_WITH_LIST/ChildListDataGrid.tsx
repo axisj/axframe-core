@@ -17,6 +17,9 @@ interface Props {
 }
 
 function ChildListDataGrid({ onClick }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const childListColWidths = use$LIST_WITH_LIST$Store((s) => s.childListColWidths);
   const childListSelectedRowKey = use$LIST_WITH_LIST$Store((s) => s.childListSelectedRowKey);
   const childListCheckedIndexes = use$LIST_WITH_LIST$Store((s) => s.childListCheckedIndexes);
@@ -29,7 +32,6 @@ function ChildListDataGrid({ onClick }: Props) {
   const delChildListData = use$LIST_WITH_LIST$Store((s) => s.delChildListData);
   const setChildListData = use$LIST_WITH_LIST$Store((s) => s.setChildListData);
 
-  const { t } = useI18n();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -100,7 +102,7 @@ function ChildListDataGrid({ onClick }: Props) {
   return (
     <>
       <Header>
-        <div>{t.pages.example.list.title}</div>
+        <div>{_t.title.list}</div>
         <ButtonGroup compact>
           <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
           <Button onClick={handleDelSubItem}>{t.button.del}</Button>

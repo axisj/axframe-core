@@ -14,11 +14,14 @@ interface Props {}
 
 function App({}: Props) {
   const { t } = useI18n();
+  const _t = t.example;
+
   const init = use$FORM$Store((s) => s.init);
   const reset = use$FORM$Store((s) => s.reset);
   const destroy = use$FORM$Store((s) => s.destroy);
   const saveSpinning = use$FORM$Store((s) => s.saveSpinning);
   const callSaveApi = use$FORM$Store((s) => s.callSaveApi);
+  const programFn = use$FORM$Store((s) => s.programFn);
 
   const [form] = Form.useForm();
   const handleSave = useCallback(async () => {
@@ -54,16 +57,17 @@ function App({}: Props) {
   return (
     <Container>
       <Header>
-        <ProgramTitle icon={<AXFIWriteForm />} title={t.pages.example.form.title}>
+        <ProgramTitle icon={<AXFIWriteForm />}>
           <Button icon={<AXFIRevert />} onClick={reset} size='small' type={"text"}>
             {t.button.reset}
           </Button>
         </ProgramTitle>
         <ButtonGroup compact>
-          <Button onClick={reset}>{t.button.reset}</Button>
-          <Button type={"primary"} loading={saveSpinning} onClick={handleSave}>
-            저장하기
-          </Button>
+          {programFn?.fn02 && (
+            <Button type={"primary"} loading={saveSpinning} onClick={handleSave}>
+              {t.button.save}
+            </Button>
+          )}
         </ButtonGroup>
       </Header>
 

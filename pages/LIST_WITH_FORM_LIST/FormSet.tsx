@@ -16,6 +16,9 @@ interface Props {
 interface DtoItem extends ExampleItem {}
 
 function FormSet({ form }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const saveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.saveRequestValue);
   const setSaveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.setSaveRequestValue);
   const callSaveApi = use$LIST_WITH_FORM_LIST$Store((s) => s.callSaveApi);
@@ -23,8 +26,6 @@ function FormSet({ form }: Props) {
   const formActive = use$LIST_WITH_FORM_LIST$Store((s) => s.formActive);
   const cancelFormActive = use$LIST_WITH_FORM_LIST$Store((s) => s.cancelFormActive);
   const setFormActive = use$LIST_WITH_FORM_LIST$Store((s) => s.setFormActive);
-
-  const { t } = useI18n();
 
   const formInitialValues = React.useRef({}).current; // form 의 초기값 reset해도 이값 으로 리셋됨
 
@@ -85,6 +86,7 @@ function FormSet({ form }: Props) {
             await callSaveApi();
             await cancelFormActive();
           }}
+          validateMessages={t.core.validateMessages}
         >
           <FormBox>
             <Row gutter={[20, 0]}>
@@ -97,16 +99,16 @@ function FormSet({ form }: Props) {
             <Row gutter={[20, 0]}>
               <Col xs={24} sm={8}>
                 <Form.Item
-                  label={t.pages.example.form.area.label}
+                  label={_t.label.area}
                   name={"area"}
                   rules={[{ required: true, message: "커스텀 메세지 사용 가능" }]}
                 >
-                  <Select options={t.pages.example.form.area.options} />
+                  <Select options={_t.options.area} />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.cnsltDt.label} name={"cnsltDt"}>
+                <Form.Item label={_t.label.cnsltDt} name={"cnsltDt"}>
                   <DatePicker />
                 </Form.Item>
               </Col>

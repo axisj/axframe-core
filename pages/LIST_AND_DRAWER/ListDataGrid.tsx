@@ -13,6 +13,9 @@ interface Props {
 }
 
 function ListDataGrid({ onClick }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const listColWidths = use$LIST_AND_DRAWER$Store((s) => s.listColWidths);
   const listSortParams = use$LIST_AND_DRAWER$Store((s) => s.listSortParams);
   const listData = use$LIST_AND_DRAWER$Store((s) => s.listData);
@@ -22,7 +25,6 @@ function ListDataGrid({ onClick }: Props) {
   const setListSortParams = use$LIST_AND_DRAWER$Store((s) => s.setListSortParams);
   const changeListPage = use$LIST_AND_DRAWER$Store((s) => s.changeListPage);
 
-  const { t } = useI18n();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -34,22 +36,21 @@ function ListDataGrid({ onClick }: Props) {
   );
 
   const columns = React.useMemo(() => {
-    const datagrid = t.pages.example.datagrid;
     return (
       [
-        { key: "id", label: datagrid.id, align: "left", width: 80 },
-        { key: "name", label: datagrid.성명, align: "left", width: 80 },
-        { key: "cnsltDt", label: datagrid.상담일, align: "left", width: 100 },
-        { key: "area", label: datagrid.행정구, align: "left", width: 80 },
-        { key: "birthDt", label: datagrid.생년월일, align: "center", width: 120 },
-        { key: "phone1", label: datagrid.연락처, align: "center", width: 150 },
-        { key: "cnsltHow", label: datagrid.상담방법, align: "left", width: 100 },
-        { key: "cnsltPath", label: datagrid.상담경로, align: "left", width: 150 },
-        { key: "fmTyp", label: datagrid.가구유형, align: "left", width: 100 },
-        { key: "homeTyp", label: datagrid.거주형태, align: "left", width: 100 },
-        { key: "fldA", label: datagrid.수급, align: "left", width: 100 },
-        { key: "hopePoint", label: datagrid.주요욕구, align: "left", width: 150 },
-        { key: "updatedByNm", label: datagrid.상담원, align: "left", width: 120 },
+        { key: "id", label: _t.label.id, align: "left", width: 80 },
+        { key: "name", label: _t.label.name, align: "left", width: 80 },
+        { key: "cnsltDt", label: _t.label.cnsltDt, align: "left", width: 100 },
+        { key: "area", label: _t.label.area, align: "left", width: 80 },
+        { key: "birthDt", label: _t.label.birthDt, align: "center", width: 120 },
+        { key: "phone1", label: _t.label.phone1, align: "center", width: 150 },
+        { key: "cnsltHow", label: _t.label.cnsltHow, align: "left", width: 100 },
+        { key: "cnsltPath", label: _t.label.cnsltPath, align: "left", width: 150 },
+        { key: "fmTyp", label: _t.label.fmTyp, align: "left", width: 100 },
+        { key: "homeTyp", label: _t.label.homeTyp, align: "left", width: 100 },
+        { key: "fldA", label: _t.label.fldA, align: "left", width: 100 },
+        { key: "hopePoint", label: _t.label.hopePoint, align: "left", width: 150 },
+        { key: "updatedByNm", label: _t.label.updatedByNm, align: "left", width: 120 },
       ] as AXFDGColumn<DtoItem>[]
     ).map((column, colIndex) => {
       if (listColWidths.length > 0) {
@@ -59,7 +60,7 @@ function ListDataGrid({ onClick }: Props) {
 
       return column;
     });
-  }, [t, listColWidths]);
+  }, [_t, listColWidths]);
 
   return (
     <Container ref={containerRef}>
@@ -78,10 +79,10 @@ function ListDataGrid({ onClick }: Props) {
             await changeListPage(currentPage, pageSize);
           },
         }}
-        sort={{
-          sortParams: listSortParams,
-          onChange: setListSortParams,
-        }}
+        // sort={{
+        //   sortParams: listSortParams,
+        //   onChange: setListSortParams,
+        // }}
         onChangeColumns={handleColumnsChange}
       />
     </Container>

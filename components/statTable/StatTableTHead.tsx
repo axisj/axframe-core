@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { StatCol, StatHeadTr, StatTableStyleProps } from "./types";
 import styled from "@emotion/styled";
 import StatTableColResizer from "./StatTableColResizer";
@@ -33,7 +33,7 @@ function StatTableTHead({ marginLeft, tableWidth, colGroups, headColumns, headRo
       colGroups[ci].width = width;
       onChangeColGroups([...colGroups]);
     },
-    [colGroups, onChangeColGroups],
+    [colGroups, onChangeColGroups]
   );
 
   return (
@@ -56,6 +56,7 @@ function StatTableTHead({ marginLeft, tableWidth, colGroups, headColumns, headRo
                     rowSpan={th.rowspan}
                     align={th.align ?? "center"}
                     data-text-cell={true}
+                    className={th.className}
                     {...dangerouslySetInnerHTML(th.label)}
                   ></th>
                 );

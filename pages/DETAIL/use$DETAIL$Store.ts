@@ -62,8 +62,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       console.log(response);
 
       set({ detail: response.rs });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ detailSpinning: false });
     }

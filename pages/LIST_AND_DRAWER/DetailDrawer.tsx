@@ -25,6 +25,8 @@ interface Props {
 
 function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) {
   const { t } = useI18n();
+  const _t = t.example;
+
   const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
 
   const callDetailApi = use$LIST_AND_DRAWER$Store((s) => s.callDetailApi);
@@ -77,30 +79,30 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
             TEST
           </Button>
           <Button type='primary' onClick={handleSave} loading={spinning?.save}>
-            수정하기
+            {t.button.save}
           </Button>
           <Button onClick={handleDelete} loading={spinning?.delete}>
-            삭제하기
+            {t.button.delete}
           </Button>
-          <Button onClick={onCancel}>취소</Button>
+          <Button onClick={onCancel}>{t.button.cancel}</Button>
         </Space>
       }
     >
       TEST {params.query?.id}
       <Descriptions bordered size={"small"}>
-        <Descriptions.Item label={t.pages.example.form.name.label}>{detail?.name}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.birthDt.label}>{detail?.birthDt}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.sex.label}>{detail?.sex}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.phone1.label}>{detail?.phone1}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.phone2.label} span={2}>
+        <Descriptions.Item label={_t.label.name}>{detail?.name}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.birthDt}>{detail?.birthDt}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.sex}>{detail?.sex}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.phone1}>{detail?.phone1}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.phone2} span={2}>
           {detail?.phone2}
         </Descriptions.Item>
         <Descriptions.Item label='Status' span={3}>
           <Badge status='processing' text='Running' />
         </Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.hndcapYn.label}>{detail?.hndcapYn}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.hndcapGrade.label}>{detail?.hndcapGrade}</Descriptions.Item>
-        <Descriptions.Item label={t.pages.example.form.hndcapTyp.label}>{detail?.hndcapTyp}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.hndcapYn}>{detail?.hndcapYn}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.hndcapGrade}>{detail?.hndcapGrade}</Descriptions.Item>
+        <Descriptions.Item label={_t.label.hndcapTyp}>{detail?.hndcapTyp}</Descriptions.Item>
       </Descriptions>
       <Loading active={detailSpinning} />
     </Drawer>

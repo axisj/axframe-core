@@ -8,26 +8,28 @@ interface Props {}
 
 function View({}: Props) {
   const { t } = useI18n();
+  const _t = t.example;
+
   const detail = use$DETAIL$Store((s) => s.detail);
 
   return (
     <Body>
-      <ContentBoxHeader>{t.pages.example.form.title1}</ContentBoxHeader>
+      <ContentBoxHeader>{_t.title.detail}</ContentBoxHeader>
       <ContentBox>
         <Descriptions bordered>
-          <Descriptions.Item label={t.pages.example.form.name.label}>{detail?.name}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.birthDt.label}>{detail?.birthDt}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.sex.label}>{detail?.sex}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.phone1.label}>{detail?.phone1}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.phone2.label} span={2}>
+          <Descriptions.Item label={_t.label.name}>{detail?.name}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.birthDt}>{detail?.birthDt}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.sex}>{detail?.sex}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.phone1}>{detail?.phone1}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.phone2} span={2}>
             {detail?.phone2}
           </Descriptions.Item>
           <Descriptions.Item label='Status' span={3}>
             <Badge status='processing' text='Running' />
           </Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.hndcapYn.label}>{detail?.hndcapYn}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.hndcapGrade.label}>{detail?.hndcapGrade}</Descriptions.Item>
-          <Descriptions.Item label={t.pages.example.form.hndcapTyp.label}>{detail?.hndcapTyp}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.hndcapYn}>{detail?.hndcapYn}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.hndcapGrade}>{detail?.hndcapGrade}</Descriptions.Item>
+          <Descriptions.Item label={_t.label.hndcapTyp}>{detail?.hndcapTyp}</Descriptions.Item>
           <Descriptions.Item label='Config Info'>
             Data disk type: MongoDB
             <br />

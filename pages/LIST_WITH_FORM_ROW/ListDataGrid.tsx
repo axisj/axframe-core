@@ -78,10 +78,10 @@ function ListDataGrid({ onClick }: Props) {
             await changeListPage(currentPage, pageSize);
           },
         }}
-        sort={{
-          sortParams: listSortParams,
-          onChange: setListSortParams,
-        }}
+        // sort={{
+        //   sortParams: listSortParams,
+        //   onChange: setListSortParams,
+        // }}
         onChangeColumns={handleColumnsChange}
         rowKey={"id"}
         selectedRowKey={listSelectedRowKey ?? ""}

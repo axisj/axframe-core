@@ -18,6 +18,9 @@ interface Props {
 interface DtoItem extends ExampleItem {}
 
 function FormSet({ form }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const saveRequestValue = use$LIST_WITH_FORM$Store((s) => s.saveRequestValue);
   const setSaveRequestValue = use$LIST_WITH_FORM$Store((s) => s.setSaveRequestValue);
   const callSaveApi = use$LIST_WITH_FORM$Store((s) => s.callSaveApi);
@@ -26,7 +29,6 @@ function FormSet({ form }: Props) {
   const cancelFormActive = use$LIST_WITH_FORM$Store((s) => s.cancelFormActive);
   const setFormActive = use$LIST_WITH_FORM$Store((s) => s.setFormActive);
 
-  const { t } = useI18n();
   const openZipCodeFinder = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
 
   const cnsltHow = Form.useWatch("cnsltHow", form);
@@ -106,41 +108,38 @@ function FormSet({ form }: Props) {
             await callSaveApi();
             await cancelFormActive();
           }}
+          validateMessages={t.core.validateMessages}
         >
           <FormBox>
             <Row gutter={20}>
               <Col xs={24} sm={8}>
                 <Form.Item
-                  label={t.pages.example.form.area.label}
+                  label={_t.label.area}
                   name={"area"}
                   rules={[{ required: true, message: "커스텀 메세지 사용 가능" }]}
                 >
-                  <Select options={t.pages.example.form.area.options} />
+                  <Select options={_t.options.area} />
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item
-                  label={t.pages.example.form.cnsltUserCd.label}
-                  name={"cnsltUserCd"}
-                  rules={[{ required: true }]}
-                >
+                <Form.Item label={_t.label.cnsltUserCd} name={"cnsltUserCd"} rules={[{ required: true }]}>
                   <Select>
                     <Select.Option value={"system"}>시스템관리자</Select.Option>
                   </Select>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.cnsltDt.label} name={"cnsltDt"}>
+                <Form.Item label={_t.label.cnsltDt} name={"cnsltDt"}>
                   <DatePicker />
                 </Form.Item>
               </Col>
             </Row>
 
-            <Form.Item label={t.pages.example.form.cnsltHow.label} rules={[{ required: true }]}>
+            <Form.Item label={_t.label.cnsltHow} rules={[{ required: true }]}>
               <Space size={[8, 16]} wrap>
                 <Form.Item noStyle name={"cnsltHow"}>
                   <Radio.Group>
-                    {t.pages.example.form.cnsltHow.options.map((o, i) => (
+                    {_t.options.cnsltHow.map((o, i) => (
                       <Radio value={o.value} key={i}>
                         {o.label}
                       </Radio>
@@ -153,14 +152,9 @@ function FormSet({ form }: Props) {
               </Space>
             </Form.Item>
 
-            <Form.Item
-              label={t.pages.example.form.cnsltPath.label}
-              required
-              name={"cnsltPath"}
-              style={{ marginBottom: 5 }}
-            >
+            <Form.Item label={_t.label.cnsltPath} required name={"cnsltPath"} style={{ marginBottom: 5 }}>
               <Radio.Group>
-                {t.pages.example.form.cnsltPath.options.map((o, i) => (
+                {_t.options.cnsltPath.map((o, i) => (
                   <Radio value={o.value} key={i}>
                     {o.label}
                   </Radio>
@@ -171,7 +165,7 @@ function FormSet({ form }: Props) {
             {cnsltPath === "관련기관" && (
               <Form.Item noStyle name={"cnsltPathDtl"}>
                 <Radio.Group>
-                  {t.pages.example.form.cnsltPathDtl.options.map((o, i) => (
+                  {_t.options.cnsltPathDtl.map((o, i) => (
                     <Radio value={o.value} key={i}>
                       {o.label}
                     </Radio>
@@ -181,58 +175,53 @@ function FormSet({ form }: Props) {
             )}
             {cnsltPath === "개인소개" && (
               <Form.Item noStyle name={"cnsltPathPerson"}>
-                <Input placeholder={t.pages.example.form.cnsltPathPerson.placeholder} style={{ maxWidth: 300 }} />
+                <Input placeholder={_t.placeholder.cnsltPathPerson} style={{ maxWidth: 300 }} />
               </Form.Item>
             )}
             {cnsltPath === "본인직접" && (
               <Form.Item noStyle name={"cnsltPathDirect"}>
-                <Input placeholder={t.pages.example.form.cnsltPathDirect.placeholder} style={{ maxWidth: 300 }} />
+                <Input placeholder={_t.placeholder.cnsltPathDirect} style={{ maxWidth: 300 }} />
               </Form.Item>
             )}
             {cnsltPath === "기타기관" && (
               <Space size={20} wrap>
                 <Form.Item noStyle name={"cnsltPathOrg"}>
-                  <Input placeholder={t.pages.example.form.cnsltPathOrg.placeholder} />
+                  <Input placeholder={_t.placeholder.cnsltPathOrg} />
                 </Form.Item>
                 <Form.Item noStyle name={"cnsltPathOrgPerson"}>
-                  <Input placeholder={t.pages.example.form.cnsltPathOrgPerson.placeholder} />
+                  <Input placeholder={_t.placeholder.cnsltPathOrgPerson} />
                 </Form.Item>
                 <Form.Item noStyle name={"cnsltPathOrgPhone"}>
-                  <Input placeholder={t.pages.example.form.cnsltPathOrgPhone.placeholder} />
+                  <Input placeholder={_t.placeholder.cnsltPathOrgPhone} />
                 </Form.Item>
               </Space>
             )}
           </FormBox>
 
-          <FormBoxHeader>{t.pages.example.form.title1}</FormBoxHeader>
+          <FormBoxHeader>{_t.title.formSub}</FormBoxHeader>
           <FormBox>
             <Row gutter={20}>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.name.label} name={"name"} rules={[{ required: true }]}>
+                <Form.Item label={_t.label.name} name={"name"} rules={[{ required: true }]}>
                   <Input />
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.birthDt.label}>
+                <Form.Item label={_t.label.birthDt}>
                   <Space.Compact>
                     <Form.Item name={"birthDt"} noStyle rules={[{ required: true }]}>
                       <DatePicker />
                     </Form.Item>
                     <Form.Item name={"age"} noStyle>
-                      <Input
-                        readOnly
-                        style={{ width: 80 }}
-                        prefix={t.pages.example.form.age.prefix}
-                        suffix={t.pages.example.form.age.suffix}
-                      />
+                      <Input readOnly style={{ width: 80 }} prefix={_t.label.age} />
                     </Form.Item>
                   </Space.Compact>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.sex.label} name={"sex"}>
+                <Form.Item label={_t.label.sex} name={"sex"}>
                   <Radio.Group>
-                    {t.pages.example.form.sex.options.map((o, i) => (
+                    {_t.options.sex.map((o, i) => (
                       <Radio value={o.value} key={i}>
                         {o.label}
                       </Radio>
@@ -243,21 +232,21 @@ function FormSet({ form }: Props) {
             </Row>
             <Row gutter={20}>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.phone1.label} name={"phone1"} rules={[{ required: true }]}>
+                <Form.Item label={_t.label.phone1} name={"phone1"} rules={[{ required: true }]}>
                   <Input />
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.phone2.label} name={"phone2"} rules={[{ required: true }]}>
+                <Form.Item label={_t.label.phone2} name={"phone2"} rules={[{ required: true }]}>
                   <Input />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={20}>
               <Col xs={24} sm={8}>
-                <Form.Item label={t.pages.example.form.hndcapYn.label} name={"hndcapYn"} rules={[{ required: true }]}>
+                <Form.Item label={_t.label.hndcapYn} name={"hndcapYn"} rules={[{ required: true }]}>
                   <Radio.Group>
-                    {t.pages.example.form.hndcapYn.options.map((o, i) => (
+                    {_t.options.hndcapYn.map((o, i) => (
                       <Radio value={o.value} key={i}>
                         {o.label}
                       </Radio>
@@ -266,13 +255,9 @@ function FormSet({ form }: Props) {
                 </Form.Item>
               </Col>
               <Col xs={24} sm={16}>
-                <Form.Item
-                  label={t.pages.example.form.hndcapGrade.label}
-                  name={"hndcapGrade"}
-                  rules={[{ required: true }]}
-                >
+                <Form.Item label={_t.label.hndcapGrade} name={"hndcapGrade"} rules={[{ required: true }]}>
                   <Radio.Group>
-                    {t.pages.example.form.hndcapGrade.options.map((o, i) => (
+                    {_t.options.hndcapGrade.map((o, i) => (
                       <Radio value={o.value} key={i}>
                         {o.label}
                       </Radio>
@@ -282,9 +267,9 @@ function FormSet({ form }: Props) {
               </Col>
             </Row>
 
-            <Form.Item label={t.pages.example.form.hndcapTyp.label} name={"hndcapTyp"} rules={[{ required: true }]}>
+            <Form.Item label={_t.label.hndcapTyp} name={"hndcapTyp"} rules={[{ required: true }]}>
               <Radio.Group>
-                {t.pages.example.form.hndcapTyp.options.map((o, i) => (
+                {_t.options.hndcapTyp.map((o, i) => (
                   <Radio value={o.value} key={i}>
                     {o.label}
                   </Radio>
@@ -292,7 +277,7 @@ function FormSet({ form }: Props) {
               </Radio.Group>
             </Form.Item>
 
-            <Form.Item label={t.pages.example.form.addr.label}>
+            <Form.Item label={_t.label.addr}>
               <Row gutter={[10, 10]}>
                 <Col xs={12} sm={3}>
                   <Form.Item noStyle name={"zipNum"}>

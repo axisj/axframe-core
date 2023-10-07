@@ -20,6 +20,7 @@ interface Props {}
 
 function App({}: Props) {
   const { t } = useI18n();
+  const _t = t.example;
 
   const init = use$LIST_WITH_FORM$Store((s) => s.init);
   const reset = use$LIST_WITH_FORM$Store((s) => s.reset);
@@ -92,24 +93,24 @@ function App({}: Props) {
     () =>
       [
         {
-          placeholder: t.pages.example.form.area.label,
+          placeholder: _t.label.area,
           name: "select1",
           type: SearchParamType.SELECT,
-          options: t.pages.example.form.area.options,
+          options: _t.options.area,
         },
         {
-          placeholder: t.pages.example.form.cnsltHow.label,
+          placeholder: _t.label.cnsltHow,
           name: "select2",
           type: SearchParamType.SELECT,
-          options: t.pages.example.form.cnsltHow.options,
+          options: _t.options.cnsltHow,
         },
         {
-          placeholder: t.pages.example.form.cnsltDt.label,
+          placeholder: _t.label.cnsltDt,
           name: "timeRange",
           type: SearchParamType.DATE_RANGE,
         },
       ] as IParam[],
-    [t],
+    [_t],
   );
 
   useDidMountEffect(() => {
@@ -130,7 +131,7 @@ function App({}: Props) {
   return (
     <Container stretch role={"page-container"}>
       <Header>
-        <ProgramTitle title={t.pages.example.listWithForm.title}>
+        <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
             {t.button.reset}
           </Button>

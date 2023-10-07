@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
 import { ItemTotal, StatBodyTd, StatCol, StatSubTotal, StatTableStyleProps } from "./types";
 import { toMoney } from "@core/utils/number";
 import styled from "@emotion/styled";
+import { alpha } from "../../../styles/palette/colorUtil";
 
 interface Props<T> {
   tableWidth: number;
@@ -53,7 +54,13 @@ function StatTableTBody<T>({
                   })();
 
                   return (
-                    <td key={si} colSpan={sc.colspan} align={sc.align ?? "center"} data-text-cell={sc.textCell}>
+                    <td
+                      key={si}
+                      colSpan={sc.colspan}
+                      align={sc.align ?? "center"}
+                      data-text-cell={sc.textCell}
+                      className={sc.className}
+                    >
                       {tdValue}
                     </td>
                   );
@@ -79,6 +86,7 @@ function StatTableTBody<T>({
                         }
                       }}
                       align={c.align ?? "center"}
+                      className={c.className}
                       data-text-cell={c.textCell}
                     >
                       {tdValue}
@@ -126,7 +134,7 @@ const Table = styled.table<StatTableStyleProps>`
     }
     tr[role="subtotal"] {
       td {
-        background: #ffeeee;
+        background: ${(p) => alpha(p.theme.highlight_color, 0.1)};
       }
     }
   }

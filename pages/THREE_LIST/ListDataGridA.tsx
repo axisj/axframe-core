@@ -16,6 +16,9 @@ interface Props {
 }
 
 function ListDataGridA({ onClick }: Props) {
+  const { t } = useI18n();
+  const _t = t.example;
+
   const listAColWidths = use$THREE_LIST$Store((s) => s.listAColWidths);
   const setListAColWidths = use$THREE_LIST$Store((s) => s.setListAColWidths);
   const listASelectedRowKey = use$THREE_LIST$Store((s) => s.listASelectedRowKey);
@@ -28,7 +31,6 @@ function ListDataGridA({ onClick }: Props) {
   const delListAData = use$THREE_LIST$Store((s) => s.delListAData);
   const setListAData = use$THREE_LIST$Store((s) => s.setListAData);
 
-  const { t } = useI18n();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -93,13 +95,13 @@ function ListDataGridA({ onClick }: Props) {
 
         return column;
       }),
-    [t, listAColWidths],
+    [listAColWidths],
   );
 
   return (
     <>
       <Header>
-        <div>{t.pages.example.list.title}</div>
+        <div>{_t.title.list}</div>
         <ButtonGroup compact>
           <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
           <Button onClick={handleDelSubItem}>{t.button.del}</Button>

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import styled from "@emotion/styled";
 import { mouseEventSubscribe } from "@core/utils/event";
 import { delay } from "@core/utils/thread/timing";
@@ -34,10 +34,10 @@ function StatTableColResizer({ container, columnIndex, left, width, onChangeWidt
         () => {
           // setColumnResizing(false);
           // setColumnWidth(columnIndex);
-        },
+        }
       );
     },
-    [container, left, onChangeWidth, width],
+    [container, left, onChangeWidth, width]
   );
 
   const onMouseDoubleClick = React.useCallback(
@@ -70,7 +70,7 @@ function StatTableColResizer({ container, columnIndex, left, width, onChangeWidt
         targetDiv.remove();
       }
     },
-    [container],
+    [container]
   );
 
   return (

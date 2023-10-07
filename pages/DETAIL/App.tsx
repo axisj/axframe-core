@@ -12,6 +12,8 @@ interface Props {}
 
 function App({}: Props) {
   const { t } = useI18n();
+  const _t = t.example;
+
   const init = use$DETAIL$Store((s) => s.init);
   const destroy = use$DETAIL$Store((s) => s.destroy);
   const callDetailApi = use$DETAIL$Store((s) => s.callDetailApi);
@@ -36,7 +38,7 @@ function App({}: Props) {
   return (
     <Container>
       <Header>
-        <ProgramTitle title={t.pages.example.detail.title}></ProgramTitle>
+        <ProgramTitle title={_t.title.detail}></ProgramTitle>
 
         <ButtonGroup compact></ButtonGroup>
       </Header>
