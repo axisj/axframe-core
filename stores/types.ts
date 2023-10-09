@@ -8,6 +8,6 @@ export interface PageStoreActions<T> {
   syncMetadata: (metaData?: T) => void;
   onMountApp: () => Promise<void>;
   init: () => Promise<void>;
-  reset: () => void;
+  reset: () => Promise<void>;
   destroy: () => void;
 }

@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { ExampleItem, ExampleListRequest } from "@core/services/example/ExampleRepositoryInterface";
 import { AXFDGDataItem, AXFDGPage, AXFDGSortParam } from "@axframe/datagrid";
 import { ExampleService } from "services";
-import { errorDialog } from "@core/components/dialogs/errorDialog";
 import { getTabStoreListener } from "@core/stores/usePageTabStore";
 import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
@@ -91,8 +90,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           totalElements: response.page?.totalCount,
         },
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ listSpinning: false });
     }
@@ -112,8 +109,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       console.log(response);
 
       set({ detail: response.rs });
-    } catch (e) {
-      await errorDialog(e as any);
     } finally {
       await set({ detailSpinning: false });
     }
@@ -138,7 +133,7 @@ export const use$LIST_AND_DRAWER$Store = create(
   subscribeWithSelector<$LIST_AND_DRAWER$Store>((set, get) => ({
     ...createState,
     ...createActions(set, get),
-  }))
+  })),
 );
 
 use$LIST_AND_DRAWER$Store.subscribe(
@@ -149,5 +144,5 @@ use$LIST_AND_DRAWER$Store.subscribe(
     listColWidths: s.listColWidths,
   }),
   getTabStoreListener<MetaData>(createState.routePath),
-  { equalityFn: shallow }
+  { equalityFn: shallow },
 );

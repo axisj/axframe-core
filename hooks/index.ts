@@ -1,5 +1,4 @@
 export * from "./useContainerSize";
-export * from "./useDialog";
 export * from "./useDidMountEffect";
 export * from "./useDidUpdateEffect";
 export * from "./useI18n";

@@ -56,7 +56,7 @@ function App({}: Props) {
       const data = await openDetailDrawer({ query: params.item });
       message.info(JSON.stringify(data ?? {}));
     } catch (err) {
-      console.log(err);
+      await errorHandling(err);
     }
   }, []);
 

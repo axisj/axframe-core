@@ -6,6 +6,5 @@ export async function formErrorHandler(form: FormInstance) {
     const fieldNames = errors[0].name;
     form.scrollToField(fieldNames);
     await message.error(`${errors[0].errors}`);
-    // await alertDialog({ content: `${errors[0].errors}` });
   }
 }

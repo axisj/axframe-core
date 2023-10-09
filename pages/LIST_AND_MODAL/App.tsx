@@ -59,7 +59,7 @@ function App({}: Props) {
 
       message.info(JSON.stringify(data ?? {}));
     } catch (err) {
-      console.log(err);
+      await errorHandling(err);
     }
   }, []);
 

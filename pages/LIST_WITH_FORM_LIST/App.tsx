@@ -5,7 +5,7 @@ import { ColResizer, ProgramTitle } from "@core/components/common";
 import { AXFIRevert } from "@axframe/icon";
 import { Button, Form } from "antd";
 import { PageLayout } from "styles/pageStyled";
-import { useDialog, useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
+import { useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 import { FormSet } from "./FormSet";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
@@ -21,7 +21,6 @@ interface Props {}
 function App({}: Props) {
   const { t } = useI18n();
   const _t = t.example;
-  const { errorDialog } = useDialog();
 
   const init = use$LIST_WITH_FORM_LIST$Store((s) => s.init);
   const reset = use$LIST_WITH_FORM_LIST$Store((s) => s.reset);

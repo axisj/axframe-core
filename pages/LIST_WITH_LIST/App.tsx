@@ -6,7 +6,7 @@ import { Button, Form } from "antd";
 
 import { PageLayout } from "styles/pageStyled";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { useDialog, useI18n, useUnmountEffect } from "@core/hooks";
+import { useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
 import { AXFDGClickParams } from "@axframe/datagrid";
@@ -22,8 +22,6 @@ interface Props {}
 function App({}: Props) {
   const { t } = useI18n();
   const _t = t.example;
-
-  const { errorDialog } = useDialog();
 
   const init = use$LIST_WITH_LIST$Store((s) => s.init);
   const reset = use$LIST_WITH_LIST$Store((s) => s.reset);
@@ -57,7 +55,7 @@ function App({}: Props) {
     } catch (e) {
       await errorHandling(e);
     }
-  }, [callListApi, errorDialog]);
+  }, [callListApi]);
 
   const onClickItem = React.useCallback(
     (params: AXFDGClickParams<DtoItem>) => {

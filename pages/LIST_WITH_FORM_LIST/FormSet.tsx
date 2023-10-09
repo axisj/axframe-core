@@ -9,6 +9,7 @@ import { EmptyMsg } from "components/common";
 import { convertToDate } from "@core/utils/object";
 import { SubListDataGrid } from "./SubListDataGrid";
 import { errorDialog } from "@core/components/dialogs";
+import { errorHandling } from "../../../utils";
 
 interface Props {
   form: FormInstance<DtoItem>;
@@ -44,7 +45,7 @@ function FormSet({ form }: Props) {
         form.setFieldsValue(convertToDate({ ...formInitialValues, ...saveRequestValue }, ["cnsltDt"]));
       }
     } catch (err) {
-      errorDialog(err as any);
+      errorHandling(err).then();
     }
   }, [saveRequestValue, form, formInitialValues]);
 

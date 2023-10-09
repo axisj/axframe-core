@@ -1,11 +1,10 @@
-import React from "react";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import { ProgramTitle, RowResizer } from "@core/components/common";
 import { AXFIRevert } from "@axframe/icon";
 import { Button, Form } from "antd";
 import { PageLayout } from "styles/pageStyled";
-import { useDialog, useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
+import { useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";
 import { FormSet } from "./FormSet";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
@@ -21,8 +20,6 @@ interface Props {}
 function App({}: Props) {
   const { t } = useI18n();
   const _t = t.example;
-
-  const { errorDialog } = useDialog();
 
   const init = use$LIST_WITH_FORM_ROW$Store((s) => s.init);
   const reset = use$LIST_WITH_FORM_ROW$Store((s) => s.reset);

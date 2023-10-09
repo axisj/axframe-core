@@ -10,6 +10,7 @@ import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import { convertToDate } from "@core/utils/object";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { errorDialog } from "@core/components/dialogs";
+import { errorHandling } from "../../../utils";
 
 interface Props {
   form: FormInstance<DtoItem>;
@@ -75,7 +76,7 @@ function FormSet({ form }: Props) {
     try {
       form.setFieldsValue(convertToDate(saveRequestValue, ["cnsltDt", "birthDt"]));
     } catch (err) {
-      errorDialog(err as any).then();
+      errorHandling(err).then();
     }
   });
 
