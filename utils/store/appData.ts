@@ -1,5 +1,5 @@
 import LZUTF8 from "lzutf8";
-import {getCookie, setCookie} from "../cookie";
+import { getCookie, setCookie } from "../cookie";
 
 interface AppData {
   name: string;
@@ -9,9 +9,14 @@ interface AppData {
 }
 
 export function setAppData(values: AppData) {
-  setCookie("appData", LZUTF8.compress(JSON.stringify(values), {
-    outputEncoding: "StorageBinaryString",
-  }), undefined, {path: "/"});
+  setCookie(
+    "appData",
+    LZUTF8.compress(JSON.stringify(values), {
+      outputEncoding: "StorageBinaryString",
+    }),
+    undefined,
+    { path: "/" },
+  );
 }
 
 export function clearAppData() {
@@ -29,7 +34,9 @@ export function getAppData(): AppData | null {
       );
 
       // console.log("state", state.me);
-    } finally { /* empty */ }
+    } finally {
+      /* empty */
+    }
   }
 
   return null;
