@@ -1,5 +1,6 @@
-import type { DebouncedFunc, DebounceSettings } from "lodash-es";
-import { debounce, memoize } from "lodash-es";
+import type { DebouncedFunc, DebounceSettings } from "lodash";
+import debounce from "lodash/debounce";
+import memoize from "lodash/memoize";
 
 export const delay = <T>(ms: number, result?: T): Promise<T> =>
   new Promise<T>((res) => setTimeout(() => res(result as T), ms));
@@ -9,7 +10,6 @@ export function memoizeDebounce<T extends (...args: any[]) => any>(
   wait: number = 0,
   options: DebounceSettings = {},
 ): (...args: Parameters<T>) => ReturnType<DebouncedFunc<T>> {
-  // eslint-disable-next-line unused-imports/no-unused-vars-ts
   const mem = memoize(function (_param: string) {
     return debounce(func, wait, options);
   });
@@ -23,7 +23,9 @@ export function memoizeDebounce<T extends (...args: any[]) => any>(
         if (typeof arg === "object") {
           try {
             return JSON.stringify(arg);
-          } catch (error) {}
+          } catch (error) {
+            // eslint-disable-next-line no-console
+          }
         }
         return undefined;
       })

@@ -2,13 +2,12 @@ import { create } from "zustand";
 import { ExampleItem, ExampleListRequest } from "@core/services/example/ExampleRepositoryInterface";
 import { AXFDGDataItem, AXFDGPage, AXFDGSortParam } from "@axframe/datagrid";
 import { ExampleService } from "services";
-import { getTabStoreListener, setMetaDataByPath } from "@core/stores/usePageTabStore";
+import { getTabStoreListener } from "@core/stores/usePageTabStore";
 import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
-import { pick } from "lodash-es";
 import { ProgramFn } from "@types";
 
 interface ListRequest extends ExampleListRequest {}
@@ -86,8 +85,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           totalElements: response.page?.totalCount,
         },
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ listSpinning: false });
     }

@@ -11,7 +11,7 @@ import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
-import { pick } from "lodash-es";
+import pick from "lodash/pick";
 import { ProgramFn } from "@types";
 
 interface SaveRequest extends ExampleSaveRequest {}

@@ -7,7 +7,7 @@ import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
-import { pick } from "lodash-es";
+import pick from "lodash/pick";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
 
@@ -55,8 +55,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       const response = await ExampleService.save(convertDateToString(apiParam));
 
       console.log(response);
-    } catch (e) {
-      throw e;
     } finally {
       await set({ saveSpinning: false });
     }

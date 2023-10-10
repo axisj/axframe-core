@@ -110,8 +110,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           totalElements: response.page?.totalCount,
         },
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ spinning: false });
     }
@@ -147,8 +145,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           values: item.values,
         })),
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ spinning: false });
     }
@@ -216,7 +212,7 @@ export const use$LIST_WITH_LIST$Store = create(
   subscribeWithSelector<$LIST_WITH_LIST$Store>((set, get) => ({
     ...createState,
     ...createActions(set, get),
-  }))
+  })),
 );
 
 // pageModel 에 저장할 대상 모델 셀렉터 정의
@@ -234,5 +230,5 @@ use$LIST_WITH_LIST$Store.subscribe(
     childListData: s.childListData,
   }),
   getTabStoreListener<MetaData>(createState.routePath),
-  { equalityFn: shallow }
+  { equalityFn: shallow },
 );

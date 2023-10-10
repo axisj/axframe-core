@@ -76,8 +76,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       set({
         listData: response.ds,
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ spinning: false });
     }
@@ -112,7 +110,7 @@ export const use$STATS$Store = create(
   subscribeWithSelector<$STATS$Store>((set, get) => ({
     ...createState,
     ...createActions(set, get),
-  }))
+  })),
 );
 
 // pageModel 에 저장할 대상 모델 셀렉터 정의
@@ -127,5 +125,5 @@ use$STATS$Store.subscribe(
     flexGrowPg2: s.flexGrowPg2,
   }),
   getTabStoreListener<MetaData>(createState.routePath),
-  { equalityFn: shallow }
+  { equalityFn: shallow },
 );

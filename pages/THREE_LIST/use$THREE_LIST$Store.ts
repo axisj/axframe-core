@@ -117,8 +117,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           values,
         })),
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ spinning: false });
     }
@@ -146,8 +144,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       await ExampleService.childListSave({
         list: get().listCData.map(listDataCollector),
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ spinning: false });
     }
@@ -266,7 +262,7 @@ export const use$THREE_LIST$Store = create(
   subscribeWithSelector<$LIST_WITH_LIST$Store>((set, get) => ({
     ...createState,
     ...createActions(set, get),
-  }))
+  })),
 );
 
 // pageModel 에 저장할 대상 모델 셀렉터 정의
@@ -285,5 +281,5 @@ use$THREE_LIST$Store.subscribe(
     listCCheckedIndexes: s.listCCheckedIndexes,
   }),
   getTabStoreListener<MetaData>(createState.routePath),
-  { equalityFn: shallow }
+  { equalityFn: shallow },
 );

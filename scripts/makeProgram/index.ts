@@ -9,6 +9,7 @@ function main() {
   programs.forEach((p) => {
     const programName = Array.isArray(p.name) ? p.name[p.name.length - 1] : p.name;
     const dirs = Array.isArray(p.name) ? p.name : [p.name];
+
     const targetDir = path.join(pagesDir, ...dirs);
     if (exist(targetDir)) {
       throw `There is a program already created with the same name. "${targetDir}" Please delete the folder and try again.`;
@@ -26,14 +27,18 @@ function main() {
       let data = fs.readFileSync(path.join(templateDir, p.type, fn), { encoding: "utf-8" });
       let pathToFile = path.join(targetDir, fn);
 
-      pathToFile = pathToFile.replace(`$${p.type}$`, camelCase(programName, { pascalCase: true }));
-      data = data
-        .replace(`use$${p.type}$`, "use" + camelCase(programName, { pascalCase: true }))
-        .replace(`$${p.type}$`, camelCase(programName));
+      const rePType = new RegExp(`\\$${p.type}\\$`, "g");
+      const reUsePType = new RegExp(`use\\$${p.type}\\$`, "g");
+      const Pascal_programName = camelCase(programName, { pascalCase: true });
+
+      pathToFile = pathToFile.replace(rePType, Pascal_programName);
+      data = data.replace(reUsePType, "use" + Pascal_programName).replace(rePType, camelCase(programName));
 
       if (exist(pathToFile)) {
         throw "Failed to create file. The file already exists.";
       } else {
+        console.log(pathToFile);
+
         fs.writeFileSync(pathToFile, data);
       }
     });

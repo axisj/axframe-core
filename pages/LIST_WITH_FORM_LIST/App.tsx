@@ -1,5 +1,4 @@
-import React from "react";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import { ColResizer, ProgramTitle } from "@core/components/common";
 import { AXFIRevert } from "@axframe/icon";

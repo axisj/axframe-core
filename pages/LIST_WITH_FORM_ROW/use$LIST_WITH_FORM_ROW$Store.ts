@@ -112,8 +112,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           totalElements: response.page?.totalCount,
         },
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ listSpinning: false });
     }
@@ -143,8 +141,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       const response = await ExampleService.save(convertDateToString(apiParam));
 
       console.log(response);
-    } catch (e) {
-      throw e;
     } finally {
       await set({ saveSpinning: false });
     }
@@ -180,7 +176,7 @@ export const use$LIST_WITH_FORM_ROW$Store = create(
   subscribeWithSelector<$LIST_WITH_FORM_ROW$Store>((set, get) => ({
     ...createState,
     ...createActions(set, get),
-  }))
+  })),
 );
 
 // pageModel 에 저장할 대상 모델 셀렉터 정의
@@ -197,5 +193,5 @@ use$LIST_WITH_FORM_ROW$Store.subscribe(
     formActive: s.formActive,
   }),
   getTabStoreListener<MetaData>(createState.routePath),
-  { equalityFn: shallow }
+  { equalityFn: shallow },
 );

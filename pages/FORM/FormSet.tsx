@@ -9,7 +9,6 @@ import { use$FORM$Store } from "./use$FORM$Store";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import { convertToDate } from "@core/utils/object";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { errorDialog } from "@core/components/dialogs";
 import { errorHandling } from "../../../utils";
 
 interface Props {

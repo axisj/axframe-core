@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Button, Form, message } from "antd";
 import { ProgramTitle } from "@core/components/common";
 import React from "react";
-import { AXFIListSearch, AXFIRevert } from "@axframe/icon";
+import { AXFIRevert } from "@axframe/icon";
 import { PageLayout } from "styles/pageStyled";
 import { useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_AND_MODAL$Store } from "./use$LIST_AND_MODAL$Store";

@@ -14,7 +14,7 @@ import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import React from "react";
 import { ROUTES } from "router/Routes";
-import { omit } from "lodash-es";
+import omit from "lodash/omit";
 import { convertDateToString } from "@core/utils/object";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
@@ -148,8 +148,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
           totalElements: response.page?.totalCount,
         },
       });
-    } catch (e) {
-      throw e;
     } finally {
       await set({ listSpinning: false });
     }
@@ -187,8 +185,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       };
 
       await ExampleService.save(convertDateToString(apiParam));
-    } catch (e) {
-      throw e;
     } finally {
       await set({ saveSpinning: false });
     }
