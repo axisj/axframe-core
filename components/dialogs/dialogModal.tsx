@@ -82,9 +82,9 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
       width={params?.width ?? 412}
       transitionName={"slide-up"}
       closable={false}
-      {...{ open, onOk: onOk as any, afterClose }}
+      {...{ open, onOk: onOk as any, onCancel, afterClose }}
       onCancel={() => {
-        onCancel("dialog_cancel");
+        onCancel();
       }}
     >
       <Container>
@@ -100,7 +100,7 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
             {t.button.ok}
           </Button>
 
-          {params?.type === "confirm" && <Button onClick={onCancel}>{t.button.cancel}</Button>}
+          {params?.type === "confirm" && <Button onClick={() => onCancel("cancel")}>{t.button.cancel}</Button>}
         </Footer>
       </Container>
     </Modal>

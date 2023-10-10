@@ -55,12 +55,12 @@ export const useModalStore = create<ModalStore>((set, get) => ({
       const modal = new ModalModelClass({ id, modalFactory });
 
       modal.resolve = (value) => {
-        resolve(value as T);
         get().closeModal(id);
+        resolve(value as T);
       };
       modal.reject = (reason) => {
-        reject(reason);
         get().closeModal(id);
+        reject(reason);
       };
       modal.onClose = (evt) => {
         if (evt?.target && evt?.currentTarget) {
@@ -91,7 +91,8 @@ export const useModalStore = create<ModalStore>((set, get) => ({
       // get().modals.clear();
     }
 
-    set({ modals: new Map([...get().modals]) });
+    const modals = new Map([...get().modals]);
+    set({ modals });
   },
   removeModal: (id) => {
     if (id) {
