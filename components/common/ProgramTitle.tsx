@@ -2,12 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 import { SMixinFlexRow } from "@core/styles/emotion";
 import { ROUTES_LIST, useAppMenu } from "router";
-import { MenuIcon } from "components/MenuIcon";
 import { Breadcrumb } from "antd";
-import { useI18n, useLink } from "../../hooks";
-import { AppMenu } from "../../../services";
+import { useI18n, useLink } from "hooks";
+import { AppMenu } from "services";
 import { matchPath } from "react-router-dom";
 import { Spinner } from "./Spinner";
+
+const MenuIcon = React.lazy(() => import("components/MenuIcon"));
 
 interface Props {
   title?: string;
