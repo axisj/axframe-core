@@ -19,6 +19,7 @@ interface DtoItem extends ExampleItem {}
 interface Props {}
 
 function App({}: Props) {
+  const [messageApi, contextHolder] = message.useMessage();
   const { t } = useI18n();
   const _t = t.example;
 
@@ -29,6 +30,7 @@ function App({}: Props) {
   const listRequestValue = use$LIST_AND_DRAWER$Store((s) => s.listRequestValue);
   const setListRequestValue = use$LIST_AND_DRAWER$Store((s) => s.setListRequestValue);
   const listSpinning = use$LIST_AND_DRAWER$Store((s) => s.listSpinning);
+  const programFn = use$LIST_AND_DRAWER$Store((s) => s.programFn);
 
   const [searchForm] = Form.useForm();
 
@@ -51,14 +53,17 @@ function App({}: Props) {
     }
   }, [callListApi]);
 
-  const onClickItem = React.useCallback(async (params: AXFDGClickParams<DtoItem>) => {
-    try {
-      const data = await openDetailDrawer({ query: params.item });
-      message.info(JSON.stringify(data ?? {}));
-    } catch (err) {
-      await errorHandling(err);
-    }
-  }, []);
+  const onClickItem = React.useCallback(
+    async (params: AXFDGClickParams<DtoItem>) => {
+      try {
+        const data = await openDetailDrawer({ query: params.item });
+        messageApi.info(JSON.stringify(data ?? {}));
+      } catch (err) {
+        await errorHandling(err);
+      }
+    },
+    [messageApi],
+  );
 
   const params = React.useMemo(
     () =>
@@ -101,6 +106,7 @@ function App({}: Props) {
 
   return (
     <Container stretch role={"page-container"}>
+      {contextHolder}
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
@@ -109,7 +115,7 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button onClick={handleSearch}>{t.button.search}</Button>
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
         </ButtonGroup>
       </Header>
 

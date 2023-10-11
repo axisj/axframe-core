@@ -28,6 +28,7 @@ function App({}: Props) {
   const callListApi = use$THREE_LIST$Store((s) => s.callListApi);
   const callSaveApi = use$THREE_LIST$Store((s) => s.callSaveApi);
   const spinning = use$THREE_LIST$Store((s) => s.spinning);
+  const programFn = use$THREE_LIST$Store((s) => s.programFn);
 
   const resizerContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -99,21 +100,25 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button
-            onClick={() => {
-              callListApi();
-            }}
-          >
-            {t.button.search}
-          </Button>
-          <Button
-            type={"primary"}
-            onClick={() => {
-              callSaveApi();
-            }}
-          >
-            {t.button.save}
-          </Button>
+          {programFn?.fn01 && (
+            <Button
+              onClick={() => {
+                callListApi();
+              }}
+            >
+              {t.button.search}
+            </Button>
+          )}
+          {programFn?.fn02 && (
+            <Button
+              type={"primary"}
+              onClick={() => {
+                callSaveApi();
+              }}
+            >
+              {t.button.save}
+            </Button>
+          )}
         </ButtonGroup>
       </Header>
 

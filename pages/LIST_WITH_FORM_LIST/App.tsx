@@ -39,6 +39,7 @@ function App({}: Props) {
   const callSaveApi = use$LIST_WITH_FORM_LIST$Store((s) => s.callSaveApi);
   const formActive = use$LIST_WITH_FORM_LIST$Store((s) => s.formActive);
   const listSelectedRowKey = use$LIST_WITH_FORM_LIST$Store((s) => s.listSelectedRowKey);
+  const programFn = use$LIST_WITH_FORM_LIST$Store((s) => s.programFn);
 
   const [searchForm] = Form.useForm();
   const [form] = Form.useForm();
@@ -138,23 +139,27 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button onClick={handleSearch}>{t.button.search}</Button>
-          <Button
-            onClick={() => {
-              cancelFormActive();
-              setFormActive();
-            }}
-          >
-            {t.button.addNew}
-          </Button>
-          <Button
-            type={"primary"}
-            loading={saveSpinning}
-            disabled={!formActive && !listSelectedRowKey}
-            onClick={handleSave}
-          >
-            {t.button.save}
-          </Button>
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn02 && (
+            <Button
+              onClick={() => {
+                cancelFormActive();
+                setFormActive();
+              }}
+            >
+              {t.button.addNew}
+            </Button>
+          )}
+          {programFn?.fn02 && (
+            <Button
+              type={"primary"}
+              loading={saveSpinning}
+              disabled={!formActive && !listSelectedRowKey}
+              onClick={handleSave}
+            >
+              {t.button.save}
+            </Button>
+          )}
         </ButtonGroup>
       </Header>
 

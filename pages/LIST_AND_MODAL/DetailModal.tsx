@@ -27,6 +27,7 @@ interface Props {
 }
 
 function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
+  const [messageApi, contextHolder] = message.useMessage();
   const { t } = useI18n();
   const _t = t.example;
 
@@ -39,10 +40,10 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
   const handleTest = React.useCallback(async () => {
     if (isBusy) return;
     setSpinning({ test: true });
-    message.info("The test has been completed.");
+    messageApi.info("The test has been completed.");
     await delay(1000);
     setSpinning({ test: false });
-  }, [setSpinning, isBusy]);
+  }, [messageApi, setSpinning, isBusy]);
 
   const handleSave = React.useCallback(async () => {
     if (isBusy) return;
@@ -70,6 +71,7 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
 
   return (
     <Modal width={800} {...{ open, onCancel, onOk: onOk as any, afterClose }}>
+      {contextHolder}
       <Container>
         <ModalLayout.Header title={`샘플(상세#${params.query?.id})`}>
           <Button size={"small"} onClick={handleTest} loading={spinning?.test}>

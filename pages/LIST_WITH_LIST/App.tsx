@@ -34,6 +34,7 @@ function App({}: Props) {
   const spinning = use$LIST_WITH_LIST$Store((s) => s.spinning);
   const setListSelectedRowKey = use$LIST_WITH_LIST$Store((s) => s.setListSelectedRowKey);
   const flexGrow = use$LIST_WITH_LIST$Store((s) => s.flexGrow);
+  const programFn = use$LIST_WITH_LIST$Store((s) => s.programFn);
   const resizerContainerRef = React.useRef<HTMLDivElement>(null);
 
   const [searchForm] = Form.useForm();
@@ -113,15 +114,17 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button onClick={handleSearch}>{t.button.search}</Button>
-          <Button
-            type={"primary"}
-            onClick={() => {
-              callSaveApi();
-            }}
-          >
-            {t.button.save}
-          </Button>
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn02 && (
+            <Button
+              type={"primary"}
+              onClick={() => {
+                callSaveApi();
+              }}
+            >
+              {t.button.save}
+            </Button>
+          )}
         </ButtonGroup>
       </Header>
 

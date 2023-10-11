@@ -39,6 +39,7 @@ function App({}: Props) {
   const formActive = use$LIST_WITH_FORM_ROW$Store((s) => s.formActive);
   const listSelectedRowKey = use$LIST_WITH_FORM_ROW$Store((s) => s.listSelectedRowKey);
   const flexGrow = use$LIST_WITH_FORM_ROW$Store((s) => s.flexGrow);
+  const programFn = use$LIST_WITH_FORM_ROW$Store((s) => s.programFn);
 
   const onClickItem = React.useCallback(
     (params: AXFDGClickParams<DtoItem>) => {
@@ -138,23 +139,27 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button onClick={handleSearch}>{t.button.search}</Button>
-          <Button
-            onClick={() => {
-              cancelFormActive();
-              setFormActive();
-            }}
-          >
-            {t.button.addNew}
-          </Button>
-          <Button
-            type={"primary"}
-            loading={saveSpinning}
-            disabled={!formActive && !listSelectedRowKey}
-            onClick={handleSave}
-          >
-            {t.button.save}
-          </Button>
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn02 && (
+            <Button
+              onClick={() => {
+                cancelFormActive();
+                setFormActive();
+              }}
+            >
+              {t.button.addNew}
+            </Button>
+          )}
+          {programFn?.fn02 && (
+            <Button
+              type={"primary"}
+              loading={saveSpinning}
+              disabled={!formActive && !listSelectedRowKey}
+              onClick={handleSave}
+            >
+              {t.button.save}
+            </Button>
+          )}
         </ButtonGroup>
       </Header>
 

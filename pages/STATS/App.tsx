@@ -26,6 +26,7 @@ function App({}: Props) {
   const spinning = use$STATS$Store((s) => s.spinning);
   const activeTabKey = use$STATS$Store((s) => s.activeTabKey);
   const setActiveTabKey = use$STATS$Store((s) => s.setActiveTabKey);
+  const programFn = use$STATS$Store((s) => s.programFn);
 
   const [searchForm] = Form.useForm();
 
@@ -95,7 +96,7 @@ function App({}: Props) {
         </ProgramTitle>
 
         <ButtonGroup compact>
-          <Button onClick={handleSearch}>{t.button.search}</Button>
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
         </ButtonGroup>
       </Header>
 

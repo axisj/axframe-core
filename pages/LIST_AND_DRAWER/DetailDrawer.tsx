@@ -24,6 +24,7 @@ interface Props {
 }
 
 function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) {
+  const [messageApi, contextHolder] = message.useMessage();
   const { t } = useI18n();
   const _t = t.example;
 
@@ -36,10 +37,10 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
   const handleTest = React.useCallback(async () => {
     if (isBusy) return;
     setSpinning({ test: true });
-    message.info("The test has been completed.");
+    messageApi.info("The test has been completed.");
     await delay(1000);
     setSpinning({ test: false });
-  }, [setSpinning, isBusy]);
+  }, [messageApi, setSpinning, isBusy]);
 
   const handleSave = React.useCallback(async () => {
     if (isBusy) return;
@@ -88,6 +89,7 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
         </Space>
       }
     >
+      {contextHolder}
       TEST {params.query?.id}
       <Descriptions bordered size={"small"}>
         <Descriptions.Item label={_t.label.name}>{detail?.name}</Descriptions.Item>
