@@ -1,5 +1,5 @@
 import { useErrorBoundary } from "react-error-boundary";
-import { Alert, Button } from "antd";
+import { Button, Input, Space } from "antd";
 import styled from "@emotion/styled";
 
 export function ErrorFallback({ error }) {
@@ -8,8 +8,12 @@ export function ErrorFallback({ error }) {
   return (
     <Container>
       <h3>Something went wrong:</h3>
-      <pre style={{ color: "red" }}>{error.stack ?? error.message}</pre>
-      <Button onClick={resetBoundary}>Try again</Button>
+      <Input.TextArea style={{ color: "red", marginBottom: 10 }} value={error.stack ?? error.message} rows={20} />
+
+      <Space>
+        <Button onClick={resetBoundary}>Try again</Button>
+        <Button onClick={() => window.location.reload()}>Refresh Page</Button>
+      </Space>
     </Container>
   );
 }
