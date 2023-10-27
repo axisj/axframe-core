@@ -144,10 +144,7 @@ const Footer = styled.div`
 
 export async function dialogModal(params?: DialogRequest) {
   const openModal = useModalStore.getState().openModal;
-  return await openModal<DialogResponse>(
-    (open, resolve, reject, onClose, afterClose) => (
-      <DialogModal open={open} onOk={resolve} onCancel={reject} afterClose={afterClose} params={params} />
-    ),
-    "DialogModal",
-  );
+  return await openModal<DialogResponse>((open, resolve, reject, onClose, afterClose) => (
+    <DialogModal open={open} onOk={resolve} onCancel={reject} afterClose={afterClose} params={params} />
+  ));
 }
