@@ -12,6 +12,7 @@ import { useI18n } from "../../hooks";
 import { css } from "@emotion/react";
 import { useModalStore } from "../../stores/useModalStore.ts";
 import React, { useMemo } from "react";
+import { ApiErrorCode } from "../../../@types";
 
 export type DialogType = "info" | "success" | "error" | "warning" | "confirm";
 export interface DialogRequest {
@@ -21,6 +22,7 @@ export interface DialogRequest {
   title?: React.ReactNode;
   content: React.ReactNode;
   message?: string;
+  data?: string;
   code?: number;
 }
 
@@ -54,13 +56,26 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
 
   const { title, content } = useMemo(() => {
     if (params?.type === "error") {
+      const [errName] = Object.entries(ApiErrorCode).find(([_, v]) => v === "" + params?.code) ?? [];
+
+      const errContents: string[] = [];
+      if (params?.content) {
+        errContents.push("" + params?.content);
+      }
+      if (params?.message) {
+        errContents.push(params?.message);
+      }
+      if (params?.data) {
+        errContents.push(params?.data);
+      }
+
       return {
-        title: params?.title ?? `Error ${params?.code}`,
+        title: params?.title ?? `${errName ?? params?.code}`,
         content: (
           <>
-            {params?.content || params?.message || "Unknown error occurred"} <Divider style={{ margin: "10px 0" }} />
+            {errContents.join("\n") || "Unknown error occurred"}
+            <Divider style={{ margin: "10px 0" }} />
             {params?.code && `Code: ${params?.code}`}
-            {params?.message && `, ${params?.message}`}
           </>
         ),
       };
