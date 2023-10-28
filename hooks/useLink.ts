@@ -47,7 +47,7 @@ export function useLink() {
   );
 
   const linkByRoute = React.useCallback(
-    (route: RawRoute, params: Record<string, any>, metaData?: MetadataLinkByRoute) => {
+    (route: RawRoute, params: Record<string, any>, metaData?: MetadataLinkByRoute, query?: Record<string, any>) => {
       const labels = { en: route.program_type as string, ko: route.program_type as string };
       const { tabUuid, page } = getActiveTabPage();
 
@@ -79,7 +79,8 @@ export function useLink() {
       setActiveTab(addedTabUuid);
 
       const hash = getActiveTabPage().page.hash ?? "";
-      navigate(path + hash);
+      const qs = new URLSearchParams(query).toString();
+      navigate(path + hash + (qs ? `?${qs}` : ""));
     },
     [MENUS_LIST, addTab, getActiveTabPage, navigate, setActiveTab, updateTab],
   );
