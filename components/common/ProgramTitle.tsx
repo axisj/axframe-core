@@ -128,7 +128,7 @@ function ProgramTitle({ title, icon, disableIcon, disableBreadcrumb, spinning, c
 
 const Container = styled.div`
   position: relative;
-  ${SMixinFlexRow("flex-start", "center")};
+  ${SMixinFlexRow("flex-start", "center", "wrap")};
   gap: 5px;
   min-height: 32px;
 
