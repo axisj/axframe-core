@@ -4,6 +4,6 @@ export function pick<T extends object, K extends keyof T>(model: T, keys: K[]): 
       ...acc,
       [cur]: model[cur],
     }),
-    {} as Pick<T, K>
+    {} as Pick<T, K>,
   );
 }

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import programConfig from "../../../makeProgramConfig";
-import { exist, mkdir, camelCase } from "./utils";
+import { camelCase, exist, mkdir } from "./utils";
 
 function main() {
   const { pagesDir, templateDir, programs } = programConfig;

@@ -11,6 +11,7 @@ import { getSelectEditor, InputEditor } from "components/dataGridEditor";
 import { ITEM_STAT } from "./Types";
 
 interface DtoItem extends ExampleSubItem {}
+
 interface Props {
   onClick?: AXFDGProps<DtoItem>["onClick"];
 }

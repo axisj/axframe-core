@@ -5,8 +5,7 @@ export async function PromiseMap<T, R>(
   let index = 0;
   const result: R[] = [];
 
-  for await (const value of arr)
-    result.push(await callback(value, index++, arr));
+  for await (const value of arr) result.push(await callback(value, index++, arr));
 
   return result;
 }

@@ -5,7 +5,7 @@ export function addDataGridList<T>(listData: AXFDGDataItem<T>[], list: T[]): AXF
     ...list.map((n) => ({
       status: AXFDGDataItemStatus.new,
       values: n,
-    }))
+    })),
   );
 
   return listData;

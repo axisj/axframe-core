@@ -16,6 +16,7 @@ interface Program {
   name: string | string[];
   type: keyof typeof ProgramType;
 }
+
 export interface ProgramConfig {
   pagesDir: string;
   templateDir: string;

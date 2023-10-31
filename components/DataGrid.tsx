@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { AXFDGProps, AXFDataGrid } from "@axframe/datagrid";
+import { AXFDataGrid, AXFDGProps } from "@axframe/datagrid";
 import { css } from "@emotion/react";
 import { darken } from "../../styles/palette/colorUtil";
 

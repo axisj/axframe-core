@@ -4,7 +4,7 @@ import { projectConfig } from "projectConfig";
 export function convertDateToString(
   target: Record<string, any> = {},
   formatString: string = projectConfig.dateFormatString,
-  keys?: string[]
+  keys?: string[],
 ) {
   if (!target) return target;
 

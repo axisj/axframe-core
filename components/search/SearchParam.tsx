@@ -21,6 +21,7 @@ export enum SearchParamType {
   SUBMIT_BUTTON,
   BUTTON,
 }
+
 export type DateType = "date" | "week" | "month" | "quarter" | "year";
 
 export interface SearchParamOption {

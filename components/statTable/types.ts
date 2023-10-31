@@ -69,6 +69,7 @@ export interface StatTableStyleProps {
   headRowHeight?: number;
   bodyRowHeight?: number;
 }
+
 export interface StatTableProps<T> extends StatTableStyleProps {
   spinning?: boolean;
   style?: React.CSSProperties;

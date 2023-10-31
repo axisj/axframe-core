@@ -13,7 +13,7 @@ export const dragEventSubscribe = (callBack: DragEventSubscribeCallbackFn, onEnd
       },
       () => {
         onDragendWindow();
-      }
+      },
     );
   };
 

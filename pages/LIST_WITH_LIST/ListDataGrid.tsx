@@ -8,6 +8,7 @@ import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
 import { PageLayout } from "styles/pageStyled";
 
 interface DtoItem extends ExampleItem {}
+
 interface Props {
   onClick: AXFDGProps<DtoItem>["onClick"];
 }

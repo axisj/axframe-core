@@ -1,5 +1,5 @@
 import React from "react";
-import { usePageTabStore, Page } from "stores";
+import { Page, usePageTabStore } from "stores";
 
 export function usePageMetaData<T = Record<string, any>>(path: string) {
   const pages = usePageTabStore((s) => s.pages);

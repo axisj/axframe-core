@@ -65,8 +65,7 @@ export const useDrawerStore = create<DrawerStore>((set, get) => ({
         evt.currentTarget["focus"]();
       };
       drawer.afterOpenChange = (open) => {
-        if (open) {
-        } else {
+        if (!open) {
           get().removeDrawer(id);
         }
       };

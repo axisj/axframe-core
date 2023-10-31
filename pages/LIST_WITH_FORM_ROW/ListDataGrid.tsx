@@ -7,6 +7,7 @@ import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";
 
 interface DtoItem extends ExampleItem {}
+
 interface Props {
   onClick: AXFDGProps<DtoItem>["onClick"];
 }

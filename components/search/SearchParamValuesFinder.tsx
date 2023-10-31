@@ -24,7 +24,9 @@ export const SearchParamValuesFinder: SearchParamComponent = ({
 
       form.setFieldValue(name, options);
       onChangedComponentValue?.();
-    } catch (err) {}
+    } catch (e) {
+      console.log(e);
+    }
   }, [onSearch, form, name, onChangedComponentValue]);
 
   width = width ? width - 29 : 71;

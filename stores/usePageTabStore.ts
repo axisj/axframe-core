@@ -200,7 +200,7 @@ export const usePageTabStore = buildStore<TabsStore>(
   (storageValue) => {
     storageValue.state.activeTabUuid = initialUuid;
     return storageValue;
-  }
+  },
 );
 
 usePageTabStore.persist.onFinishHydration((state) => {
@@ -211,7 +211,7 @@ usePageTabStore.persist.onFinishHydration((state) => {
 
 export const setMetaDataByPath = <T extends Record<string, any>>(
   routePath: string,
-  metaData: Partial<Record<keyof T, any>>
+  metaData: Partial<Record<keyof T, any>>,
 ) => {
   usePageTabStore.getState().setTabMetaDataByPath<T>(routePath, metaData);
 };

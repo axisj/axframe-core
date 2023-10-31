@@ -15,6 +15,7 @@ import React, { useMemo } from "react";
 import { ApiErrorCode } from "../../../@types";
 
 export type DialogType = "info" | "success" | "error" | "warning" | "confirm";
+
 export interface DialogRequest {
   type?: DialogType;
   className?: string;

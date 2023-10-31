@@ -37,7 +37,7 @@ export function ChartJS({ chartType, labels, datasets }: ChartJSProps) {
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
   switch (chartType) {
-    case "bar-horizontal":
+    case "bar-horizontal": {
       const options = {
         indexAxis: "y" as const,
         elements: {
@@ -82,9 +82,10 @@ export function ChartJS({ chartType, labels, datasets }: ChartJSProps) {
           />
         </ChartContainer>
       );
-
-    default:
+    }
+    default: {
       return null;
+    }
   }
 }
 

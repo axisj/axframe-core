@@ -24,7 +24,7 @@ export function memoizeDebounce<T extends (...args: any[]) => any>(
           try {
             return JSON.stringify(arg);
           } catch (error) {
-            // eslint-disable-next-line no-console
+            console.log(error);
           }
         }
         return undefined;

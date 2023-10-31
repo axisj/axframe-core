@@ -33,7 +33,7 @@ function StatTableTHead({ marginLeft, tableWidth, colGroups, headColumns, headRo
       colGroups[ci].width = width;
       onChangeColGroups([...colGroups]);
     },
-    [colGroups, onChangeColGroups]
+    [colGroups, onChangeColGroups],
   );
 
   return (

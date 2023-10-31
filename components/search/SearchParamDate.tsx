@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchParamComponent } from "./SearchParam";
-import { DatePicker, Form, DatePickerProps } from "antd";
+import { DatePicker, DatePickerProps, Form } from "antd";
 
 export const SearchParamDate: SearchParamComponent = ({ name, label, picker, width, disabled }) => {
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {

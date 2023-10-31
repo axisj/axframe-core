@@ -8,6 +8,7 @@ import { useI18n } from "@core/hooks/useI18n";
 import { use$LIST$Store } from "./use$LIST$Store";
 
 interface DtoItem extends ExampleItem {}
+
 interface Props {
   onClick: AXFDGProps<DtoItem>["onClick"];
 }

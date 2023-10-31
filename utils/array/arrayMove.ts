@@ -1,8 +1,4 @@
-export const arrayMove = <T extends unknown>(
-  array: T[],
-  moveIndex: number,
-  toIndex: number,
-): T[] => {
+export const arrayMove = <T>(array: T[], moveIndex: number, toIndex: number): T[] => {
   const item = array[moveIndex];
   const length = array.length;
   const diff = moveIndex - toIndex;

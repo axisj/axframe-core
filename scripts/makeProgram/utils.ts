@@ -120,6 +120,7 @@ export type Options = {
    */
   readonly locale?: false | string | readonly string[];
 };
+
 export function camelCase(input: string | string[], options: Options = {}): string {
   if (!(typeof input === "string" || Array.isArray(input))) {
     throw new TypeError("Expected the input to be `string | string[]`");

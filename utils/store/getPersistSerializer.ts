@@ -38,12 +38,14 @@ export function getPersistSerializer<T>(
         const value: string | undefined = await get(name);
 
         try {
-          const storageValue = value ? JSON.parse(
-            LZUTF8.decompress(value, {
-              inputEncoding: "StorageBinaryString",
-            }),
-            reviver,
-          ) : { state: {} }
+          const storageValue = value
+            ? JSON.parse(
+                LZUTF8.decompress(value, {
+                  inputEncoding: "StorageBinaryString",
+                }),
+                reviver,
+              )
+            : { state: {} };
 
           storageValue.state.loaded = false;
 
@@ -63,8 +65,6 @@ export function getPersistSerializer<T>(
         });
 
         await set(name, storageValue);
-
-
       },
       removeItem: async (name) => {
         await del(name);
