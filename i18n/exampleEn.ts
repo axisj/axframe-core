@@ -96,7 +96,7 @@ export const EN_example = {
       { value: "기타", label: "Etc" },
     ],
     cnsltPath: [
-      { value: "", label: "Clear" },
+      { value: "방문", label: "visit" },
       { value: "관련기관", label: "related organization" },
       { value: "개인소개", label: "Personal introduction" },
       { value: "본인직접", label: "Self" },

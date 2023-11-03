@@ -6,10 +6,9 @@ import dayjs from "dayjs";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { useI18n } from "@core/hooks";
 import { convertToDate } from "@core/utils/object";
-import { useDaumPostcodePopup } from "react-daum-postcode";
 import { use$LIST_WITH_FORM$Store } from "./use$LIST_WITH_FORM$Store";
 import { EmptyMsg } from "components/common";
-import { errorHandling } from "../../../utils";
+import { errorHandling } from "utils";
 
 interface Props {
   form: FormInstance<DtoItem>;
@@ -29,30 +28,13 @@ function FormSet({ form }: Props) {
   const cancelFormActive = use$LIST_WITH_FORM$Store((s) => s.cancelFormActive);
   const setFormActive = use$LIST_WITH_FORM$Store((s) => s.setFormActive);
 
-  const openZipCodeFinder = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
-
   const cnsltHow = Form.useWatch("cnsltHow", form);
   const cnsltPath = Form.useWatch("cnsltPath", form);
 
   const formInitialValues = React.useRef({}).current; // form 의 초기값 reset해도 이값 으로 리셋됨
 
-  const handleFindZipCode = React.useCallback(async () => {
-    await openZipCodeFinder({
-      onComplete: (data) => {
-        form.setFieldsValue({
-          zipNum: data.zonecode,
-          addr: data.address,
-        });
-        form.getFieldInstance("addrDtls").focus();
-      },
-    });
-  }, [form, openZipCodeFinder]);
-
   const onValuesChange = React.useCallback(
     (changedValues: any, values: Record<string, any>) => {
-      if ("birthDt" in changedValues) {
-        values["age"] = dayjs().diff(dayjs(changedValues.birthDt), "years");
-      }
       setSaveRequestValue(values);
     },
     [setSaveRequestValue],
@@ -63,7 +45,8 @@ function FormSet({ form }: Props) {
       if (!saveRequestValue || Object.keys(saveRequestValue).length < 1) {
         form.resetFields();
       } else {
-        form.setFieldsValue(convertToDate({ ...formInitialValues, ...saveRequestValue }, ["cnsltDt", "birthDt"]));
+        // 날짜 스트링은 dayjs 로 변환 날짜를 사용하는 컴포넌트 'cnsltDt'
+        form.setFieldsValue(convertToDate({ ...formInitialValues, ...saveRequestValue }, ["cnsltDt"]));
       }
     } catch (err) {
       errorHandling(err).then();
@@ -197,111 +180,6 @@ function FormSet({ form }: Props) {
               </Space>
             )}
           </FormBox>
-
-          <FormBoxHeader>{_t.title.formSub}</FormBoxHeader>
-          <FormBox>
-            <Row gutter={20}>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.name} name={"name"} rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.birthDt}>
-                  <Space.Compact>
-                    <Form.Item name={"birthDt"} noStyle rules={[{ required: true }]}>
-                      <DatePicker />
-                    </Form.Item>
-                    <Form.Item name={"age"} noStyle>
-                      <Input readOnly style={{ width: 80 }} prefix={_t.label.age} />
-                    </Form.Item>
-                  </Space.Compact>
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.sex} name={"sex"}>
-                  <Radio.Group>
-                    {_t.options.sex.map((o, i) => (
-                      <Radio value={o.value} key={i}>
-                        {o.label}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={20}>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.phone1} name={"phone1"} rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.phone2} name={"phone2"} rules={[{ required: true }]}>
-                  <Input />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={20}>
-              <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.hndcapYn} name={"hndcapYn"} rules={[{ required: true }]}>
-                  <Radio.Group>
-                    {_t.options.hndcapYn.map((o, i) => (
-                      <Radio value={o.value} key={i}>
-                        {o.label}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={16}>
-                <Form.Item label={_t.label.hndcapGrade} name={"hndcapGrade"} rules={[{ required: true }]}>
-                  <Radio.Group>
-                    {_t.options.hndcapGrade.map((o, i) => (
-                      <Radio value={o.value} key={i}>
-                        {o.label}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Form.Item label={_t.label.hndcapTyp} name={"hndcapTyp"} rules={[{ required: true }]}>
-              <Radio.Group>
-                {_t.options.hndcapTyp.map((o, i) => (
-                  <Radio value={o.value} key={i}>
-                    {o.label}
-                  </Radio>
-                ))}
-              </Radio.Group>
-            </Form.Item>
-
-            <Form.Item label={_t.label.addr}>
-              <Row gutter={[10, 10]}>
-                <Col xs={12} sm={3}>
-                  <Form.Item noStyle name={"zipNum"}>
-                    <Input readOnly />
-                  </Form.Item>
-                </Col>
-                <Col xs={12} sm={3}>
-                  <Button block onClick={handleFindZipCode}>
-                    {t.button.findAddr}
-                  </Button>
-                </Col>
-                <Col xs={24} sm={9}>
-                  <Form.Item noStyle name={"addr"}>
-                    <Input readOnly />
-                  </Form.Item>
-                </Col>
-                <Col xs={24} sm={9}>
-                  <Form.Item noStyle name={"addrDtls"}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Form.Item>
-          </FormBox>
         </Form>
       </Body>
     </>
@@ -310,7 +188,6 @@ function FormSet({ form }: Props) {
 
 const Header = styled(PageLayout.FrameHeader)``;
 const Body = styled.div``;
-const FormBoxHeader = styled(PageLayout.ContentBoxHeader)``;
 const FormBox = styled(PageLayout.ContentBox)`
   > * {
     max-width: 960px;

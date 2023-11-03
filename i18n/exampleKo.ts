@@ -98,7 +98,7 @@ export const KO_example: typeof EN_example = {
       { value: "기타", label: "기타" },
     ],
     cnsltPath: [
-      { value: "", label: "" },
+      { value: "방문", label: "방문" },
       { value: "관련기관", label: "관련기관" },
       { value: "개인소개", label: "개인소개" },
       { value: "본인직접", label: "본인직접" },
