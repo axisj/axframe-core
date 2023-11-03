@@ -1,10 +1,9 @@
 import { toNumber } from "./";
 
-export function toMoney(value: unknown, emptyString = "-"): string {
+export function toMoney(value: unknown, emptyString = "-", fractionDigit = 0): string {
   if (value === undefined || value === null) return emptyString;
 
   const n = toNumber(value);
-  let fractionDigit = 0;
 
   if (Number.isNaN(n)) {
     return String(value);
