@@ -13,6 +13,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
 import pick from "lodash/pick";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface SaveRequest extends ExampleSaveRequest {}
 
@@ -39,7 +40,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_DETAIL.children.DETAIL.path,
+  routePath: EXAMPLE_router.children.LIST_DETAIL.children.DETAIL.path,
   saveRequestValue: {},
   detailSpinning: false,
 };
@@ -53,7 +54,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   setDetailSpinning: (spinning) => set({ detailSpinning: spinning }),
   callDetailApi: async (request) => {
     if (get().detailSpinning) return;
-    await set({ detailSpinning: true });
+    set({ detailSpinning: true });
 
     try {
       const apiParam = request ?? get().saveRequestValue;
@@ -63,7 +64,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
 
       set({ detail: response.rs });
     } finally {
-      await set({ detailSpinning: false });
+      set({ detailSpinning: false });
     }
   },
   syncMetadata: (metaData) => {

@@ -11,6 +11,7 @@ import { ROUTES } from "router/Routes";
 import { ExampleService } from "services";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -71,7 +72,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.THREE_LIST.path,
+  routePath: EXAMPLE_router.children.THREE_LIST.path,
   listRequestValue: {},
   spinning: false,
 
@@ -100,7 +101,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   },
   callListApi: async () => {
     if (get().spinning) return;
-    await set({ spinning: true });
+    set({ spinning: true });
 
     try {
       const apiParam = get().listRequestValue;
@@ -118,12 +119,12 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         })),
       });
     } finally {
-      await set({ spinning: false });
+      set({ spinning: false });
     }
   },
   callSaveApi: async () => {
     if (get().spinning) return;
-    await set({ spinning: true });
+    set({ spinning: true });
 
     const listDataCollector = (item) => {
       const ITEM_STAT = {
@@ -145,7 +146,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         list: get().listCData.map(listDataCollector),
       });
     } finally {
-      await set({ spinning: false });
+      set({ spinning: false });
     }
   },
 

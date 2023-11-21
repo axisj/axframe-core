@@ -11,6 +11,7 @@ import React from "react";
 import { ROUTES } from "router/Routes";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -58,7 +59,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_WITH_FORM.path,
+  routePath: EXAMPLE_router.children.LIST_WITH_FORM.path,
   listRequestValue: { pageNumber: 1, pageSize: 100 },
   listColWidths: [],
   listSpinning: false,
@@ -91,7 +92,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   },
   callListApi: async (request) => {
     if (get().listSpinning) return;
-    await set({ listSpinning: true });
+    set({ listSpinning: true });
 
     try {
       const apiParam: ListRequest = {
@@ -113,7 +114,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         },
       });
     } finally {
-      await set({ listSpinning: false });
+      set({ listSpinning: false });
     }
   },
   changeListPage: async (pageNumber, pageSize) => {
@@ -131,7 +132,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   setSaveSpinning: (exampleSaveSpinning) => set({ saveSpinning: exampleSaveSpinning }),
   callSaveApi: async (request) => {
     if (get().saveSpinning) return;
-    await set({ saveSpinning: true });
+    set({ saveSpinning: true });
 
     try {
       const apiParam: SaveRequest = {
@@ -143,7 +144,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
 
       await ExampleService.save(convertDateToString(apiParam));
     } finally {
-      await set({ saveSpinning: false });
+      set({ saveSpinning: false });
     }
   },
   cancelFormActive: () => {

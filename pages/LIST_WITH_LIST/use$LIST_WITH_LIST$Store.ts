@@ -11,6 +11,7 @@ import React from "react";
 import { ROUTES } from "router/Routes";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -61,7 +62,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_WITH_LIST.path,
+  routePath: EXAMPLE_router.children.LIST_WITH_LIST.path,
   listRequestValue: {
     pageNumber: 1,
     pageSize: 100,
@@ -89,7 +90,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   onMountApp: async () => {},
   callListApi: async (request) => {
     if (get().spinning) return;
-    await set({ spinning: true });
+    set({ spinning: true });
 
     try {
       const apiParam: ListRequest = {
@@ -111,7 +112,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         },
       });
     } finally {
-      await set({ spinning: false });
+      set({ spinning: false });
     }
   },
   changeListPage: async (pageNumber, pageSize) => {
@@ -122,7 +123,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   },
   callSaveApi: async () => {
     if (get().spinning) return;
-    await set({ spinning: true });
+    set({ spinning: true });
 
     const listDataCollector = (item) => {
       const ITEM_STAT = {
@@ -146,7 +147,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         })),
       });
     } finally {
-      await set({ spinning: false });
+      set({ spinning: false });
     }
   },
   setSpinning: (spinning) => set({ spinning }),

@@ -64,7 +64,7 @@ export function getPersistSerializer<T>(
           outputEncoding: "StorageBinaryString",
         });
 
-        await set(name, storageValue);
+        set(name, storageValue);
       },
       removeItem: async (name) => {
         await del(name);

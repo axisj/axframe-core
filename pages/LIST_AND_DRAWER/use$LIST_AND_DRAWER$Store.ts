@@ -9,6 +9,7 @@ import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -45,7 +46,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_AND_DRAWER.path,
+  routePath: EXAMPLE_router.children.LIST_AND_DRAWER.path,
   listRequestValue: {
     pageNumber: 1,
     pageSize: 100,
@@ -72,7 +73,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   setListSortParams: (sortParams) => set({ listSortParams: sortParams }),
   callListApi: async (request) => {
     if (get().listSpinning) return;
-    await set({ listSpinning: true });
+    set({ listSpinning: true });
 
     try {
       const apiParam: ListRequest = { ...get().listRequestValue, ...request };
@@ -91,7 +92,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         },
       });
     } finally {
-      await set({ listSpinning: false });
+      set({ listSpinning: false });
     }
   },
   changeListPage: async (pageNumber, pageSize) => {
@@ -102,7 +103,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   },
   setDetailSpinning: (spinning) => set({ detailSpinning: spinning }),
   callDetailApi: async (request) => {
-    await set({ detailSpinning: true });
+    set({ detailSpinning: true });
 
     try {
       const response = await ExampleService.detail(request);
@@ -110,7 +111,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
 
       set({ detail: response.rs });
     } finally {
-      await set({ detailSpinning: false });
+      set({ detailSpinning: false });
     }
   },
   syncMetadata: (s = createState) => {

@@ -13,6 +13,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { ROUTES } from "router/Routes";
 import { StatCol } from "@core/components/statTable";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -48,7 +49,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.STATS.path,
+  routePath: EXAMPLE_router.children.STATS.path,
   listRequestValue: {
     pageNumber: 1,
     pageSize: 100,
@@ -67,7 +68,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   onMountApp: async () => {},
   callListApi: async (request) => {
     if (get().spinning) return;
-    await set({ spinning: true });
+    set({ spinning: true });
 
     try {
       const apiParam: ExampleStatRequest = { ...get().listRequestValue, ...request };
@@ -77,7 +78,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         listData: response.ds,
       });
     } finally {
-      await set({ spinning: false });
+      set({ spinning: false });
     }
   },
   setRequestValue: (requestValues) => set({ listRequestValue: requestValues }),

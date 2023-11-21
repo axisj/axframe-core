@@ -18,6 +18,7 @@ import omit from "lodash/omit";
 import { convertDateToString } from "@core/utils/object";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -81,7 +82,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_WITH_FORM_LIST.path,
+  routePath: EXAMPLE_router.children.LIST_WITH_FORM_LIST.path,
   listRequestValue: { pageNumber: 1, pageSize: 100 },
   listColWidths: [],
   listSpinning: false,
@@ -149,7 +150,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
         },
       });
     } finally {
-      await set({ listSpinning: false });
+      set({ listSpinning: false });
     }
   },
   changeListPage: async (pageNumber, pageSize) => {
@@ -167,7 +168,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   setSaveSpinning: (exampleSaveSpinning) => set({ saveSpinning: exampleSaveSpinning }),
   callSaveApi: async (request) => {
     if (get().saveSpinning) return;
-    await set({ saveSpinning: true });
+    set({ saveSpinning: true });
 
     try {
       // subList 데이터를 어떻게 전송할지 체크 필요!!
@@ -186,7 +187,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
 
       await ExampleService.save(convertDateToString(apiParam));
     } finally {
-      await set({ saveSpinning: false });
+      set({ saveSpinning: false });
     }
   },
   cancelFormActive: () => {

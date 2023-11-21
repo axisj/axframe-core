@@ -11,9 +11,9 @@ import { IParam, SearchParams, SearchParamType } from "@core/components/search";
 import { ListDataGrid } from "./ListDataGrid";
 import { useLink, useUnmountEffect } from "hooks";
 import { AXFDGClickParams } from "@axframe/datagrid";
-import { ROUTES } from "router";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { errorHandling } from "utils/errorHandling";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface DtoItem extends ExampleItem {}
 
@@ -56,7 +56,7 @@ function App({}: Props) {
 
   const onClickItem = React.useCallback(
     (params: AXFDGClickParams<DtoItem>) => {
-      linkByRoute(ROUTES.EXAMPLES.children.LIST_DETAIL.children.DETAIL, { id: params.item.id });
+      linkByRoute(EXAMPLE_router.children.LIST_DETAIL.children.DETAIL, { id: params.item.id });
     },
     [linkByRoute],
   );

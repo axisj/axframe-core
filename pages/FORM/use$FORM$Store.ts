@@ -6,10 +6,10 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
-import { ROUTES } from "router/Routes";
 import pick from "lodash/pick";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
+import { EXAMPLE_router } from "../../router/exampleRouter.ts";
 
 interface SaveRequest extends ExampleSaveRequest {}
 
@@ -31,7 +31,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: ROUTES.EXAMPLES.children.LIST_DETAIL.children.REGISTRATION.path,
+  routePath: EXAMPLE_router.children.LIST_DETAIL.children.REGISTRATION.path,
   saveRequestValue: {},
   saveSpinning: false,
 };
@@ -45,7 +45,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
   setSaveSpinning: (exampleSaveSpinning) => set({ saveSpinning: exampleSaveSpinning }),
   callSaveApi: async (request) => {
     if (get().saveSpinning) return;
-    await set({ saveSpinning: true });
+    set({ saveSpinning: true });
 
     try {
       const apiParam = request ?? get().saveRequestValue;
@@ -56,7 +56,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
 
       console.log(response);
     } finally {
-      await set({ saveSpinning: false });
+      set({ saveSpinning: false });
     }
   },
   syncMetadata: (metaData) => {
