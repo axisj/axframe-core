@@ -17,7 +17,7 @@ import omit from "lodash/omit";
 import { convertDateToString } from "@core/utils/object";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface ListRequest extends ExampleListRequest {}
 

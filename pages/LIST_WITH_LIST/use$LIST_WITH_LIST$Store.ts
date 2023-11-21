@@ -10,7 +10,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import React from "react";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface ListRequest extends ExampleListRequest {}
 

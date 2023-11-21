@@ -12,7 +12,7 @@ import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import { StatCol } from "@core/components/statTable";
 import { ProgramFn } from "@types";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface ListRequest extends ExampleListRequest {}
 

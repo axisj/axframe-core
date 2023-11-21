@@ -13,7 +13,7 @@ import { useLink, useUnmountEffect } from "hooks";
 import { AXFDGClickParams } from "@axframe/datagrid";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { errorHandling } from "utils/errorHandling";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface DtoItem extends ExampleItem {}
 

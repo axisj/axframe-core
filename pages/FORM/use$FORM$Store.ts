@@ -9,7 +9,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import pick from "lodash/pick";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface SaveRequest extends ExampleSaveRequest {}
 

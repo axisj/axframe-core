@@ -42,7 +42,6 @@ export const SearchParamValuesFinder: SearchParamComponent = ({
             placeholder={placeholder}
             options={value}
             labelInValue
-            showArrow={false}
             // open={false}
             maxTagCount='responsive'
             allowClear
