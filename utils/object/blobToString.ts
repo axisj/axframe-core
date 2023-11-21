@@ -6,10 +6,10 @@ export function blobConverter<T extends BlobToType>(blob: Blob, type: T) {
     type === "arrayBuffer" || type === "buffer"
       ? "readAsArrayBuffer"
       : type === "binary" || type === "binaryString"
-      ? "readAsBinaryString"
-      : type === "dataURL" || type === "base64"
-      ? "readAsDataURL"
-      : "readAsText";
+        ? "readAsBinaryString"
+        : type === "dataURL" || type === "base64"
+          ? "readAsDataURL"
+          : "readAsText";
   return new Promise<BlobTo<typeof type>>((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.onload = (e: any) => {

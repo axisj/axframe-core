@@ -70,8 +70,8 @@ export function Chart({ chartType, dataKeys, data }: ChartProps) {
                   activeDataKey === undefined
                     ? CHART_COLORS[di % CHART_COLORS.length]
                     : activeDataKey === dataKey
-                    ? "#0356ce"
-                    : "#ccc"
+                      ? "#0356ce"
+                      : "#ccc"
                 }
                 strokeWidth={activeDataKey === dataKey ? 2 : 1}
                 dot={{
@@ -104,8 +104,8 @@ export function Chart({ chartType, dataKeys, data }: ChartProps) {
                   activeDataKey === undefined
                     ? CHART_COLORS[di % CHART_COLORS.length]
                     : activeDataKey === dataKey
-                    ? "#0356ce"
-                    : "#ccc"
+                      ? "#0356ce"
+                      : "#ccc"
                 }
                 animationDuration={300}
                 animationEasing={"ease-in"}
@@ -134,8 +134,8 @@ export function Chart({ chartType, dataKeys, data }: ChartProps) {
                   activeDataKey === undefined
                     ? CHART_COLORS[di % CHART_COLORS.length]
                     : activeDataKey === dataKey
-                    ? "#0356ce"
-                    : "#ccc"
+                      ? "#0356ce"
+                      : "#ccc"
                 }
                 animationDuration={300}
                 animationEasing={"ease-in"}

@@ -140,8 +140,8 @@ export const SMixinGrid = ({
   const gridTemplatePhrase = Array.isArray(w)
     ? `${w.join(" ")}`
     : typeof w === "object"
-    ? css`repeat(${r}, minmax(${w.min}, ${w.max ?? "1fr"}))`
-    : css`repeat(${r}, minmax(auto, ${w}))`;
+      ? css`repeat(${r}, minmax(${w.min}, ${w.max ?? "1fr"}))`
+      : css`repeat(${r}, minmax(auto, ${w}))`;
 
   const gapPhrase: string = Array.isArray(gap) ? attachPx(gap).join(" ") : attachPx(gap);
 

@@ -53,7 +53,7 @@ export function stringFormat(str: string, ...param: Record<string, any>[]): stri
     if (str[index - 1] === "{" && str[index + match.length] === "}") {
       return k;
     }
-    const result = args.hasOwnProperty(k) ? args[k] : null;
+    const result = Object.prototype.hasOwnProperty.call(args, k) ? args[k] : null;
     if (result === null || result === undefined) {
       return "";
     }
