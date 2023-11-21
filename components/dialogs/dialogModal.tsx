@@ -100,7 +100,7 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
       closable={false}
       {...{ open, onOk: onOk as any, onCancel, afterClose }}
       onCancel={() => {
-        onCancel();
+        onCancel("cancel");
       }}
     >
       <Container>
