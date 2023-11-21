@@ -7,11 +7,10 @@ import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import React from "react";
-import { ROUTES } from "router/Routes";
 import { ExampleService } from "services";
 import { addDataGridList, delDataGridList } from "@core/utils/array";
 import { ProgramFn } from "@types";
-import { EXAMPLE_router } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
 
 interface ListRequest extends ExampleListRequest {}
 
@@ -72,7 +71,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: EXAMPLE_router.children.THREE_LIST.path,
+  routePath: EXAMPLE_ROUTERS.THREE_LIST.path,
   listRequestValue: {},
   spinning: false,
 

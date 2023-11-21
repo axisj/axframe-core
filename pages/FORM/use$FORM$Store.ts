@@ -9,7 +9,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import pick from "lodash/pick";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
-import { EXAMPLE_router } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
 
 interface SaveRequest extends ExampleSaveRequest {}
 
@@ -31,7 +31,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: EXAMPLE_router.children.LIST_DETAIL.children.REGISTRATION.path,
+  routePath: EXAMPLE_ROUTERS.LIST_DETAIL.children.REGISTRATION.path,
   saveRequestValue: {},
   saveSpinning: false,
 };

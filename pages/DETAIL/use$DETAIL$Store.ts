@@ -10,10 +10,9 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
-import { ROUTES } from "router/Routes";
 import pick from "lodash/pick";
 import { ProgramFn } from "@types";
-import { EXAMPLE_router } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
 
 interface SaveRequest extends ExampleSaveRequest {}
 
@@ -40,7 +39,7 @@ interface Actions extends PageStoreActions<States> {
 
 // create states
 const createState: States = {
-  routePath: EXAMPLE_router.children.LIST_DETAIL.children.DETAIL.path,
+  routePath: EXAMPLE_ROUTERS.LIST_DETAIL.children.DETAIL.path,
   saveRequestValue: {},
   detailSpinning: false,
 };

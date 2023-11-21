@@ -13,7 +13,7 @@ import { useLink, useUnmountEffect } from "hooks";
 import { AXFDGClickParams } from "@axframe/datagrid";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { errorHandling } from "utils/errorHandling";
-import { EXAMPLE_router } from "../../router/exampleRouter.ts";
+import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
 
 interface DtoItem extends ExampleItem {}
 
@@ -56,7 +56,7 @@ function App({}: Props) {
 
   const onClickItem = React.useCallback(
     (params: AXFDGClickParams<DtoItem>) => {
-      linkByRoute(EXAMPLE_router.children.LIST_DETAIL.children.DETAIL, { id: params.item.id });
+      linkByRoute(EXAMPLE_ROUTERS.LIST_DETAIL.children.DETAIL, { id: params.item.id });
     },
     [linkByRoute],
   );
