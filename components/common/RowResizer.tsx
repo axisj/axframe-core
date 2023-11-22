@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { mouseEventSubscribe } from "@core/utils/event";
 import { IMousePosition } from "@core/utils/types";
+import { alpha } from "../../../styles/palette/colorUtil.ts";
 
 interface Props {
   containerRef?: React.RefObject<HTMLDivElement>;
@@ -32,13 +33,12 @@ const Container = styled.div`
   width: 100%;
   background: linear-gradient(
     90deg,
-    rgba(213, 213, 213, 0) 0%,
-    rgba(213, 213, 213, 1) 32px,
-    rgba(213, 213, 213, 1) calc(100% - 32px),
-    rgba(213, 213, 213, 0) 100%
+    ${(p) => alpha(p.theme.border_color_base, 0)} 0%,
+    ${(p) => alpha(p.theme.border_color_base, 100)} 32px,
+    ${(p) => alpha(p.theme.border_color_base, 100)} calc(100% - 32px),
+    ${(p) => alpha(p.theme.border_color_base, 0)} 100%
   );
   z-index: ${(p) => p.theme.ui_drag_zindex};
-  box-shadow: ${(p) => p.theme.box_shadow_resizer};
   &:before {
     cursor: row-resize;
     content: "";
