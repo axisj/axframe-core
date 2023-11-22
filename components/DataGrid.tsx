@@ -66,7 +66,7 @@ const Container = styled.div`
       }
 
       [role="rfdg-scroll-container"] {
-        background: ${theme.component_background};
+        background: ${theme.body_background};
       }
     `;
   }}
