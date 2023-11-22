@@ -52,7 +52,7 @@ export function useLink() {
       const { tabUuid, page } = getActiveTabPage();
 
       if (route.program_type) {
-        const menu = MENUS_LIST.find((menu) => menu.progCd === route.program_type);
+        const menu = MENUS_LIST.find((menu) => menu.progCd && menu.progCd === route.program_type);
         labels.en = stringFormat(
           menu?.multiLanguage.en ?? metaData?.labels?.en ?? (route.program_type as string),
           params,

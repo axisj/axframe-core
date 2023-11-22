@@ -151,7 +151,7 @@ export const usePageTabStore = buildStore<TabsStore>(
       } else {
         const existsRoute = ROUTES_LIST.find((route) => route.path === path);
         if (existsRoute && !existsRoute.hideTab) {
-          const menu = MENUS_LIST.find((m) => m.progCd === existsRoute.program_type);
+          const menu = MENUS_LIST.find((m) => m.progCd && m.progCd === existsRoute.program_type);
           const addedTabUuid = get().addTab({
             labels: menu?.multiLanguage ?? {
               en: existsRoute.program_type as string,
