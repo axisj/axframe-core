@@ -66,7 +66,7 @@ const Container = styled.div`
       }
 
       [role="rfdg-scroll-container"] {
-        background: ${theme.body_background};
+        background: ${theme.axfdg_body_odd_bg};
       }
     `;
   }}
