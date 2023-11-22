@@ -10,17 +10,18 @@ export const SearchParamSelect: SearchParamComponent = ({
   width,
   loading,
   disabled,
+  allowClear = true,
 }) => {
   return (
     <Form.Item name={name} {...(label ? { label, style: { marginBottom: 0, marginRight: 10 } } : { noStyle: true })}>
       <Select
         placeholder={placeholder}
         showSearch
-        allowClear
+        allowClear={allowClear}
         style={{ minWidth: 50, width }}
         loading={loading}
         options={options}
-        disabled={disabled}
+        disabled={disabled || loading}
       />
     </Form.Item>
   );

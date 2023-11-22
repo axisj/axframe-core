@@ -2,7 +2,7 @@ import React from "react";
 import { SearchParamComponent } from "./SearchParam";
 import { DatePicker, DatePickerProps, Form } from "antd";
 
-export const SearchParamDate: SearchParamComponent = ({ name, label, picker, width, disabled }) => {
+export const SearchParamDate: SearchParamComponent = ({ name, label, picker, width, disabled, allowClear = true }) => {
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(date, dateString);
   };
@@ -12,7 +12,7 @@ export const SearchParamDate: SearchParamComponent = ({ name, label, picker, wid
       <DatePicker
         style={{ width: width ?? 120 }}
         onChange={onChange}
-        allowClear
+        allowClear={allowClear}
         picker={picker ?? "date"}
         disabled={disabled}
       />

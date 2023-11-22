@@ -15,6 +15,7 @@ export const SearchParamDateRange: SearchParamComponent = ({
   label,
   disabled,
   placeholder,
+  allowClear = true,
 }) => {
   const onClickButton = React.useCallback(
     (rangeType: RangeType) => {

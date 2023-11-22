@@ -25,6 +25,7 @@ export interface IParam {
   style?: React.CSSProperties;
   icon?: React.ReactNode;
   onClick?: () => void;
+  allowClear?: boolean;
   config?: Record<string, any>;
 }
 
@@ -63,7 +64,7 @@ export function SearchParams({
   filterWidth,
   filterLabel,
   disableFilter = false,
-  labelMinWidth = 60,
+  labelMinWidth,
 }: Props) {
   const [showChildren, setShowChildren] = React.useState(false);
 
@@ -207,7 +208,7 @@ const Container = styled.div`
   flex: 1;
 `;
 
-const DefaultWrap = styled.div<{ labelMinWidth: number }>`
+const DefaultWrap = styled.div<{ labelMinWidth?: number }>`
   ${SMixinFlexRow("stretch", "center")};
   gap: 6px;
   margin-bottom: 15px;
@@ -217,6 +218,7 @@ const DefaultWrap = styled.div<{ labelMinWidth: number }>`
 
   .ant-form-item .ant-form-item-label > label {
     ${({ labelMinWidth }) => {
+      if (!labelMinWidth) return;
       return css`
         min-width: ${labelMinWidth}px;
       `;
