@@ -43,7 +43,7 @@ interface States extends MetaData {
 }
 
 interface Actions extends PageStoreActions<States> {
-  setRequestValue: (requestValue: ListRequest) => void;
+  setRequestValue: (requestValue: ListRequest, changedValues?: ListRequest) => void;
   callListApi: (request?: ListRequest) => Promise<void>;
   callSaveApi: () => Promise<void>;
   setSpinning: (spinning: boolean) => void;

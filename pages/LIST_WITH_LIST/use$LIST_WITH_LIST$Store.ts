@@ -44,7 +44,7 @@ interface Actions extends PageStoreActions<States> {
   callSaveApi: () => Promise<void>;
   setSpinning: (spinning: boolean) => void;
 
-  setRequestValue: (requestValue: ListRequest) => void;
+  setRequestValue: (requestValue: ListRequest, changedValues?: ListRequest) => void;
   setListColWidths: (colWidths: number[]) => void;
   setListSortParams: (sortParams: AXFDGSortParam[]) => void;
   setListSelectedRowKey: (key: React.Key, detail: DtoItem) => void;

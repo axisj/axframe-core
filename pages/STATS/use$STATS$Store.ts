@@ -38,7 +38,7 @@ interface States extends MetaData {
 
 interface Actions extends PageStoreActions<States> {
   callListApi: (request?: ListRequest) => Promise<void>;
-  setRequestValue: (requestValue: ListRequest) => void;
+  setRequestValue: (requestValue: ListRequest, changedValues?: ListRequest) => void;
   setActiveTabKey: (key: PanelType) => void;
   setFlexGrowPg1: (flexGlow: number) => void;
   setFlexGrowPg2: (flexGlow: number) => void;

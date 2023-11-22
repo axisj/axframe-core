@@ -167,7 +167,7 @@ function App({}: Props) {
           form={searchForm}
           params={params}
           paramsValue={listRequestValue}
-          onChangeParamsValue={(value) => setListRequestValue(value)}
+          onChangeParamsValue={(value, changedValues) => setListRequestValue(value, changedValues)}
           onSearch={handleSearch}
           spinning={listSpinning}
           disableFilter

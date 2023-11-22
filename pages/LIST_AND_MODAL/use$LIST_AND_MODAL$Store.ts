@@ -37,7 +37,7 @@ interface States extends MetaData {
 }
 
 interface Actions extends PageStoreActions<States> {
-  setListRequestValue: (requestValue: ListRequest) => void;
+  setListRequestValue: (requestValue: ListRequest, changedValues?: ListRequest) => void;
   setListColWidths: (colWidths: number[]) => void;
   setListSpinning: (spinning: boolean) => void;
   setListSortParams: (sortParams: AXFDGSortParam[]) => void;
