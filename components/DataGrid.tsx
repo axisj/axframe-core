@@ -37,7 +37,7 @@ const Container = styled.div`
   ${({ theme }) => {
     return css`
       [role="axframe-datagrid"] {
-        --axfdg-primary-color: ${darken(theme.primary_color, 0.2)};
+        --axfdg-primary-color: ${theme.primary_color};
         --axfdg-header-bg: ${theme.axfdg_header_bg};
         --axfdg-header-color: ${theme.axfdg_header_color};
         --axfdg-header-font-weight: ${theme.axfdg_header_font_weight};
