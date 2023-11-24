@@ -13,6 +13,8 @@ enum ProgramType {
 }
 
 interface Program {
+  code: string;
+  url?: string;
   name: string | string[];
   type: keyof typeof ProgramType;
 }
@@ -20,5 +22,7 @@ interface Program {
 export interface ProgramConfig {
   pagesDir: string;
   templateDir: string;
+  programTypeFile: string;
+  pageRouteFile: string;
   programs: Program[];
 }

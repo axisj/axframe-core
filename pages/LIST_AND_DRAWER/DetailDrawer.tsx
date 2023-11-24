@@ -71,10 +71,8 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
       title={`샘플(상세#${params.query?.id})`}
       width={800}
       open={open}
-      styles={{
-        body: {
-          paddingBottom: 80,
-        },
+      bodyStyle={{
+        paddingBottom: 80,
       }}
       afterOpenChange={afterOpenChange}
       onClose={onCancel}
