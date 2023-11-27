@@ -6,15 +6,16 @@ interface Props {
   active?: boolean;
   size?: "small" | "normal";
   message?: string;
+  style?: React.CSSProperties;
 }
 
-export function Loading({ active, size = "small", message }: Props) {
+export function Loading({ active, size = "small", message, style }: Props) {
   if (!active) {
     return null;
   }
 
   return (
-    <Container active={active} size={size}>
+    <Container active={active} size={size} style={style}>
       <div role='rft-spinner-box'>
         <div role='rft-spinner' />
         {size === "normal" && <div role='rft-spinner-text'>{message ?? "Loading"}</div>}
