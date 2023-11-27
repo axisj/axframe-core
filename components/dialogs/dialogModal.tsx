@@ -25,6 +25,7 @@ export interface DialogRequest {
   message?: string;
   data?: string;
   code?: number;
+  keyboard?: boolean;
 }
 
 export interface DialogResponse {}
@@ -98,6 +99,8 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
       width={params?.width ?? 412}
       transitionName={"slide-up"}
       closable={false}
+      maskClosable={false}
+      keyboard={params?.keyboard ?? true}
       {...{ open, onOk: onOk as any, onCancel, afterClose }}
       onCancel={() => {
         onCancel("cancel");

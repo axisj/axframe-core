@@ -8,6 +8,7 @@ export type ModalFactory<T> = (
   reject: (reason?: any) => void,
   onClose: (evt: React.MouseEvent) => void,
   afterClose: () => void,
+  keyboard?: boolean,
 ) => any;
 
 interface IModalModel<T = any> {
