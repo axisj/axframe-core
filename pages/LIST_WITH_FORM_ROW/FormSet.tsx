@@ -9,7 +9,7 @@ import { convertToDate } from "@core/utils/object";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";
 import { EmptyMsg } from "components/common";
-import { errorHandling } from "../../../utils";
+import { errorHandling } from "utils";
 
 interface Props {
   form: FormInstance<DtoItem>;

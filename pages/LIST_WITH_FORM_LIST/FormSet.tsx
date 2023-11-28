@@ -8,7 +8,7 @@ import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 import { EmptyMsg } from "components/common";
 import { convertToDate } from "@core/utils/object";
 import { SubListDataGrid } from "./SubListDataGrid";
-import { errorHandling } from "../../../utils";
+import { errorHandling } from "utils";
 
 interface Props {
   form: FormInstance<DtoItem>;

@@ -9,7 +9,7 @@ import { use$FORM$Store } from "./use$FORM$Store";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import { convertToDate } from "@core/utils/object";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import { errorHandling } from "../../../utils";
+import { errorHandling } from "utils";
 
 interface Props {
   form: FormInstance<DtoItem>;
