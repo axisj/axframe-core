@@ -2,11 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import programConfig from "../../../makeProgramConfig";
 import decamelize, { camelCase, exist, mkdir } from "./utils";
-import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
-import { Route } from "react-router-dom";
-import React from "react";
-import * as url from "url";
-import { ROUTES } from "../../../router";
+import { getNameNDir } from "./getNameNDir";
+import { saveFileByTmpl } from "./saveFileByTmpl";
 
 function main() {
   const { pagesDir, templateDir, programTypeFile, pageRouteFile, routesFile, serviceMockUpDataFile, programs } =
@@ -20,6 +17,14 @@ function main() {
     throw `The pageRouteFile file does not exist. "${pageRouteFile}"`;
   }
 
+  if (!exist(routesFile)) {
+    throw `The routesFile file does not exist. "${routesFile}"`;
+  }
+
+  if (!exist(serviceMockUpDataFile)) {
+    throw `The serviceMockUpDataFile file does not exist. "${serviceMockUpDataFile}"`;
+  }
+
   const programTypeFileRaw = fs.readFileSync(programTypeFile, { encoding: "utf-8" });
   const pageRouteFileRaw = fs.readFileSync(pageRouteFile, { encoding: "utf-8" });
   const routesFileRaw = fs.readFileSync(routesFile, { encoding: "utf-8" });
@@ -31,8 +36,7 @@ function main() {
   let serviceMockUpDataFileRawNew = serviceMockUpDataFileRaw;
 
   programs.forEach((p) => {
-    const programName = Array.isArray(p.name) ? p.name[p.name.length - 1] : p.name;
-    const dirs = Array.isArray(p.name) ? p.name : [p.name];
+    const { name: programName, dirs } = getNameNDir(p.name);
 
     const targetDir = path.join(pagesDir, ...dirs);
     if (exist(targetDir)) {
@@ -47,27 +51,18 @@ function main() {
       .filter((p) => p.isFile())
       .map((p) => p.name);
     const Pascal_programName = camelCase(programName, { pascalCase: true });
+    const programTypeName = decamelize(p.code).toUpperCase();
 
-    fileNames.forEach((fn) => {
-      let data = fs.readFileSync(path.join(templateDir, p.type, fn), { encoding: "utf-8" });
-      let pathToFile = path.join(targetDir, fn);
-
-      const rePType = new RegExp(`\\$${p.type}\\$`, "g");
-      const reUsePType = new RegExp(`use\\$${p.type}\\$`, "g");
-
-      pathToFile = pathToFile.replace(rePType, Pascal_programName);
-      data = data.replace(reUsePType, "use" + Pascal_programName).replace(rePType, camelCase(programName));
-
-      if (exist(pathToFile)) {
-        throw "Failed to create file. The file already exists.";
-      } else {
-        console.log(pathToFile);
-
-        fs.writeFileSync(pathToFile, data);
-      }
+    // 템플릿 파일로 파일 생성
+    saveFileByTmpl({
+      fileNames,
+      type: p.type,
+      templateDir,
+      targetDir,
+      Pascal_programName,
+      programName,
     });
 
-    const programTypeName = decamelize(p.code).toUpperCase();
     programTypeFileNew = programTypeFileNew.replace(
       "/* ##ADD_PROGRAM_TYPE_POSITION## */",
       `${programTypeName} = "${programTypeName}",
@@ -77,9 +72,9 @@ function main() {
     routesFileRawNew = routesFileRawNew.replace(
       "/* ##INSERT_ROUTE_POSITION## */",
       `${programTypeName} : {
-        program_type: PROGRAM_TYPES.${programTypeName},
-        path: "${p.url}",
-      },",
+    program_type: PROGRAM_TYPES.${programTypeName},
+    path: "${p.url}",
+  },
   /* ##INSERT_ROUTE_POSITION## */`,
     );
 
@@ -110,9 +105,9 @@ function main() {
       /* ##INSERT_MENU_POSITION## */`,
       )
       .replace(
-        "/* ##INSERT_MENU_POSITION## */",
+        "/* ##INSERT_PROGRAM_TYPE_POSITION## */",
         `"${programTypeName}",
-    /* ##INSERT_MENU_POSITION## */`,
+    /* ##INSERT_PROGRAM_TYPE_POSITION## */`,
       );
   });
 
@@ -121,7 +116,7 @@ function main() {
   // Update pageRouteFile
   fs.writeFileSync(pageRouteFile, pageRouteFileNew);
   // Update routesFile
-  fs.writeFileSync(routesFileRaw, routesFileRawNew);
+  fs.writeFileSync(routesFile, routesFileRawNew);
   // Update serviceMockUpDataFile
   fs.writeFileSync(serviceMockUpDataFile, serviceMockUpDataFileRawNew);
 }

@@ -1,4 +1,4 @@
-enum ProgramType {
+export enum ProgramType {
   DETAIL,
   FORM,
   LIST,
