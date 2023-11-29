@@ -6,9 +6,11 @@ import { EXAMPLE_ROUTERS } from "../../router/exampleRouter.ts";
 import { Route } from "react-router-dom";
 import React from "react";
 import * as url from "url";
+import { ROUTES } from "../../../router";
 
 function main() {
-  const { pagesDir, templateDir, programTypeFile, pageRouteFile, programs } = programConfig;
+  const { pagesDir, templateDir, programTypeFile, pageRouteFile, routesFile, serviceMockUpDataFile, programs } =
+    programConfig;
 
   if (!exist(programTypeFile)) {
     throw `The programType file does not exist. "${programTypeFile}"`;
@@ -20,8 +22,13 @@ function main() {
 
   const programTypeFileRaw = fs.readFileSync(programTypeFile, { encoding: "utf-8" });
   const pageRouteFileRaw = fs.readFileSync(pageRouteFile, { encoding: "utf-8" });
+  const routesFileRaw = fs.readFileSync(routesFile, { encoding: "utf-8" });
+  const serviceMockUpDataFileRaw = fs.readFileSync(serviceMockUpDataFile, { encoding: "utf-8" });
+
   let programTypeFileNew = programTypeFileRaw;
   let pageRouteFileNew = pageRouteFileRaw;
+  let routesFileRawNew = routesFileRaw;
+  let serviceMockUpDataFileRawNew = serviceMockUpDataFileRaw;
 
   programs.forEach((p) => {
     const programName = Array.isArray(p.name) ? p.name[p.name.length - 1] : p.name;
@@ -60,10 +67,20 @@ function main() {
       }
     });
 
+    const programTypeName = decamelize(p.code).toUpperCase();
     programTypeFileNew = programTypeFileNew.replace(
       "/* ##ADD_PROGRAM_TYPE_POSITION## */",
-      `${decamelize(p.code).toUpperCase()} = "${decamelize(p.code).toUpperCase()}",
+      `${programTypeName} = "${programTypeName}",
   /* ##ADD_PROGRAM_TYPE_POSITION## */`,
+    );
+
+    routesFileRawNew = routesFileRawNew.replace(
+      "/* ##INSERT_ROUTE_POSITION## */",
+      `${programTypeName} : {
+        program_type: PROGRAM_TYPES.${programTypeName},
+        path: "${p.url}",
+      },",
+  /* ##INSERT_ROUTE_POSITION## */`,
     );
 
     pageRouteFileNew = pageRouteFileNew
@@ -74,16 +91,39 @@ function main() {
       )
       .replace(
         "{/* ##INSERT_ROUTE_POSITION## */}",
-        `<Route path={"${p.url}"} element={<${Pascal_programName} />} />
+        `<Route path={ROUTES.${programTypeName}.path} element={<${Pascal_programName} />} />
           {/* ##INSERT_ROUTE_POSITION## */}`,
+      );
+
+    serviceMockUpDataFileRawNew = serviceMockUpDataFileRawNew
+      .replace(
+        "/* ##INSERT_MENU_POSITION## */",
+        `{
+        multiLanguage: {
+          en: "${Pascal_programName}",
+          ko: "${Pascal_programName}",
+        },
+        iconTy: "Default",
+        progCd: "${programTypeName}",
+        children: [],
+      },
+      /* ##INSERT_MENU_POSITION## */`,
+      )
+      .replace(
+        "/* ##INSERT_MENU_POSITION## */",
+        `"${programTypeName}",
+    /* ##INSERT_MENU_POSITION## */`,
       );
   });
 
-  // Update programType file
+  // Update programTypeFile
   fs.writeFileSync(programTypeFile, programTypeFileNew);
-
-  // Update pageRoute file
+  // Update pageRouteFile
   fs.writeFileSync(pageRouteFile, pageRouteFileNew);
+  // Update routesFile
+  fs.writeFileSync(routesFileRaw, routesFileRawNew);
+  // Update serviceMockUpDataFile
+  fs.writeFileSync(serviceMockUpDataFile, serviceMockUpDataFileRawNew);
 }
 
 main();

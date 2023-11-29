@@ -24,5 +24,7 @@ export interface ProgramConfig {
   templateDir: string;
   programTypeFile: string;
   pageRouteFile: string;
+  routesFile: string;
+  serviceMockUpDataFile: string;
   programs: Program[];
 }
