@@ -66,19 +66,17 @@ function FormSet({ form }: Props) {
   }, [birthDt, form]);
 
   React.useEffect(() => {
-    if (!saveRequestValue || Object.keys(saveRequestValue).length < 1) {
-      form.resetFields();
-    }
-  }, [saveRequestValue, form]);
-
-  useDidMountEffect(() => {
-    console.log("form.setFieldsValue by metaData");
     try {
-      form.setFieldsValue(convertToDate(saveRequestValue, ["cnsltDt", "birthDt"]));
+      if (!saveRequestValue || Object.keys(saveRequestValue).length < 1) {
+        form.resetFields();
+      } else {
+        // 날짜 스트링은 dayjs 로 변환 날짜를 사용하는 컴포넌트 'cnsltDt'
+        form.setFieldsValue(convertToDate({ ...formInitialValues, ...saveRequestValue }, ["cnsltDt", "birthDt"]));
+      }
     } catch (err) {
       errorHandling(err).then();
     }
-  });
+  }, [saveRequestValue, form, formInitialValues]);
 
   return (
     <Form<DtoItem>
