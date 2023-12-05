@@ -1,6 +1,7 @@
 import { getI18n } from "@core/hooks";
 import { ApiErrorCode } from "@types";
 import { alertDialog, errorDialog } from "@core/components/dialogs";
+import { DialogRequest } from "@core/components/dialogs/dialogModal.tsx";
 
 const knownErrorCodes = [
   ApiErrorCode.SQL_DUPLICATE_ERROR,
@@ -23,10 +24,14 @@ export async function errorHandler(err: any, msgs?: Record<string, any>) {
     if (err?.code) {
       if (knownErrorCodes.includes(err.code)) {
         await alertDialog({
-          content: msgs?.[err.code] ?? t.apiErrMsg[err.code],
+          content: msgs?.[err.code] ?? t.apiErrMsg[err.code] + (err.data ? `\n[${err.data}]` : ""),
         });
       } else {
-        await errorDialog(err);
+        await errorDialog({
+          code: err.code,
+          content: err.message,
+          data: err.data,
+        } as DialogRequest);
       }
     } else {
       if (err?.message) {
