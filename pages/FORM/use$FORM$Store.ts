@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { ExampleSaveRequest } from "@core/services/example/ExampleRepositoryInterface";
 import { ExampleService } from "services";
-import { setMetaDataByPath } from "@core/stores/usePageTabStore";
+import { getTabStoreListener } from "@core/stores/usePageTabStore";
 import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
-import pick from "lodash/pick";
 import { convertDateToString } from "@core/utils/object";
 import { ProgramFn } from "@types";
 import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
@@ -59,10 +58,7 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       set({ saveSpinning: false });
     }
   },
-  syncMetadata: (metaData) => {
-    const metaDataKeys: (keyof MetaData)[] = ["programFn", "saveRequestValue"];
-    set(pick(metaData ?? createState, metaDataKeys));
-  },
+  syncMetadata: (s = createState) => set(s),
 
   ...pageStoreActions(set, get, { createState }),
 });
@@ -78,12 +74,10 @@ export const use$FORM$Store = create(
 );
 
 use$FORM$Store.subscribe(
-  (s) => [s.programFn, s.saveRequestValue],
-  ([programFn, saveRequestValue]) => {
-    setMetaDataByPath<MetaData>(createState.routePath, {
-      programFn,
-      saveRequestValue: saveRequestValue,
-    });
-  },
+  (s): MetaData => ({
+    programFn: s.programFn,
+    saveRequestValue: s.saveRequestValue,
+  }),
+  getTabStoreListener<MetaData>(createState.routePath),
   { equalityFn: shallow },
 );
