@@ -1,13 +1,12 @@
+import { Loading } from "@core/components/common";
+import { useDidMountEffect, useI18n, useSpinning } from "@core/hooks";
+import { useModalStore } from "@core/stores/useModalStore";
+import { delay } from "@core/utils/thread/timing";
 import styled from "@emotion/styled";
 import { Badge, Button, Descriptions, message, Modal } from "antd";
 import React from "react";
 import { ModalLayout } from "styles/pageStyled";
-import { useModalStore } from "@core/stores/useModalStore";
-import { delay } from "@core/utils/thread/timing";
 import { use$LIST_AND_MODAL$Store } from "./use$LIST_AND_MODAL$Store";
-import { useDidMountEffect, useSpinning } from "@core/hooks";
-import { Loading } from "@core/components/common";
-import { useI18n } from "@core/hooks/useI18n";
 
 export interface ModalRequest {
   query?: Record<string, any>;
@@ -28,8 +27,8 @@ interface Props {
 
 function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
   const [messageApi, contextHolder] = message.useMessage();
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
 
@@ -99,12 +98,12 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
         </Body>
         <Footer>
           <Button type='primary' onClick={handleSave} loading={spinning?.save}>
-            {t.button.save}
+            {t("save")}
           </Button>
           <Button onClick={handleDelete} loading={spinning?.delete}>
-            {t.button.delete}
+            {t("delete")}
           </Button>
-          <Button onClick={onCancel}>{t.button.cancel}</Button>
+          <Button onClick={onCancel}>{t("cancel")}</Button>
         </Footer>
       </Container>
     </Modal>

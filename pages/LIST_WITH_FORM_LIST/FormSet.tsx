@@ -3,7 +3,7 @@ import { Button, Col, DatePicker, Form, FormInstance, Input, Row, Select } from 
 import styled from "@emotion/styled";
 import { PageLayout } from "styles/pageStyled";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { useI18n } from "@core/hooks";
+import { useI18n, useI18n } from "@core/hooks";
 import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 import { EmptyMsg } from "components/common";
 import { convertToDate } from "@core/utils/object";
@@ -17,8 +17,8 @@ interface Props {
 interface DtoItem extends ExampleItem {}
 
 function FormSet({ form }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const saveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.saveRequestValue);
   const setSaveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.setSaveRequestValue);
@@ -59,7 +59,7 @@ function FormSet({ form }: Props) {
               setFormActive();
             }}
           >
-            {t.button.addNew}
+            {t("button.addNew")}
           </Button>
         </EmptyMsg>
         <Form form={form} />
@@ -72,7 +72,7 @@ function FormSet({ form }: Props) {
       <Header>
         Form
         <ButtonGroup compact>
-          <Button onClick={() => cancelFormActive()}>{t.button.cancel}</Button>
+          <Button onClick={() => cancelFormActive()}>{t("button.cancel")}</Button>
         </ButtonGroup>
       </Header>
       <Body>
@@ -87,7 +87,6 @@ function FormSet({ form }: Props) {
             await callSaveApi();
             await cancelFormActive();
           }}
-          validateMessages={t.core.validateMessages}
         >
           <FormBox>
             <Row gutter={[20, 0]}>

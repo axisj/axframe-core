@@ -6,7 +6,7 @@ import { Button, Form } from "antd";
 
 import { PageLayout } from "styles/pageStyled";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useI18n, useI18n, useUnmountEffect } from "@core/hooks";
 import { use$THREE_LIST$Store } from "./use$THREE_LIST$Store";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
 import { ListDataGridA } from "./ListDataGridA";
@@ -17,8 +17,8 @@ import { errorHandling } from "utils/errorHandling";
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const init = use$THREE_LIST$Store((s) => s.init);
   const reset = use$THREE_LIST$Store((s) => s.reset);
@@ -95,7 +95,7 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {t("button.reset")}
           </Button>
         </ProgramTitle>
 
@@ -106,7 +106,7 @@ function App({}: Props) {
                 callListApi();
               }}
             >
-              {t.button.search}
+              {t("button.search")}
             </Button>
           )}
           {programFn?.fn02 && (
@@ -116,7 +116,7 @@ function App({}: Props) {
                 callSaveApi();
               }}
             >
-              {t.button.save}
+              {t("button.save")}
             </Button>
           )}
         </ButtonGroup>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
 import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
+import { useContainerSize, useI18n, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 import { use$THREE_LIST$Store } from "./use$THREE_LIST$Store";
 import { Button } from "antd";
@@ -17,8 +17,8 @@ interface Props {
 }
 
 function ListDataGridB({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const listBColWidths = use$THREE_LIST$Store((s) => s.listBColWidths);
   const setListBColWidths = use$THREE_LIST$Store((s) => s.setListBColWidths);
@@ -104,8 +104,8 @@ function ListDataGridB({ onClick }: Props) {
       <Header>
         <div>{_t.title.list}</div>
         <ButtonGroup compact>
-          <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
-          <Button onClick={handleDelSubItem}>{t.button.del}</Button>
+          <Button onClick={handleAddSubItem}>{t("button.addNew")}</Button>
+          <Button onClick={handleDelSubItem}>{t("button.del")}</Button>
         </ButtonGroup>
       </Header>
 

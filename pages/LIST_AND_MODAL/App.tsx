@@ -4,7 +4,7 @@ import { ProgramTitle } from "@core/components/common";
 import React from "react";
 import { AXFIRevert } from "@axframe/icon";
 import { PageLayout } from "styles/pageStyled";
-import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useI18n, useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_AND_MODAL$Store } from "./use$LIST_AND_MODAL$Store";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import { AXFDGClickParams } from "@axframe/datagrid";
@@ -20,8 +20,8 @@ interface Props {}
 
 function App({}: Props) {
   const [messageApi, contextHolder] = message.useMessage();
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const init = use$LIST_AND_MODAL$Store((s) => s.init);
   const reset = use$LIST_AND_MODAL$Store((s) => s.reset);
@@ -113,13 +113,11 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {t("reset")}
           </Button>
         </ProgramTitle>
 
-        <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
-        </ButtonGroup>
+        <ButtonGroup compact>{programFn?.fn01 && <Button onClick={handleSearch}>{t("search")}</Button>}</ButtonGroup>
       </Header>
 
       <Body>

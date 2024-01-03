@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
+import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 import { DataGrid } from "@core/components/DataGrid";
 import { useContainerSize, useI18n } from "@core/hooks";
-import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
+import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
+import styled from "@emotion/styled";
+import React from "react";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";
 
 interface DtoItem extends ExampleItem {}
@@ -13,8 +13,8 @@ interface Props {
 }
 
 function ListDataGrid({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const listColWidths = use$LIST_WITH_FORM_ROW$Store((s) => s.listColWidths);
   const listSortParams = use$LIST_WITH_FORM_ROW$Store((s) => s.listSortParams);

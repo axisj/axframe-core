@@ -1,7 +1,7 @@
 import { Badge, Button, Descriptions, Drawer, message, Space } from "antd";
 import React from "react";
 import { useDrawerStore } from "@core/stores/useDrawerStore";
-import { useDidMountEffect, useI18n, useSpinning } from "@core/hooks";
+import { useDidMountEffect, useI18n, useI18n, useSpinning } from "@core/hooks";
 import { delay } from "@core/utils/thread/timing";
 import { use$LIST_AND_DRAWER$Store } from "./use$LIST_AND_DRAWER$Store";
 import { Loading } from "@core/components/common";
@@ -25,8 +25,8 @@ interface Props {
 
 function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) {
   const [messageApi, contextHolder] = message.useMessage();
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
 
@@ -82,12 +82,12 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
             TEST
           </Button>
           <Button type='primary' onClick={handleSave} loading={spinning?.save}>
-            {t.button.save}
+            {t("save")}
           </Button>
           <Button onClick={handleDelete} loading={spinning?.delete}>
-            {t.button.delete}
+            {t("delete")}
           </Button>
-          <Button onClick={onCancel}>{t.button.cancel}</Button>
+          <Button onClick={onCancel}>{t("cancel")}</Button>
         </Space>
       }
     >

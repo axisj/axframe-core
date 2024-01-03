@@ -2,9 +2,9 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize } from "@core/hooks";
+import { useBtnI18n, useContainerSize, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
-import { useI18n } from "@core/hooks/useI18n";
+
 import { use$LIST$Store } from "./use$LIST$Store";
 
 interface DtoItem extends ExampleItem {}
@@ -14,8 +14,8 @@ interface Props {
 }
 
 function ListDataGrid({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const listColWidths = use$LIST$Store((s) => s.listColWidths);
   const listSortParams = use$LIST$Store((s) => s.listSortParams);
@@ -39,19 +39,19 @@ function ListDataGrid({ onClick }: Props) {
   const columns = React.useMemo(() => {
     return (
       [
-        { key: "id", label: _t.label.id, align: "left", width: 80 },
-        { key: "name", label: _t.label.name, align: "left", width: 80 },
-        { key: "cnsltDt", label: _t.label.cnsltDt, align: "left", width: 100 },
-        { key: "area", label: _t.label.area, align: "left", width: 80 },
-        { key: "birthDt", label: _t.label.birthDt, align: "center", width: 120 },
-        { key: "phone1", label: _t.label.phone1, align: "center", width: 150 },
-        { key: "cnsltHow", label: _t.label.cnsltHow, align: "left", width: 100 },
-        { key: "cnsltPath", label: _t.label.cnsltPath, align: "left", width: 150 },
-        { key: "fmTyp", label: _t.label.fmTyp, align: "left", width: 100 },
-        { key: "homeTyp", label: _t.label.homeTyp, align: "left", width: 100 },
-        { key: "fldA", label: _t.label.fldA, align: "left", width: 100 },
-        { key: "hopePoint", label: _t.label.hopePoint, align: "left", width: 150 },
-        { key: "updatedByNm", label: _t.label.updatedByNm, align: "left", width: 120 },
+        { key: "id", label: t("id"), align: "left", width: 80 },
+        { key: "name", label: t("name"), align: "left", width: 80 },
+        { key: "cnsltDt", label: t("cnsltDt"), align: "left", width: 100 },
+        { key: "area", label: t("area"), align: "left", width: 80 },
+        { key: "birthDt", label: t("birthDt"), align: "center", width: 120 },
+        { key: "phone1", label: t("phone1"), align: "center", width: 150 },
+        { key: "cnsltHow", label: t("cnsltHow"), align: "left", width: 100 },
+        { key: "cnsltPath", label: t("cnsltPath"), align: "left", width: 150 },
+        { key: "fmTyp", label: t("fmTyp"), align: "left", width: 100 },
+        { key: "homeTyp", label: t("homeTyp"), align: "left", width: 100 },
+        { key: "fldA", label: t("fldA"), align: "left", width: 100 },
+        { key: "hopePoint", label: t("hopePoint"), align: "left", width: 150 },
+        { key: "updatedByNm", label: t("updatedByNm"), align: "left", width: 120 },
       ] as AXFDGColumn<DtoItem>[]
     ).map((column, colIndex) => {
       if (listColWidths.length > 0) {
@@ -61,7 +61,7 @@ function ListDataGrid({ onClick }: Props) {
 
       return column;
     });
-  }, [_t, listColWidths]);
+  }, [t, listColWidths]);
 
   return (
     <Container ref={containerRef}>

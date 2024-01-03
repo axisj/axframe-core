@@ -1,18 +1,17 @@
-import styled from "@emotion/styled";
 import { Loading, ProgramTitle } from "@core/components/common";
-import { PageLayout } from "styles/pageStyled";
 import { useI18n, useUnmountEffect } from "@core/hooks";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { View } from "./View";
-import { use$DETAIL$Store } from "./use$DETAIL$Store";
+import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
+import { PageLayout } from "styles/pageStyled";
 import { errorHandling } from "utils/errorHandling";
+import { use$DETAIL$Store } from "./use$DETAIL$Store";
+import { View } from "./View";
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
 
   const init = use$DETAIL$Store((s) => s.init);
   const destroy = use$DETAIL$Store((s) => s.destroy);
@@ -38,7 +37,7 @@ function App({}: Props) {
   return (
     <Container>
       <Header>
-        <ProgramTitle title={_t.title.detail}></ProgramTitle>
+        <ProgramTitle title={t("데모-뷰페이지")}></ProgramTitle>
 
         <ButtonGroup compact></ButtonGroup>
       </Header>

@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { toMoney } from "@core/utils/number";
-import { ExampleStatItem } from "@core/services/example/ExampleRepositoryInterface";
-import { use$STATS$Store } from "./use$STATS$Store";
-import { useContainerSize, useI18n } from "@core/hooks";
 import { StatDataGrid } from "@core/components/StatDataGrid";
+import { useContainerSize, useI18n } from "@core/hooks";
+import { ExampleStatItem } from "@core/services/example/ExampleRepositoryInterface";
+import { toMoney } from "@core/utils/number";
+import styled from "@emotion/styled";
+import React from "react";
+import { use$STATS$Store } from "./use$STATS$Store";
 
 interface DtoItem extends ExampleStatItem {}
 
 interface Props {}
 
 function StatList1({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const listData = use$STATS$Store((s) => s.listData);
   const spinning = use$STATS$Store((s) => s.spinning);

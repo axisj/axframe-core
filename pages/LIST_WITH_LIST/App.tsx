@@ -1,27 +1,27 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ColResizer, ProgramTitle } from "@core/components/common";
+import { AXFDGClickParams } from "@axframe/datagrid";
 import { AXFIRevert } from "@axframe/icon";
+import { ColResizer, ProgramTitle } from "@core/components/common";
+import { IParam, SearchParams, SearchParamType } from "@core/components/search";
+import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
+import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
+import styled from "@emotion/styled";
 import { Button, Form } from "antd";
+import React from "react";
 
 import { PageLayout } from "styles/pageStyled";
-import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { useI18n, useUnmountEffect } from "@core/hooks";
-import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
-import { IParam, SearchParams, SearchParamType } from "@core/components/search";
-import { AXFDGClickParams } from "@axframe/datagrid";
-import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { ListDataGrid } from "./ListDataGrid";
-import { ChildListDataGrid } from "./ChildListDataGrid";
 import { errorHandling } from "utils/errorHandling";
+import { ChildListDataGrid } from "./ChildListDataGrid";
+import { ListDataGrid } from "./ListDataGrid";
+import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
 
 interface DtoItem extends ExampleItem {}
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const init = use$LIST_WITH_LIST$Store((s) => s.init);
   const reset = use$LIST_WITH_LIST$Store((s) => s.reset);
@@ -109,12 +109,12 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {t("button.reset")}
           </Button>
         </ProgramTitle>
 
         <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t("button.search")}</Button>}
           {programFn?.fn02 && (
             <Button
               type={"primary"}
@@ -122,7 +122,7 @@ function App({}: Props) {
                 callSaveApi();
               }}
             >
-              {t.button.save}
+              {t("button.save")}
             </Button>
           )}
         </ButtonGroup>

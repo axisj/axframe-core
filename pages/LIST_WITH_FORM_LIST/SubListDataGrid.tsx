@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
 import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
+import { useContainerSize, useI18n, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGDataItemStatus } from "@axframe/datagrid";
 import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 import { Button, Tag } from "antd";
@@ -32,7 +32,7 @@ function SubListDataGrid({}: Props) {
   const subListCheckedIndexes = use$LIST_WITH_FORM_LIST$Store((s) => s.subListCheckedIndexes);
   const setSubListCheckedIndexes = use$LIST_WITH_FORM_LIST$Store((s) => s.setSubListCheckedIndexes);
 
-  const { t } = useI18n();
+  const { t } = useI18n("$example$");
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -120,8 +120,8 @@ function SubListDataGrid({}: Props) {
       <FormBoxHeader>
         <div>LIST</div>
         <ButtonGroup compact>
-          <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
-          <Button onClick={handleDelSubItem}>{t.button.del}</Button>
+          <Button onClick={handleAddSubItem}>{t("button.addNew")}</Button>
+          <Button onClick={handleDelSubItem}>{t("button.del")}</Button>
         </ButtonGroup>
       </FormBoxHeader>
 

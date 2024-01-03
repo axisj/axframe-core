@@ -4,7 +4,7 @@ import { ProgramTitle, RowResizer } from "@core/components/common";
 import { AXFIRevert } from "@axframe/icon";
 import { Button, Form } from "antd";
 import { PageLayout } from "styles/pageStyled";
-import { useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
+import { useDidMountEffect, useI18n, useI18n, useUnmountEffect } from "@core/hooks";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";
 import { FormSet } from "./FormSet";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
@@ -18,8 +18,8 @@ interface DtoItem extends ExampleItem {}
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const init = use$LIST_WITH_FORM_ROW$Store((s) => s.init);
   const reset = use$LIST_WITH_FORM_ROW$Store((s) => s.reset);
@@ -134,12 +134,12 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {t("button.reset")}
           </Button>
         </ProgramTitle>
 
         <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t("button.search")}</Button>}
           {programFn?.fn02 && (
             <Button
               onClick={() => {
@@ -147,7 +147,7 @@ function App({}: Props) {
                 setFormActive();
               }}
             >
-              {t.button.addNew}
+              {t("button.addNew")}
             </Button>
           )}
           {programFn?.fn02 && (
@@ -157,7 +157,7 @@ function App({}: Props) {
               disabled={!formActive && !listSelectedRowKey}
               onClick={handleSave}
             >
-              {t.button.save}
+              {t("button.save")}
             </Button>
           )}
         </ButtonGroup>

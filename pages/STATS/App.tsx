@@ -1,21 +1,21 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ProgramTitle } from "@core/components/common";
 import { AXFIRevert } from "@axframe/icon";
-import { Button, Form, Tabs } from "antd";
-import { PageLayout } from "styles/pageStyled";
-import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { useI18n, useUnmountEffect } from "@core/hooks";
-import { PanelType, use$STATS$Store } from "./use$STATS$Store";
+import { ProgramTitle } from "@core/components/common";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
-import { PanelIndex } from "./PanelIndex";
+import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
+import styled from "@emotion/styled";
+import { Button, Form, Tabs } from "antd";
+import React from "react";
+import { PageLayout } from "styles/pageStyled";
 import { errorHandling } from "utils/errorHandling";
+import { PanelIndex } from "./PanelIndex";
+import { PanelType, use$STATS$Store } from "./use$STATS$Store";
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const init = use$STATS$Store((s) => s.init);
   const reset = use$STATS$Store((s) => s.reset);
@@ -91,12 +91,12 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {t("button.reset")}
           </Button>
         </ProgramTitle>
 
         <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn01 && <Button onClick={handleSearch}>{t("button.search")}</Button>}
         </ButtonGroup>
       </Header>
 

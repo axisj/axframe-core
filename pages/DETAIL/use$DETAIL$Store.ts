@@ -1,18 +1,18 @@
-import { create } from "zustand";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 import {
   ExampleDetailRequest,
   ExampleItem,
   ExampleSaveRequest,
 } from "@core/services/example/ExampleRepositoryInterface";
-import { ExampleService } from "services";
+import { pageStoreActions } from "@core/stores/pageStoreActions";
+import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { setMetaDataByPath } from "@core/stores/usePageTabStore";
+import { ProgramFn } from "@types";
+import pick from "lodash/pick";
+import { ExampleService } from "services";
+import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
-import { PageStoreActions, StoreActions } from "@core/stores/types";
-import { pageStoreActions } from "@core/stores/pageStoreActions";
-import pick from "lodash/pick";
-import { ProgramFn } from "@types";
-import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface SaveRequest extends ExampleSaveRequest {}
 

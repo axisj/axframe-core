@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
+import { useContainerSize, useI18n, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 import { use$LIST_AND_DRAWER$Store } from "./use$LIST_AND_DRAWER$Store";
 
@@ -13,8 +13,8 @@ interface Props {
 }
 
 function ListDataGrid({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const _t: any = {};
 
   const listColWidths = use$LIST_AND_DRAWER$Store((s) => s.listColWidths);
   const listSortParams = use$LIST_AND_DRAWER$Store((s) => s.listSortParams);
