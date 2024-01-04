@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 import { Breadcrumb } from "antd";
 import { useLink } from "hooks";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { matchPath } from "react-router-dom";
 import { ROUTES_LIST, useAppMenu } from "router";
 import { AppMenu } from "services";
-import { useAppStore } from "../../../stores";
+import { useAppStore } from "stores";
 import { Spinner } from "./Spinner";
 
 const MenuIcon = React.lazy(() => import("components/MenuIcon"));
