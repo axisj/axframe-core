@@ -1,20 +1,20 @@
+import { AXFIRevert, AXFIWriteForm } from "@axframe/icon";
+import { Loading, ProgramTitle } from "@core/components/common";
+import { useBtnI18n, useI18n, useUnmountEffect } from "hooks";
+import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import styled from "@emotion/styled";
 import { Button, Form } from "antd";
-import { Loading, ProgramTitle } from "@core/components/common";
 import { useCallback } from "react";
-import { AXFIRevert, AXFIWriteForm } from "@axframe/icon";
 import { PageLayout } from "styles/pageStyled";
-import { useI18n, useUnmountEffect } from "@core/hooks";
-import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
+import { errorHandling, formErrorHandling } from "utils/errorHandling";
 import { FormSet } from "./FormSet";
 import { use$FORM$Store } from "./use$FORM$Store";
-import { errorHandling, formErrorHandling } from "utils/errorHandling";
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const init = use$FORM$Store((s) => s.init);
   const reset = use$FORM$Store((s) => s.reset);
@@ -59,13 +59,13 @@ function App({}: Props) {
       <Header>
         <ProgramTitle icon={<AXFIWriteForm />}>
           <Button icon={<AXFIRevert />} onClick={reset} size='small' type={"text"}>
-            {t.button.reset}
+            {btnT("초기화")}
           </Button>
         </ProgramTitle>
         <ButtonGroup compact>
           {programFn?.fn02 && (
             <Button type={"primary"} loading={saveSpinning} onClick={handleSave}>
-              {t.button.save}
+              {btnT("저장")}
             </Button>
           )}
         </ButtonGroup>

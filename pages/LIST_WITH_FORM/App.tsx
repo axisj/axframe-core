@@ -1,25 +1,25 @@
-import React, { useCallback } from "react";
-import styled from "@emotion/styled";
-import { ColResizer, ProgramTitle } from "@core/components/common";
-import { AXFIRevert } from "@axframe/icon";
-import { Button, Form } from "antd";
-import { PageLayout } from "styles/pageStyled";
-import { useDidMountEffect, useI18n, useUnmountEffect } from "@core/hooks";
-import { use$LIST_WITH_FORM$Store } from "./use$LIST_WITH_FORM$Store";
-import { FormSet } from "./FormSet";
-import { IParam, SearchParams, SearchParamType } from "@core/components/search";
 import { AXFDGClickParams } from "@axframe/datagrid";
+import { AXFIRevert } from "@axframe/icon";
+import { ColResizer, ProgramTitle } from "@core/components/common";
+import { IParam, SearchParams, SearchParamType } from "@core/components/search";
+import { useBtnI18n, useDidMountEffect, useI18n, useUnmountEffect } from "hooks";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { ListDataGrid } from "./ListDataGrid";
+import styled from "@emotion/styled";
+import { Button, Form } from "antd";
+import React, { useCallback } from "react";
+import { PageLayout } from "styles/pageStyled";
 import { errorHandling, formErrorHandling } from "utils/errorHandling";
+import { FormSet } from "./FormSet";
+import { ListDataGrid } from "./ListDataGrid";
+import { use$LIST_WITH_FORM$Store } from "./use$LIST_WITH_FORM$Store";
 
 interface DtoItem extends ExampleItem {}
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const init = use$LIST_WITH_FORM$Store((s) => s.init);
   const reset = use$LIST_WITH_FORM$Store((s) => s.reset);
@@ -93,24 +93,39 @@ function App({}: Props) {
     () =>
       [
         {
-          placeholder: _t.label.area,
+          placeholder: t("지역"),
           name: "select1",
           type: SearchParamType.SELECT,
-          options: _t.options.area,
+          options: [
+            { label: t("중구"), value: "중구" },
+            { label: t("동구"), value: "동구" },
+            { label: t("서구"), value: "서구" },
+            { label: t("남구"), value: "남구" },
+            { label: t("북구"), value: "북구" },
+            { label: t("수성구"), value: "수성구" },
+            { label: t("달서구"), value: "달서구" },
+            { label: t("달성군"), value: "달성군" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltHow,
+          placeholder: t("상담방법"),
           name: "select2",
           type: SearchParamType.SELECT,
-          options: _t.options.cnsltHow,
+          options: [
+            { label: t("유선"), value: "유선" },
+            { label: t("내방"), value: "내방" },
+            { label: t("방문"), value: "방문" },
+            { label: t("이동상담"), value: "이동상담" },
+            { label: t("기타"), value: "기타" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltDt,
+          placeholder: t("상담일자"),
           name: "timeRange",
           type: SearchParamType.DATE_RANGE,
         },
       ] as IParam[],
-    [_t],
+    [t],
   );
 
   useDidMountEffect(() => {
@@ -133,12 +148,12 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {btnT("초기화")}
           </Button>
         </ProgramTitle>
 
         <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
+          {programFn?.fn01 && <Button onClick={handleSearch}>{btnT("검색")}</Button>}
           {programFn?.fn02 && (
             <Button
               onClick={() => {
@@ -146,7 +161,7 @@ function App({}: Props) {
                 setFormActive();
               }}
             >
-              {t.button.addNew}
+              {btnT("추가")}
             </Button>
           )}
           {programFn?.fn02 && (
@@ -156,7 +171,7 @@ function App({}: Props) {
               disabled={!formActive && !listSelectedRowKey}
               onClick={handleSave}
             >
-              {t.button.save}
+              {btnT("저장")}
             </Button>
           )}
         </ButtonGroup>

@@ -1,27 +1,27 @@
+import { AXFDGClickParams } from "@axframe/datagrid";
+import { AXFIRevert } from "@axframe/icon";
+import { ProgramTitle } from "@core/components/common";
+import { IParam, SearchParams, SearchParamType } from "@core/components/search";
+import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
+import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
+import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import styled from "@emotion/styled";
 import { Button, Form } from "antd";
-import { ProgramTitle } from "@core/components/common";
+import { useBtnI18n, useI18n, useLink, useUnmountEffect } from "hooks";
 import React from "react";
-import { AXFIRevert } from "@axframe/icon";
 import { PageLayout } from "styles/pageStyled";
-import { useI18n } from "@core/hooks/useI18n";
-import { use$LIST$Store } from "./use$LIST$Store";
-import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
-import { IParam, SearchParams, SearchParamType } from "@core/components/search";
-import { ListDataGrid } from "./ListDataGrid";
-import { useLink, useUnmountEffect } from "hooks";
-import { AXFDGClickParams } from "@axframe/datagrid";
-import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { errorHandling } from "utils/errorHandling";
-import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
+import { ListDataGrid } from "./ListDataGrid";
+
+import { use$LIST$Store } from "./use$LIST$Store";
 
 interface DtoItem extends ExampleItem {}
 
 interface Props {}
 
 function App({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const { linkByRoute } = useLink();
   const init = use$LIST$Store((s) => s.init);
@@ -65,24 +65,39 @@ function App({}: Props) {
     () =>
       [
         {
-          placeholder: _t.label.area,
+          placeholder: t("지역"),
           name: "select1",
           type: SearchParamType.SELECT,
-          options: _t.options.area,
+          options: [
+            { label: t("중구"), value: "중구" },
+            { label: t("동구"), value: "동구" },
+            { label: t("서구"), value: "서구" },
+            { label: t("남구"), value: "남구" },
+            { label: t("북구"), value: "북구" },
+            { label: t("수성구"), value: "수성구" },
+            { label: t("달서구"), value: "달서구" },
+            { label: t("달성군"), value: "달성군" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltHow,
+          placeholder: t("상담방법"),
           name: "select2",
           type: SearchParamType.SELECT,
-          options: _t.options.cnsltHow,
+          options: [
+            { label: t("유선"), value: "유선" },
+            { label: t("내방"), value: "내방" },
+            { label: t("방문"), value: "방문" },
+            { label: t("이동상담"), value: "이동상담" },
+            { label: t("기타"), value: "기타" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltDt,
+          placeholder: t("상담일자"),
           name: "timeRange",
           type: SearchParamType.DATE_RANGE,
         },
       ] as IParam[],
-    [_t],
+    [t],
   );
 
   useDidMountEffect(() => {
@@ -105,13 +120,11 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t.button.reset}
+            {btnT("초기화")}
           </Button>
         </ProgramTitle>
 
-        <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t.button.search}</Button>}
-        </ButtonGroup>
+        <ButtonGroup compact>{programFn?.fn01 && <Button onClick={handleSearch}>{btnT("검색")}</Button>}</ButtonGroup>
       </Header>
 
       <Body>

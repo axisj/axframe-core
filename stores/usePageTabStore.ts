@@ -1,10 +1,10 @@
 import React from "react";
 import buildStore from "@core/stores/buildStore";
 import { v4 as uuidv4 } from "uuid";
-import { LanguageType } from "i18n";
 import { ROUTES_LIST } from "router";
-import { useAppStore } from "../../stores";
-import { getFlattedAppMenus } from "../utils/store";
+import { LanguageType } from "i18n";
+import { useAppStore } from "stores";
+import { getFlattedAppMenus } from "@core/utils/store";
 
 export interface Page {
   fixed?: boolean;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useContainerSize } from "@core/hooks";
+import { useContainerSize } from "hooks";
 import { StatDataGrid } from "@core/components/StatDataGrid";
 import { use$STATS$Store } from "./use$STATS$Store";
 import { StatRowTd } from "@core/components/statTable";

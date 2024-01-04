@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
-import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
-import { use$THREE_LIST$Store } from "./use$THREE_LIST$Store";
+import { DataGrid } from "@core/components/DataGrid";
+import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
+import styled from "@emotion/styled";
 import { Button } from "antd";
-import { PageLayout } from "styles/pageStyled";
 import { getSelectEditor, InputEditor } from "components/dataGridEditor";
+import { useBtnI18n, useContainerSize, useI18n } from "hooks";
+import React from "react";
+import { PageLayout } from "styles/pageStyled";
 import { ITEM_STAT } from "./Types";
+import { use$THREE_LIST$Store } from "./use$THREE_LIST$Store";
 
 interface DtoItem extends ExampleSubItem {}
 
@@ -17,8 +17,8 @@ interface Props {
 }
 
 function ListDataGridB({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const listBColWidths = use$THREE_LIST$Store((s) => s.listBColWidths);
   const setListBColWidths = use$THREE_LIST$Store((s) => s.setListBColWidths);
@@ -102,10 +102,10 @@ function ListDataGridB({ onClick }: Props) {
   return (
     <>
       <Header>
-        <div>{_t.title.list}</div>
+        <div>{t("목록 B")}</div>
         <ButtonGroup compact>
-          <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
-          <Button onClick={handleDelSubItem}>{t.button.del}</Button>
+          <Button onClick={handleAddSubItem}>{btnT("추가")}</Button>
+          <Button onClick={handleDelSubItem}>{btnT("삭제")}</Button>
         </ButtonGroup>
       </Header>
 

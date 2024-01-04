@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
-import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
-import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
+import { DataGrid } from "@core/components/DataGrid";
+import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
+import styled from "@emotion/styled";
 import { Button } from "antd";
+import { getSelectEditor, InputEditor } from "components/dataGridEditor";
+import { useBtnI18n, useContainerSize, useI18n } from "hooks";
+import React from "react";
 import { PageLayout } from "styles/pageStyled";
 import { ITEM_STAT } from "./Types";
-import { getSelectEditor, InputEditor } from "components/dataGridEditor";
+import { use$LIST_WITH_LIST$Store } from "./use$LIST_WITH_LIST$Store";
 
 interface DtoItem extends ExampleSubItem {}
 
@@ -17,8 +17,8 @@ interface Props {
 }
 
 function ChildListDataGrid({ onClick }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const childListColWidths = use$LIST_WITH_LIST$Store((s) => s.childListColWidths);
   const childListSelectedRowKey = use$LIST_WITH_LIST$Store((s) => s.childListSelectedRowKey);
@@ -102,10 +102,10 @@ function ChildListDataGrid({ onClick }: Props) {
   return (
     <>
       <Header>
-        <div>{_t.title.list}</div>
+        <div>{t("보조목록")}</div>
         <ButtonGroup compact>
-          <Button onClick={handleAddSubItem}>{t.button.addNew}</Button>
-          <Button onClick={handleDelSubItem}>{t.button.del}</Button>
+          <Button onClick={handleAddSubItem}>{btnT("추가")}</Button>
+          <Button onClick={handleDelSubItem}>{btnT("삭제")}</Button>
         </ButtonGroup>
       </Header>
       <Container ref={containerRef}>

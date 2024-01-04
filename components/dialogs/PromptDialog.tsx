@@ -3,7 +3,7 @@ import { Button, Form, Input, Modal } from "antd";
 import React from "react";
 import { ModalLayout } from "styles/pageStyled";
 import { useModalStore } from "@core/stores/useModalStore";
-import { useI18n } from "@core/hooks/useI18n";
+import { useI18n } from "hooks";
 
 export interface PromptDialogRequest {
   title: React.ReactNode;
@@ -57,9 +57,9 @@ function PromptModal({ open, onOk, onCancel, afterClose, params }: Props) {
         </Body>
         <Footer>
           <Button type='primary' onClick={() => form.submit()}>
-            {t.button.ok}
+            {t("button.ok")}
           </Button>
-          <Button onClick={onCancel}>{t.button.cancel}</Button>
+          <Button onClick={onCancel}>{t("button.cancel")}</Button>
         </Footer>
       </Container>
     </Modal>

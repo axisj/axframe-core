@@ -1,11 +1,12 @@
-import React from "react";
-import styled from "@emotion/styled";
 import { SMixinFlexRow } from "@core/styles/emotion";
-import { ROUTES_LIST, useAppMenu } from "router";
+import styled from "@emotion/styled";
 import { Breadcrumb } from "antd";
-import { useI18n, useLink } from "hooks";
-import { AppMenu } from "services";
+import { useLink } from "hooks";
+import React from "react";
 import { matchPath } from "react-router-dom";
+import { ROUTES_LIST, useAppMenu } from "router";
+import { AppMenu } from "services";
+import { useAppStore } from "stores";
 import { Spinner } from "./Spinner";
 
 const MenuIcon = React.lazy(() => import("components/MenuIcon"));
@@ -27,7 +28,7 @@ interface BreadCrumb {
 }
 
 function ProgramTitle({ title, icon, disableIcon, disableBreadcrumb, spinning, children }: Props) {
-  const { currentLanguage } = useI18n();
+  const currentLanguage = useAppStore((s) => s.currentLanguage);
   const { APP_MENUS, MENUS_LIST } = useAppMenu();
   const { linkByRoute } = useLink();
   const currentRoute = React.useMemo(

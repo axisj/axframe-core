@@ -1,7 +1,7 @@
-import { getI18n } from "@core/hooks";
-import { ApiErrorCode } from "@types";
 import { alertDialog, errorDialog } from "@core/components/dialogs";
-import { DialogRequest } from "@core/components/dialogs/dialogModal.tsx";
+import { DialogRequest } from "@core/components/dialogs/dialogModal";
+import { ApiErrorCode } from "@types";
+import i18n from "i18n";
 
 const knownErrorCodes = [
   ApiErrorCode.SQL_DUPLICATE_ERROR,
@@ -11,7 +11,7 @@ const knownErrorCodes = [
 ];
 
 export async function errorHandler(err: any, msgs?: Record<string, any>) {
-  const { t } = getI18n();
+  const t = i18n.t;
 
   if (err === "confirm_cancel") {
     return true;
@@ -24,7 +24,7 @@ export async function errorHandler(err: any, msgs?: Record<string, any>) {
     if (err?.code) {
       if (knownErrorCodes.includes(err.code)) {
         await alertDialog({
-          content: msgs?.[err.code] ?? t.apiErrMsg[err.code] + (err.data ? `\n[${err.data}]` : ""),
+          content: msgs?.[err.code] ?? t(`api-error.${err.code}`) + (err.data ? `\n[${err.data}]` : ""),
         });
       } else {
         await errorDialog({
@@ -45,11 +45,4 @@ export async function errorHandler(err: any, msgs?: Record<string, any>) {
       console.error(e);
     }
   }
-}
-
-export function getErrorMsg(err: any) {
-  if (err?.code) {
-    return getI18n().t.apiErrMsg[err.code] ?? `Error : ${err.code}`;
-  }
-  return err?.message;
 }

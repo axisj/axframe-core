@@ -1,14 +1,13 @@
-import React from "react";
-import { Button, Col, DatePicker, Form, FormInstance, Input, Radio, Row, Select, Space } from "antd";
-import styled from "@emotion/styled";
-import { PageLayout } from "styles/pageStyled";
-import dayjs from "dayjs";
+import { useBtnI18n, useI18n } from "hooks";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { useI18n } from "@core/hooks";
 import { convertToDate } from "@core/utils/object";
-import { use$LIST_WITH_FORM$Store } from "./use$LIST_WITH_FORM$Store";
+import styled from "@emotion/styled";
+import { Button, Col, DatePicker, Form, FormInstance, Input, Radio, Row, Select, Space } from "antd";
 import { EmptyMsg } from "components/common";
+import React from "react";
+import { PageLayout } from "styles/pageStyled";
 import { errorHandling } from "utils";
+import { use$LIST_WITH_FORM$Store } from "./use$LIST_WITH_FORM$Store";
 
 interface Props {
   form: FormInstance<DtoItem>;
@@ -17,8 +16,8 @@ interface Props {
 interface DtoItem extends ExampleItem {}
 
 function FormSet({ form }: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
 
   const saveRequestValue = use$LIST_WITH_FORM$Store((s) => s.saveRequestValue);
   const setSaveRequestValue = use$LIST_WITH_FORM$Store((s) => s.setSaveRequestValue);
@@ -63,7 +62,7 @@ function FormSet({ form }: Props) {
               setFormActive();
             }}
           >
-            {t.button.addNew}
+            {btnT("추가")}
           </Button>
         </EmptyMsg>
         <Form form={form} />
@@ -76,7 +75,7 @@ function FormSet({ form }: Props) {
       <Header>
         Form
         <ButtonGroup compact>
-          <Button onClick={() => cancelFormActive()}>{t.button.cancel}</Button>
+          <Button onClick={() => cancelFormActive()}>{btnT("취소")}</Button>
         </ButtonGroup>
       </Header>
       <Body>
@@ -91,43 +90,51 @@ function FormSet({ form }: Props) {
             await callSaveApi();
             await cancelFormActive();
           }}
-          validateMessages={t.core.validateMessages}
         >
           <FormBox>
             <Row gutter={20}>
               <Col xs={24} sm={8}>
-                <Form.Item
-                  label={_t.label.area}
-                  name={"area"}
-                  rules={[{ required: true, message: "커스텀 메세지 사용 가능" }]}
-                >
-                  <Select options={_t.options.area} />
+                <Form.Item label={t("지역")} name={"area"} rules={[{ required: true }]}>
+                  <Select
+                    options={[
+                      { label: t("중구"), value: "중구" },
+                      { label: t("동구"), value: "동구" },
+                      { label: t("서구"), value: "서구" },
+                      { label: t("남구"), value: "남구" },
+                      { label: t("북구"), value: "북구" },
+                      { label: t("수성구"), value: "수성구" },
+                      { label: t("달서구"), value: "달서구" },
+                      { label: t("달성군"), value: "달성군" },
+                    ]}
+                  />
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.cnsltUserCd} name={"cnsltUserCd"} rules={[{ required: true }]}>
+                <Form.Item label={t("상담원")} name={"cnsltUserCd"} rules={[{ required: true }]}>
                   <Select>
                     <Select.Option value={"system"}>시스템관리자</Select.Option>
                   </Select>
                 </Form.Item>
               </Col>
               <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.cnsltDt} name={"cnsltDt"}>
+                <Form.Item label={t("상담일자")} name={"cnsltDt"}>
                   <DatePicker />
                 </Form.Item>
               </Col>
             </Row>
 
-            <Form.Item label={_t.label.cnsltHow} rules={[{ required: true }]}>
+            <Form.Item label={t("상담방법")} rules={[{ required: true }]}>
               <Space size={[8, 16]} wrap>
                 <Form.Item noStyle name={"cnsltHow"}>
-                  <Radio.Group>
-                    {_t.options.cnsltHow.map((o, i) => (
-                      <Radio value={o.value} key={i}>
-                        {o.label}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
+                  <Radio.Group
+                    options={[
+                      { label: t("유선"), value: "유선" },
+                      { label: t("내방"), value: "내방" },
+                      { label: t("방문"), value: "방문" },
+                      { label: t("이동상담"), value: "이동상담" },
+                      { label: t("기타"), value: "기타" },
+                    ]}
+                  />
                 </Form.Item>
                 <Form.Item noStyle name={"cnsltHowEtc"}>
                   <Input disabled={cnsltHow !== "기타"} />
@@ -135,47 +142,52 @@ function FormSet({ form }: Props) {
               </Space>
             </Form.Item>
 
-            <Form.Item label={_t.label.cnsltPath} required name={"cnsltPath"} style={{ marginBottom: 5 }}>
-              <Radio.Group>
-                {_t.options.cnsltPath.map((o, i) => (
-                  <Radio value={o.value} key={i}>
-                    {o.label}
-                  </Radio>
-                ))}
-              </Radio.Group>
+            <Form.Item label={t("상담경로")} required name={"cnsltPath"} style={{ marginBottom: 5 }}>
+              <Radio.Group
+                options={[
+                  { label: t("방문"), value: "방문" },
+                  { label: t("관련기관"), value: "관련기관" },
+                  { label: t("개인소개"), value: "개인소개" },
+                  { label: t("본인직접"), value: "본인직접" },
+                  { label: t("기타기관"), value: "기타기관" },
+                ]}
+              />
             </Form.Item>
 
             {cnsltPath === "관련기관" && (
               <Form.Item noStyle name={"cnsltPathDtl"}>
-                <Radio.Group>
-                  {_t.options.cnsltPathDtl.map((o, i) => (
-                    <Radio value={o.value} key={i}>
-                      {o.label}
-                    </Radio>
-                  ))}
-                </Radio.Group>
+                <Radio.Group
+                  options={[
+                    { label: t("동사무소/구청"), value: "동사무소/구청" },
+                    { label: t("복지관"), value: "복지관" },
+                    { label: t("보건소"), value: "보건소" },
+                    { label: t("관리사무소"), value: "관리사무소" },
+                    { label: t("복지기관"), value: "복지기관" },
+                    { label: t("시민사회단체"), value: "시민사회단체" },
+                  ]}
+                />
               </Form.Item>
             )}
             {cnsltPath === "개인소개" && (
               <Form.Item noStyle name={"cnsltPathPerson"}>
-                <Input placeholder={_t.placeholder.cnsltPathPerson} style={{ maxWidth: 300 }} />
+                <Input style={{ maxWidth: 300 }} />
               </Form.Item>
             )}
             {cnsltPath === "본인직접" && (
               <Form.Item noStyle name={"cnsltPathDirect"}>
-                <Input placeholder={_t.placeholder.cnsltPathDirect} style={{ maxWidth: 300 }} />
+                <Input style={{ maxWidth: 300 }} />
               </Form.Item>
             )}
             {cnsltPath === "기타기관" && (
               <Space size={20} wrap>
                 <Form.Item noStyle name={"cnsltPathOrg"}>
-                  <Input placeholder={_t.placeholder.cnsltPathOrg} />
+                  <Input />
                 </Form.Item>
                 <Form.Item noStyle name={"cnsltPathOrgPerson"}>
-                  <Input placeholder={_t.placeholder.cnsltPathOrgPerson} />
+                  <Input />
                 </Form.Item>
                 <Form.Item noStyle name={"cnsltPathOrgPhone"}>
-                  <Input placeholder={_t.placeholder.cnsltPathOrgPhone} />
+                  <Input />
                 </Form.Item>
               </Space>
             )}

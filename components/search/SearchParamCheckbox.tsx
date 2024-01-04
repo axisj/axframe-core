@@ -1,8 +1,8 @@
 import { Checkbox, Form } from "antd";
-import React from "react";
-import { SearchParamComponent } from "./SearchParam";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
-import { useI18n } from "hooks";
+import React from "react";
+import { useI18n } from "../../../hooks";
+import { SearchParamComponent } from "./SearchParam";
 
 export const SearchParamCheckbox: SearchParamComponent = ({
   name,
@@ -31,7 +31,7 @@ export const SearchParamCheckbox: SearchParamComponent = ({
           checked={checkedAll.length === options.length}
           disabled={disabled}
         >
-          {t.common.checkAll}
+          {t("checkAll")}
         </Checkbox>
       )}
 

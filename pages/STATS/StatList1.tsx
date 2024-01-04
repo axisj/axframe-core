@@ -1,18 +1,17 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { toMoney } from "@core/utils/number";
-import { ExampleStatItem } from "@core/services/example/ExampleRepositoryInterface";
-import { use$STATS$Store } from "./use$STATS$Store";
-import { useContainerSize, useI18n } from "@core/hooks";
 import { StatDataGrid } from "@core/components/StatDataGrid";
+import { useContainerSize, useI18n } from "hooks";
+import { ExampleStatItem } from "@core/services/example/ExampleRepositoryInterface";
+import { toMoney } from "@core/utils/number";
+import styled from "@emotion/styled";
+import React from "react";
+import { use$STATS$Store } from "./use$STATS$Store";
 
 interface DtoItem extends ExampleStatItem {}
 
 interface Props {}
 
 function StatList1({}: Props) {
-  const { t } = useI18n();
-  const _t = t.example;
+  const { t } = useI18n("$example$");
 
   const listData = use$STATS$Store((s) => s.listData);
   const spinning = use$STATS$Store((s) => s.spinning);
@@ -51,14 +50,14 @@ function StatList1({}: Props) {
         headColumns={[
           {
             children: [
-              { label: _t.title.stats, rowspan: 2 },
-              { label: "기타", colspan: 9 },
+              { label: t("합계"), rowspan: 2 },
+              { label: t("기타"), colspan: 9 },
             ],
           },
           {
             children: [
-              { label: "사업장" },
-              { label: "식당수" },
+              { label: t("사업장") },
+              { label: t("식당수") },
               { label: "sum" },
               { label: "count" },
               { label: "avg" },
@@ -104,7 +103,7 @@ function StatList1({}: Props) {
           columns: [
             {
               colspan: 3,
-              label: "소계",
+              label: t("소계"),
             },
             // { key: "storCnt", align: "right" },
             { key: "01-28", totalType: "sum", align: "right" },
@@ -126,7 +125,7 @@ function StatList1({}: Props) {
           columns: [
             {
               colspan: 2,
-              label: "총계",
+              label: t("총계"),
             },
             { key: "storCnt", align: "right" },
             { key: "01-28", totalType: "sum", align: "right" },
