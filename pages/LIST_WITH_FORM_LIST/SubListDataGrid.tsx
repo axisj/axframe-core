@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
-import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n, useI18n } from "@core/hooks";
 import { AXFDGColumn, AXFDGDataItemStatus } from "@axframe/datagrid";
-import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
+import { DataGrid } from "@core/components/DataGrid";
+import { ExampleSubItem } from "@core/services/example/ExampleRepositoryInterface";
+import styled from "@emotion/styled";
 import { Button, Tag } from "antd";
-import { PageLayout } from "../../../styles/pageStyled";
 import { getSelectEditor, InputEditor } from "components/dataGridEditor";
+import { useBtnI18n, useContainerSize, useI18n } from "hooks";
+import React from "react";
+import { PageLayout } from "../../../styles/pageStyled";
+import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 
 interface DtoItem extends ExampleSubItem {}
 
@@ -20,6 +20,8 @@ const ITEM_STAT = {
 };
 
 function SubListDataGrid({}: Props) {
+  const { t } = useI18n("$example$");
+  const btnT = useBtnI18n();
   const subListColWidths = use$LIST_WITH_FORM_LIST$Store((s) => s.subListColWidths);
   const subListData = use$LIST_WITH_FORM_LIST$Store((s) => s.subListData);
   const subListSpinning = use$LIST_WITH_FORM_LIST$Store((s) => s.subListSpinning);
@@ -32,7 +34,6 @@ function SubListDataGrid({}: Props) {
   const subListCheckedIndexes = use$LIST_WITH_FORM_LIST$Store((s) => s.subListCheckedIndexes);
   const setSubListCheckedIndexes = use$LIST_WITH_FORM_LIST$Store((s) => s.setSubListCheckedIndexes);
 
-  const { t } = useI18n("$example$");
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { width: containerWidth, height: containerHeight } = useContainerSize(containerRef);
 
@@ -120,8 +121,8 @@ function SubListDataGrid({}: Props) {
       <FormBoxHeader>
         <div>LIST</div>
         <ButtonGroup compact>
-          <Button onClick={handleAddSubItem}>{t("button.addNew")}</Button>
-          <Button onClick={handleDelSubItem}>{t("button.del")}</Button>
+          <Button onClick={handleAddSubItem}>{btnT("추가")}</Button>
+          <Button onClick={handleDelSubItem}>{btnT("삭제")}</Button>
         </ButtonGroup>
       </FormBoxHeader>
 

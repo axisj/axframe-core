@@ -1,14 +1,14 @@
-import React from "react";
-import { Button, Col, DatePicker, Form, FormInstance, Input, Row, Select } from "antd";
-import styled from "@emotion/styled";
-import { PageLayout } from "styles/pageStyled";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { useI18n, useI18n } from "@core/hooks";
-import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
-import { EmptyMsg } from "components/common";
 import { convertToDate } from "@core/utils/object";
-import { SubListDataGrid } from "./SubListDataGrid";
+import styled from "@emotion/styled";
+import { Button, Col, DatePicker, Form, FormInstance, Input, Row, Select } from "antd";
+import { EmptyMsg } from "components/common";
+import { useBtnI18n, useI18n } from "hooks";
+import React from "react";
+import { PageLayout } from "styles/pageStyled";
 import { errorHandling } from "utils";
+import { SubListDataGrid } from "./SubListDataGrid";
+import { use$LIST_WITH_FORM_LIST$Store } from "./use$LIST_WITH_FORM_LIST$Store";
 
 interface Props {
   form: FormInstance<DtoItem>;
@@ -18,7 +18,7 @@ interface DtoItem extends ExampleItem {}
 
 function FormSet({ form }: Props) {
   const { t } = useI18n("$example$");
-  const _t: any = {};
+  const btnT = useBtnI18n();
 
   const saveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.saveRequestValue);
   const setSaveRequestValue = use$LIST_WITH_FORM_LIST$Store((s) => s.setSaveRequestValue);
@@ -59,7 +59,7 @@ function FormSet({ form }: Props) {
               setFormActive();
             }}
           >
-            {t("button.addNew")}
+            {btnT("추가")}
           </Button>
         </EmptyMsg>
         <Form form={form} />
@@ -72,7 +72,7 @@ function FormSet({ form }: Props) {
       <Header>
         Form
         <ButtonGroup compact>
-          <Button onClick={() => cancelFormActive()}>{t("button.cancel")}</Button>
+          <Button onClick={() => cancelFormActive()}>{btnT("취소")}</Button>
         </ButtonGroup>
       </Header>
       <Body>
@@ -99,16 +99,27 @@ function FormSet({ form }: Props) {
             <Row gutter={[20, 0]}>
               <Col xs={24} sm={8}>
                 <Form.Item
-                  label={_t.label.area}
+                  label={t("지역")}
                   name={"area"}
                   rules={[{ required: true, message: "커스텀 메세지 사용 가능" }]}
                 >
-                  <Select options={_t.options.area} />
+                  <Select
+                    options={[
+                      { label: t("중구"), value: "중구" },
+                      { label: t("동구"), value: "동구" },
+                      { label: t("서구"), value: "서구" },
+                      { label: t("남구"), value: "남구" },
+                      { label: t("북구"), value: "북구" },
+                      { label: t("수성구"), value: "수성구" },
+                      { label: t("달서구"), value: "달서구" },
+                      { label: t("달성군"), value: "달성군" },
+                    ]}
+                  />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
-                <Form.Item label={_t.label.cnsltDt} name={"cnsltDt"}>
+                <Form.Item label={t("상담일자")} name={"cnsltDt"}>
                   <DatePicker />
                 </Form.Item>
               </Col>

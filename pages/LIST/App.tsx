@@ -84,11 +84,11 @@ function App({}: Props) {
           name: "select2",
           type: SearchParamType.SELECT,
           options: [
-            { value: t("유선"), label: "유선" },
-            { value: t("내방"), label: "내방" },
-            { value: t("방문"), label: "방문" },
-            { value: t("이동상담"), label: "이동상담" },
-            { value: t("기타"), label: "기타" },
+            { label: t("유선"), value: "유선" },
+            { label: t("내방"), value: "내방" },
+            { label: t("방문"), value: "방문" },
+            { label: t("이동상담"), value: "이동상담" },
+            { label: t("기타"), value: "기타" },
           ],
         },
         {

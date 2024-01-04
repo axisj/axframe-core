@@ -1,10 +1,10 @@
+import { Loading } from "@core/components/common";
+import { useBtnI18n, useDidMountEffect, useI18n, useSpinning } from "hooks";
+import { useDrawerStore } from "@core/stores/useDrawerStore";
+import { delay } from "@core/utils/thread/timing";
 import { Badge, Button, Descriptions, Drawer, message, Space } from "antd";
 import React from "react";
-import { useDrawerStore } from "@core/stores/useDrawerStore";
-import { useDidMountEffect, useI18n, useI18n, useSpinning } from "@core/hooks";
-import { delay } from "@core/utils/thread/timing";
 import { use$LIST_AND_DRAWER$Store } from "./use$LIST_AND_DRAWER$Store";
-import { Loading } from "@core/components/common";
 
 export interface ExampleDrawerRequest {
   query?: Record<string, any>;
@@ -26,7 +26,7 @@ interface Props {
 function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) {
   const [messageApi, contextHolder] = message.useMessage();
   const { t } = useI18n("$example$");
-  const _t: any = {};
+  const btnT = useBtnI18n();
 
   const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
 
@@ -82,31 +82,31 @@ function DetailDrawer({ open, onOk, onCancel, params, afterOpenChange }: Props) 
             TEST
           </Button>
           <Button type='primary' onClick={handleSave} loading={spinning?.save}>
-            {t("save")}
+            {btnT("저장")}
           </Button>
           <Button onClick={handleDelete} loading={spinning?.delete}>
-            {t("delete")}
+            {btnT("삭제")}
           </Button>
-          <Button onClick={onCancel}>{t("cancel")}</Button>
+          <Button onClick={onCancel}>{btnT("취소")}</Button>
         </Space>
       }
     >
       {contextHolder}
       TEST {params.query?.id}
       <Descriptions bordered size={"small"}>
-        <Descriptions.Item label={_t.label.name}>{detail?.name}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.birthDt}>{detail?.birthDt}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.sex}>{detail?.sex}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.phone1}>{detail?.phone1}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.phone2} span={2}>
+        <Descriptions.Item label={t("성명")}>{detail?.name}</Descriptions.Item>
+        <Descriptions.Item label={t("생년월일")}>{detail?.birthDt}</Descriptions.Item>
+        <Descriptions.Item label={t("성별")}>{detail?.sex}</Descriptions.Item>
+        <Descriptions.Item label={t("연락처 1")}>{detail?.phone1}</Descriptions.Item>
+        <Descriptions.Item label={t("연락처 2")} span={2}>
           {detail?.phone2}
         </Descriptions.Item>
         <Descriptions.Item label='Status' span={3}>
           <Badge status='processing' text='Running' />
         </Descriptions.Item>
-        <Descriptions.Item label={_t.label.hndcapYn}>{detail?.hndcapYn}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.hndcapGrade}>{detail?.hndcapGrade}</Descriptions.Item>
-        <Descriptions.Item label={_t.label.hndcapTyp}>{detail?.hndcapTyp}</Descriptions.Item>
+        <Descriptions.Item label={t("장애유무")}>{detail?.hndcapYn}</Descriptions.Item>
+        <Descriptions.Item label={t("장애등급")}>{detail?.hndcapGrade}</Descriptions.Item>
+        <Descriptions.Item label={t("장애종류")}>{detail?.hndcapTyp}</Descriptions.Item>
       </Descriptions>
       <Loading active={detailSpinning} />
     </Drawer>

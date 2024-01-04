@@ -1,4 +1,4 @@
-import { useBtnI18n, useI18n } from "@core/hooks";
+import { useBtnI18n, useI18n } from "hooks";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { convertToDate } from "@core/utils/object";
 import styled from "@emotion/styled";

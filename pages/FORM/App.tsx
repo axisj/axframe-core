@@ -1,6 +1,6 @@
 import { AXFIRevert, AXFIWriteForm } from "@axframe/icon";
 import { Loading, ProgramTitle } from "@core/components/common";
-import { useBtnI18n, useI18n, useUnmountEffect } from "@core/hooks";
+import { useBtnI18n, useI18n, useUnmountEffect } from "hooks";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import styled from "@emotion/styled";
 import { Button, Form } from "antd";

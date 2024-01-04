@@ -1,5 +1,5 @@
 import { Loading, ProgramTitle } from "@core/components/common";
-import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useI18n, useUnmountEffect } from "hooks";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
@@ -37,7 +37,7 @@ function App({}: Props) {
   return (
     <Container>
       <Header>
-        <ProgramTitle title={t("데모-뷰페이지")}></ProgramTitle>
+        <ProgramTitle title={t("상세페이지")} />
 
         <ButtonGroup compact></ButtonGroup>
       </Header>

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { PageLayout } from "styles/pageStyled";
 import dayjs from "dayjs";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
-import { useI18n, useI18n } from "@core/hooks";
+import { useI18n, useI18n } from "hooks";
 import { convertToDate } from "@core/utils/object";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import { use$LIST_WITH_FORM_ROW$Store } from "./use$LIST_WITH_FORM_ROW$Store";

@@ -1,7 +1,6 @@
 export * from "./useContainerSize";
 export * from "./useDidMountEffect";
 export * from "./useDidUpdateEffect";
-export * from "../../hooks/useI18n.ts";
 export * from "./useIsMounted";
 export * from "./useLink";
 export * from "./usePageMetaData";

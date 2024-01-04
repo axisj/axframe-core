@@ -1,7 +1,7 @@
 import { AXFIRevert } from "@axframe/icon";
 import { ProgramTitle } from "@core/components/common";
 import { IParam, SearchParams, SearchParamType } from "@core/components/search";
-import { useI18n, useUnmountEffect } from "@core/hooks";
+import { useBtnI18n, useI18n, useUnmountEffect } from "hooks";
 import { useDidMountEffect } from "@core/hooks/useDidMountEffect";
 import styled from "@emotion/styled";
 import { Button, Form, Tabs } from "antd";
@@ -15,7 +15,7 @@ interface Props {}
 
 function App({}: Props) {
   const { t } = useI18n("$example$");
-  const _t: any = {};
+  const btnT = useBtnI18n();
 
   const init = use$STATS$Store((s) => s.init);
   const reset = use$STATS$Store((s) => s.reset);
@@ -51,24 +51,39 @@ function App({}: Props) {
     () =>
       [
         {
-          placeholder: _t.label.area,
+          placeholder: t("지역"),
           name: "select1",
           type: SearchParamType.SELECT,
-          options: _t.options.area,
+          options: [
+            { label: t("중구"), value: "중구" },
+            { label: t("동구"), value: "동구" },
+            { label: t("서구"), value: "서구" },
+            { label: t("남구"), value: "남구" },
+            { label: t("북구"), value: "북구" },
+            { label: t("수성구"), value: "수성구" },
+            { label: t("달서구"), value: "달서구" },
+            { label: t("달성군"), value: "달성군" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltHow,
+          placeholder: t("상담방법"),
           name: "select2",
           type: SearchParamType.SELECT,
-          options: _t.options.cnsltHow,
+          options: [
+            { label: t("유선"), value: "유선" },
+            { label: t("내방"), value: "내방" },
+            { label: t("방문"), value: "방문" },
+            { label: t("이동상담"), value: "이동상담" },
+            { label: t("기타"), value: "기타" },
+          ],
         },
         {
-          placeholder: _t.label.cnsltDt,
+          placeholder: t("상담일자"),
           name: "timeRange",
           type: SearchParamType.DATE_RANGE,
         },
       ] as IParam[],
-    [_t],
+    [t],
   );
 
   useDidMountEffect(() => {
@@ -91,13 +106,11 @@ function App({}: Props) {
       <Header>
         <ProgramTitle>
           <Button icon={<AXFIRevert />} onClick={handleReset} size='small' type={"text"}>
-            {t("button.reset")}
+            {btnT("초기화")}
           </Button>
         </ProgramTitle>
 
-        <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{t("button.search")}</Button>}
-        </ButtonGroup>
+        <ButtonGroup compact>{programFn?.fn01 && <Button onClick={handleSearch}>{t("검색")}</Button>}</ButtonGroup>
       </Header>
 
       <PageSearchBar>
@@ -117,11 +130,11 @@ function App({}: Props) {
           items={[
             {
               key: "pg1",
-              label: _t.title.stats_pg1,
+              label: t("통계1"),
             },
             {
               key: "pg2",
-              label: _t.title.stats_pg2,
+              label: t("통계2"),
             },
           ]}
           onChange={(key) => setActiveTabKey(key as PanelType)}

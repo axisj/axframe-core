@@ -1,6 +1,6 @@
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 import { DataGrid } from "@core/components/DataGrid";
-import { useContainerSize, useI18n } from "@core/hooks";
+import { useContainerSize, useI18n } from "hooks";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import styled from "@emotion/styled";
 import React from "react";

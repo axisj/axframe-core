@@ -1,5 +1,3 @@
-import styled from "@emotion/styled";
-import { Button, Divider, Modal } from "antd";
 import {
   CheckCircleFilled,
   CloseCircleFilled,
@@ -7,12 +5,14 @@ import {
   InfoCircleFilled,
   QuestionCircleFilled,
 } from "@ant-design/icons";
-import { SMixinFlexRow } from "../../styles/emotion";
-import { useI18n } from "../../hooks";
 import { css } from "@emotion/react";
-import { useModalStore } from "../../stores/useModalStore.ts";
+import styled from "@emotion/styled";
+import { Button, Divider, Modal } from "antd";
+import { useBtnI18n } from "hooks";
 import React, { useMemo } from "react";
 import { ApiErrorCode } from "../../../@types";
+import { useModalStore } from "../../stores/useModalStore.ts";
+import { SMixinFlexRow } from "../../styles/emotion";
 
 export type DialogType = "info" | "success" | "error" | "warning" | "confirm";
 
@@ -54,7 +54,7 @@ function Icon({ type }: { type?: DialogType }) {
 }
 
 export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props) {
-  const { t } = useI18n();
+  const btnT = useBtnI18n();
 
   const { title, content } = useMemo(() => {
     if (params?.type === "error") {
@@ -116,10 +116,10 @@ export function DialogModal({ open, onCancel, onOk, afterClose, params }: Props)
         <Body>{content}</Body>
         <Footer>
           <Button type={"primary"} onClick={onOk}>
-            {t.button.ok}
+            {btnT("확인")}
           </Button>
 
-          {params?.type === "confirm" && <Button onClick={() => onCancel("cancel")}>{t.button.cancel}</Button>}
+          {params?.type === "confirm" && <Button onClick={() => onCancel("cancel")}>{btnT("취소")}</Button>}
         </Footer>
       </Container>
     </Modal>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { ExampleItem } from "@core/services/example/ExampleRepositoryInterface";
 import { DataGrid } from "@core/components/DataGrid";
-import { useBtnI18n, useContainerSize, useI18n } from "@core/hooks";
+import { useBtnI18n, useContainerSize, useI18n } from "hooks";
 import { AXFDGColumn, AXFDGProps } from "@axframe/datagrid";
 
 import { use$LIST$Store } from "./use$LIST$Store";
@@ -39,19 +39,19 @@ function ListDataGrid({ onClick }: Props) {
   const columns = React.useMemo(() => {
     return (
       [
-        { key: "id", label: t("id"), align: "left", width: 80 },
-        { key: "name", label: t("name"), align: "left", width: 80 },
-        { key: "cnsltDt", label: t("cnsltDt"), align: "left", width: 100 },
-        { key: "area", label: t("area"), align: "left", width: 80 },
-        { key: "birthDt", label: t("birthDt"), align: "center", width: 120 },
-        { key: "phone1", label: t("phone1"), align: "center", width: 150 },
-        { key: "cnsltHow", label: t("cnsltHow"), align: "left", width: 100 },
-        { key: "cnsltPath", label: t("cnsltPath"), align: "left", width: 150 },
-        { key: "fmTyp", label: t("fmTyp"), align: "left", width: 100 },
-        { key: "homeTyp", label: t("homeTyp"), align: "left", width: 100 },
-        { key: "fldA", label: t("fldA"), align: "left", width: 100 },
-        { key: "hopePoint", label: t("hopePoint"), align: "left", width: 150 },
-        { key: "updatedByNm", label: t("updatedByNm"), align: "left", width: 120 },
+        { key: "id", label: t("아이디"), align: "left", width: 80 },
+        { key: "name", label: t("성명"), align: "left", width: 80 },
+        { key: "cnsltDt", label: t("상담일자"), align: "left", width: 100 },
+        { key: "area", label: t("지역"), align: "left", width: 80 },
+        { key: "birthDt", label: t("생년월일"), align: "center", width: 120 },
+        { key: "phone1", label: t("전화"), align: "center", width: 150 },
+        { key: "cnsltHow", label: t("상담방법"), align: "left", width: 100 },
+        { key: "cnsltPath", label: t("상담경로"), align: "left", width: 150 },
+        { key: "fmTyp", label: t("가족유형"), align: "left", width: 100 },
+        { key: "homeTyp", label: t("주거형태"), align: "left", width: 100 },
+        { key: "fldA", label: t("수급여부"), align: "left", width: 100 },
+        { key: "hopePoint", label: t("상담내용"), align: "left", width: 150 },
+        { key: "updatedByNm", label: t("수정일자"), align: "left", width: 120 },
       ] as AXFDGColumn<DtoItem>[]
     ).map((column, colIndex) => {
       if (listColWidths.length > 0) {

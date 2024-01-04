@@ -1,5 +1,5 @@
 import { Loading } from "@core/components/common";
-import { useDidMountEffect, useI18n, useSpinning } from "@core/hooks";
+import { useBtnI18n, useDidMountEffect, useI18n, useSpinning } from "hooks";
 import { useModalStore } from "@core/stores/useModalStore";
 import { delay } from "@core/utils/thread/timing";
 import styled from "@emotion/styled";
@@ -28,7 +28,7 @@ interface Props {
 function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
   const [messageApi, contextHolder] = message.useMessage();
   const { t } = useI18n("$example$");
-  const _t: any = {};
+  const btnT = useBtnI18n();
 
   const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
 
@@ -79,31 +79,31 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
         </ModalLayout.Header>
         <Body>
           <Descriptions bordered size={"small"}>
-            <Descriptions.Item label={_t.label.name}>{detail?.name}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.birthDt}>{detail?.birthDt}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.sex}>{detail?.sex}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.phone1}>{detail?.phone1}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.phone2} span={2}>
+            <Descriptions.Item label={t("성명")}>{detail?.name}</Descriptions.Item>
+            <Descriptions.Item label={t("생년월일")}>{detail?.birthDt}</Descriptions.Item>
+            <Descriptions.Item label={t("성별")}>{detail?.sex}</Descriptions.Item>
+            <Descriptions.Item label={t("연락처 1")}>{detail?.phone1}</Descriptions.Item>
+            <Descriptions.Item label={t("연락처 2")} span={2}>
               {detail?.phone2}
             </Descriptions.Item>
             <Descriptions.Item label='Status' span={3}>
               <Badge status='processing' text='Running' />
             </Descriptions.Item>
-            <Descriptions.Item label={_t.label.hndcapYn}>{detail?.hndcapYn}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.hndcapGrade}>{detail?.hndcapGrade}</Descriptions.Item>
-            <Descriptions.Item label={_t.label.hndcapTyp}>{detail?.hndcapTyp}</Descriptions.Item>
+            <Descriptions.Item label={t("장애유무")}>{detail?.hndcapYn}</Descriptions.Item>
+            <Descriptions.Item label={t("장애등급")}>{detail?.hndcapGrade}</Descriptions.Item>
+            <Descriptions.Item label={t("장애종류")}>{detail?.hndcapTyp}</Descriptions.Item>
           </Descriptions>
 
           <Loading active={detailSpinning} />
         </Body>
         <Footer>
           <Button type='primary' onClick={handleSave} loading={spinning?.save}>
-            {t("save")}
+            {btnT("저장")}
           </Button>
           <Button onClick={handleDelete} loading={spinning?.delete}>
-            {t("delete")}
+            {btnT("삭제")}
           </Button>
-          <Button onClick={onCancel}>{t("cancel")}</Button>
+          <Button onClick={onCancel}>{btnT("취소")}</Button>
         </Footer>
       </Container>
     </Modal>

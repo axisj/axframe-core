@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Badge, Descriptions } from "antd";
 import { useI18n } from "hooks";
+import React from "react";
 import { PageLayout } from "styles/pageStyled";
 import { use$DETAIL$Store } from "./use$DETAIL$Store";
 
@@ -13,36 +14,22 @@ function View({}: Props) {
 
   return (
     <Body>
-      <ContentBoxHeader>{t("폼")}</ContentBoxHeader>
+      <ContentBoxHeader>{t("제목")}</ContentBoxHeader>
       <ContentBox>
         <Descriptions bordered>
-          <Descriptions.Item label={t("이름")}>{detail?.name}</Descriptions.Item>
-          <Descriptions.Item label={t("생일")}>{detail?.birthDt}</Descriptions.Item>
+          <Descriptions.Item label={t("성명")}>{detail?.name}</Descriptions.Item>
+          <Descriptions.Item label={t("생년월일")}>{detail?.birthDt}</Descriptions.Item>
           <Descriptions.Item label={t("성별")}>{detail?.sex}</Descriptions.Item>
-          <Descriptions.Item label={t("전화1")}>{detail?.phone1}</Descriptions.Item>
-          <Descriptions.Item label={t("전화2")} span={2}>
+          <Descriptions.Item label={t("연락처 1")}>{detail?.phone1}</Descriptions.Item>
+          <Descriptions.Item label={t("연락처 2")} span={2}>
             {detail?.phone2}
           </Descriptions.Item>
-          <Descriptions.Item label={t("상태")} span={3}>
+          <Descriptions.Item label='Status' span={3}>
             <Badge status='processing' text='Running' />
           </Descriptions.Item>
-          <Descriptions.Item label={t("hndcapYn")}>{detail?.hndcapYn}</Descriptions.Item>
-          <Descriptions.Item label={t("hndcapGrade")}>{detail?.hndcapGrade}</Descriptions.Item>
-          <Descriptions.Item label={t("hndcapTyp")}>{detail?.hndcapTyp}</Descriptions.Item>
-          <Descriptions.Item label='Config Info'>
-            Data disk type: MongoDB
-            <br />
-            Database version: 3.4
-            <br />
-            Package: dds.mongo.mid
-            <br />
-            Storage space: 10 GB
-            <br />
-            Replication factor: 3
-            <br />
-            Region: East China 1
-            <br />
-          </Descriptions.Item>
+          <Descriptions.Item label={t("장애유무")}>{detail?.hndcapYn}</Descriptions.Item>
+          <Descriptions.Item label={t("장애등급")}>{detail?.hndcapGrade}</Descriptions.Item>
+          <Descriptions.Item label={t("장애종류")}>{detail?.hndcapTyp}</Descriptions.Item>
         </Descriptions>
       </ContentBox>
     </Body>

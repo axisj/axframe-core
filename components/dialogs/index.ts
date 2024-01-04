@@ -1,8 +1,8 @@
+import { ApiError } from "@core/services/ApiError";
+import { CustomError } from "@core/services/CustomError";
+import { ApiErrorCode } from "@types";
+import i18n from "i18n";
 import { dialogModal, DialogRequest } from "./dialogModal.tsx";
-import { CustomError } from "../../services/CustomError.ts";
-import { ApiErrorCode } from "../../../@types";
-import { getI18n } from "../../hooks";
-import { ApiError } from "../../services/ApiError.ts";
 
 export async function alertDialog(params?: DialogRequest) {
   await dialogModal({
@@ -21,7 +21,7 @@ export async function confirmDialog(params?: DialogRequest) {
 }
 
 export async function errorDialog(params?: ApiError | CustomError | DialogRequest) {
-  const { t } = getI18n();
+  const t = i18n.t;
 
   if (params instanceof CustomError || params instanceof Error) {
     return await dialogModal({
@@ -29,8 +29,8 @@ export async function errorDialog(params?: ApiError | CustomError | DialogReques
       ...params,
       title: Object.entries(ApiErrorCode).find(([k, v]) => v === `${params?.code}`)?.[0],
       content:
-        params?.code && t.apiErrMsg[params.code]
-          ? t.apiErrMsg[params.code] + (params.message ? ` [${params.message}]` : "")
+        params?.code && t(`api-error.${params.code}`)
+          ? t(`api-error.${params.code}`) + (params.message ? ` [${params.message}]` : "")
           : "",
       message: params?.message,
       code: params?.code,
