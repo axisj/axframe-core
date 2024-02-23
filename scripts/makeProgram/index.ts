@@ -81,7 +81,7 @@ function main() {
 
     routesFileRawNew = routesFileRawNew.replace(
       "/* ##INSERT_ROUTE_POSITION## */",
-      `${programTypeName} : {
+      `${programTypeName}: {
     program_type: PROGRAM_TYPES.${programTypeName},
     path: "${p.url}",
   },
