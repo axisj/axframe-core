@@ -1,12 +1,11 @@
 import { Loading } from "@core/components/common";
-import { useBtnI18n, useDidMountEffect, useI18n, useSpinning } from "hooks";
 import { useModalStore } from "@core/stores/useModalStore";
 import { delay } from "@core/utils/thread/timing";
 import styled from "@emotion/styled";
 import { Badge, Button, Descriptions, message, Modal } from "antd";
-import React from "react";
+import { useBtnI18n, useDidMountEffect, useI18n } from "hooks";
+import React, { useState } from "react";
 import { ModalLayout } from "styles/pageStyled";
-import { use$LIST_AND_MODAL$Store } from "./use$LIST_AND_MODAL$Store";
 
 export interface ModalRequest {
   query?: Record<string, any>;
@@ -30,50 +29,46 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
   const { t } = useI18n("$example$");
   const btnT = useBtnI18n();
 
-  const { spinning, setSpinning, isBusy } = useSpinning<{ test: boolean; save: boolean; delete: boolean }>();
+  const [deleteSpinning, setDeleteSpinning] = useState(false);
+  const [testSpinning, setTestSpinning] = useState(false);
+  const [saveSpinning, setSaveSpinning] = useState(false);
+  const [detailSpinning, setDetailSpinning] = useState(false);
 
-  const callDetailApi = use$LIST_AND_MODAL$Store((s) => s.callDetailApi);
-  const detailSpinning = use$LIST_AND_MODAL$Store((s) => s.detailSpinning);
-  const detail = use$LIST_AND_MODAL$Store((s) => s.detail);
+  const detail = params.query;
 
   const handleTest = React.useCallback(async () => {
-    if (isBusy) return;
-    setSpinning({ test: true });
+    setTestSpinning(true);
     messageApi.info("The test has been completed.");
     await delay(1000);
-    setSpinning({ test: false });
-  }, [messageApi, setSpinning, isBusy]);
+    setTestSpinning(false);
+  }, [messageApi]);
 
   const handleSave = React.useCallback(async () => {
-    if (isBusy) return;
-    setSpinning({ save: true });
+    setSaveSpinning(true);
     await delay(1000);
     onOk({
       save: true,
     });
-    setSpinning({ save: false });
-  }, [onOk, setSpinning, isBusy]);
+    setSaveSpinning(false);
+  }, [onOk]);
 
   const handleDelete = React.useCallback(async () => {
-    if (isBusy) return;
-    setSpinning({ delete: true });
+    setDeleteSpinning(true);
     await delay(300);
     onOk({
       delete: true,
     });
-    setSpinning({ delete: false });
-  }, [onOk, setSpinning, isBusy]);
+    setDeleteSpinning(false);
+  }, [onOk]);
 
-  useDidMountEffect(() => {
-    callDetailApi({ id: params.query?.id });
-  });
+  useDidMountEffect(() => {});
 
   return (
     <Modal width={800} {...{ open, onCancel, onOk: onOk as any, afterClose }}>
       {contextHolder}
       <Container>
         <ModalLayout.Header title={`샘플(상세#${params.query?.id})`}>
-          <Button size={"small"} onClick={handleTest} loading={spinning?.test}>
+          <Button size={"small"} onClick={handleTest} loading={testSpinning}>
             TEST
           </Button>
         </ModalLayout.Header>
@@ -97,10 +92,10 @@ function DetailModal({ open, onOk, onCancel, afterClose, params }: Props) {
           <Loading active={detailSpinning} />
         </Body>
         <Footer>
-          <Button type='primary' onClick={handleSave} loading={spinning?.save}>
+          <Button type='primary' onClick={handleSave} loading={saveSpinning}>
             {btnT("저장")}
           </Button>
-          <Button onClick={handleDelete} loading={spinning?.delete}>
+          <Button onClick={handleDelete} loading={deleteSpinning}>
             {btnT("삭제")}
           </Button>
           <Button onClick={onCancel}>{btnT("취소")}</Button>

@@ -16,8 +16,6 @@ import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 
 interface ListRequest extends ExampleListRequest {}
 
-interface DetailRequest extends ExampleDetailRequest {}
-
 interface DtoItem extends ExampleItem {}
 
 interface MetaData {
@@ -32,8 +30,6 @@ interface States extends MetaData {
   listSpinning: boolean;
   listData: AXFDGDataItem<DtoItem>[];
   listPage: AXFDGPage;
-  detailSpinning: boolean;
-  detail?: DtoItem;
 }
 
 interface Actions extends PageStoreActions<States> {
@@ -43,8 +39,6 @@ interface Actions extends PageStoreActions<States> {
   setListSortParams: (sortParams: AXFDGSortParam[]) => void;
   callListApi: (request?: ListRequest) => Promise<void>;
   changeListPage: (currentPage: number, pageSize?: number) => Promise<void>;
-  setDetailSpinning: (spinning: boolean) => void;
-  callDetailApi: (request?: DetailRequest) => Promise<void>;
 }
 
 // create states
@@ -62,7 +56,6 @@ const createState: States = {
     totalPages: 0,
   },
   listSortParams: [],
-  detailSpinning: false,
 };
 
 // create actions
@@ -103,19 +96,6 @@ const createActions: StoreActions<States & Actions, Actions> = (set, get) => ({
       pageNumber,
       pageSize,
     });
-  },
-  setDetailSpinning: (spinning) => set({ detailSpinning: spinning }),
-  callDetailApi: async (request) => {
-    set({ detailSpinning: true });
-
-    try {
-      const response = await ExampleService.detail(request);
-      console.log(response);
-
-      set({ detail: response.rs });
-    } finally {
-      set({ detailSpinning: false });
-    }
   },
   syncMetadata: (s = createState) => {
     const metaData: MetaData = {
