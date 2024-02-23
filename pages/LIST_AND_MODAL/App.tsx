@@ -132,11 +132,7 @@ function App({}: Props) {
           </Button>
         </ProgramTitle>
 
-        <ButtonGroup compact>
-          {programFn?.fn01 && <Button onClick={handleSearch}>{btnT("검색")}</Button>}
-
-          <Button onClick={handleSearch}>{btnT("검색")}</Button>
-        </ButtonGroup>
+        <ButtonGroup compact>{programFn?.fn01 && <Button onClick={handleSearch}>{btnT("검색")}</Button>}</ButtonGroup>
       </Header>
 
       <Body>
