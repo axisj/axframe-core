@@ -111,6 +111,7 @@ function main() {
         iconTy: "Default",
         progCd: "${programTypeName}",
         children: [],
+        userGroup: ["ROLE_ADMIN", "ROLE_ASP", "ROLE_USER"],
       },
       /* ##INSERT_MENU_POSITION## */`,
       )
