@@ -42,9 +42,9 @@ export const SearchParamValuesFinder: SearchParamComponent = ({
             placeholder={placeholder}
             options={value}
             labelInValue
-            // open={false}
             maxTagCount='responsive'
             allowClear
+            suffixIcon={null}
           />
         </Form.Item>
         <Button onClick={handleSearch} style={{ width: 30 }} icon={<AXFISearch />} disabled={disabled} />
