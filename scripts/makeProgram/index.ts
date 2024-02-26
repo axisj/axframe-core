@@ -81,7 +81,7 @@ function main() {
 
     routesFileRawNew = routesFileRawNew.replace(
       "/* ##INSERT_ROUTE_POSITION## */",
-      `${programTypeName} : {
+      `${programTypeName}: {
     program_type: PROGRAM_TYPES.${programTypeName},
     path: "${p.url}",
   },
@@ -111,6 +111,7 @@ function main() {
         iconTy: "Default",
         progCd: "${programTypeName}",
         children: [],
+        userGroup: ["ROLE_ADMIN", "ROLE_ASP", "ROLE_USER"],
       },
       /* ##INSERT_MENU_POSITION## */`,
       )
