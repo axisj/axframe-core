@@ -34,6 +34,7 @@ interface Props extends IParam {
   onClickExtraButton?: (params: Record<string, any>) => void;
   onChangedComponentValue?: () => void;
   allowClear?: boolean;
+  showSearch?: boolean;
 }
 
 export type SearchParamComponentProp<R> = {
