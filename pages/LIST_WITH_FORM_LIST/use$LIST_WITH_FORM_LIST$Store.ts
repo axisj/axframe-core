@@ -15,7 +15,7 @@ import { pageStoreActions } from "@core/stores/pageStoreActions";
 import React from "react";
 import omit from "lodash/omit";
 import { convertDateToString } from "@core/utils/object";
-import { addDataGridList, delDataGridList } from "@core/utils/array";
+import { addDataGridList, delDataGridList } from "@axframe/utils";
 import { ProgramFn } from "@types";
 import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 

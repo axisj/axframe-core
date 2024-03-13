@@ -2,7 +2,7 @@ import * as React from "react";
 import { StatCol, StatHeadTr, StatTableStyleProps } from "./types";
 import styled from "@emotion/styled";
 import StatTableColResizer from "./StatTableColResizer";
-import { dangerouslySetInnerHTML } from "../../utils/string";
+import { dangerouslySetInnerHTML } from "@axframe/utils";
 
 interface Props {
   marginLeft?: number;

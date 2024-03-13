@@ -8,7 +8,7 @@ import { shallow } from "zustand/shallow";
 import { PageStoreActions, StoreActions } from "@core/stores/types";
 import { pageStoreActions } from "@core/stores/pageStoreActions";
 import React from "react";
-import { addDataGridList, delDataGridList } from "@core/utils/array";
+import { addDataGridList, delDataGridList } from "@axframe/utils";
 import { ProgramFn } from "@types";
 import { EXAMPLE_ROUTERS } from "@core/router/exampleRouter";
 

@@ -1,7 +1,6 @@
-import React from "react";
+import { IMousePosition, mouseEventSubscribe } from "@axframe/utils";
 import styled from "@emotion/styled";
-import { mouseEventSubscribe } from "@core/utils/event";
-import { IMousePosition } from "@core/utils/types";
+import React from "react";
 
 interface Props {
   containerRef?: React.RefObject<HTMLDivElement>;

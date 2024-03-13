@@ -1,7 +1,7 @@
 import { Loading } from "@core/components/common";
 import { useBtnI18n, useDidMountEffect, useI18n, useSpinning } from "hooks";
 import { useDrawerStore } from "@core/stores/useDrawerStore";
-import { delay } from "@core/utils/thread/timing";
+import { delay } from "@axframe/utils";
 import { Badge, Button, Descriptions, Drawer, message, Space } from "antd";
 import React from "react";
 import { use$LIST_AND_DRAWER$Store } from "./use$LIST_AND_DRAWER$Store";

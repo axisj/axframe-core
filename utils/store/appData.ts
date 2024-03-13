@@ -1,5 +1,5 @@
 import LZUTF8 from "lzutf8";
-import { getCookie, setCookie } from "../cookie";
+import { getCookie, setCookie } from "@axframe/utils";
 
 interface AppData {
   name: string;

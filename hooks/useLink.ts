@@ -3,7 +3,7 @@ import { generatePath, useNavigate } from "react-router-dom";
 import { usePageTabStore } from "stores";
 import { getFlattedMenus } from "@core/utils/store";
 import { MenuItem, RawRoute, ROUTES_LIST, useAppMenu } from "router";
-import { stringFormat } from "@core/utils/string";
+import { stringFormat } from "@axframe/utils";
 
 export interface MetadataLinkByRoute {
   labels?: {

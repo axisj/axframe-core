@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { mouseEventSubscribe } from "@core/utils/event";
-import { delay } from "@core/utils/thread/timing";
+import { mouseEventSubscribe } from "@axframe/utils";
+import { delay } from "@axframe/utils";
 
 interface StyledProps {
   hideHandle?: boolean;

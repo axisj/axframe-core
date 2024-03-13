@@ -1,6 +1,6 @@
 import { Loading } from "@core/components/common";
 import { useModalStore } from "@core/stores/useModalStore";
-import { delay } from "@core/utils/thread/timing";
+import { delay } from "@axframe/utils";
 import styled from "@emotion/styled";
 import { Badge, Button, Descriptions, message, Modal } from "antd";
 import { useBtnI18n, useDidMountEffect, useI18n } from "hooks";

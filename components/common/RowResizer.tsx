@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { mouseEventSubscribe } from "@core/utils/event";
-import { IMousePosition } from "@core/utils/types";
+import { mouseEventSubscribe } from "@axframe/utils";
+import { IMousePosition } from "@axframe/utils";
 import { alpha } from "../../../styles/palette/colorUtil";
 
 interface Props {

@@ -4,11 +4,11 @@ import { StatTableProps } from "./types";
 import { StatTableTHead } from "./StatTableTHead";
 import { StatTableTBody } from "./StatTableTBody";
 import { StatTableTFoot } from "./StatTableTFoot";
-import { Loading } from "../common";
-import { SMixinScrollerStyle } from "../../styles/emotion";
+import { Loading } from "@core/components/common";
+import { SMixinScrollerStyle } from "@core/styles/emotion";
 import { StatTableRawBody } from "./StatTableRawBody";
 import { StatTableRawFoot } from "./StatTableRawFoot";
-import { alpha } from "../../../styles/palette/colorUtil";
+import { alpha } from "styles/palette/colorUtil";
 
 function StatTable<T = Record<string, any>>({
   width,

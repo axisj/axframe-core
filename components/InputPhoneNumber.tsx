@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { phoneNumFormatter, phoneNumParser } from "../utils/antd";
+import { phoneNumFormatter, phoneNumParser } from "@axframe/utils";
 
 interface Props {
   name: string;
