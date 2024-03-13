@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs-extra";
-import { themePalette } from "../../styles/theme.ts";
+import { themePalette } from "../../styles/theme";
 import * as less from "less";
 
 const srcPath = "../../styles/theme.ts";

@@ -2,7 +2,7 @@ import { ApiError } from "@core/services/ApiError";
 import { CustomError } from "@core/services/CustomError";
 import { ApiErrorCode } from "@types";
 import i18n from "i18n";
-import { dialogModal, DialogRequest } from "./dialogModal.tsx";
+import { dialogModal, DialogRequest } from "./dialogModal";
 
 export async function alertDialog(params?: DialogRequest) {
   await dialogModal({

@@ -11,7 +11,7 @@ import { Button, Divider, Modal } from "antd";
 import { useBtnI18n } from "hooks";
 import React, { useMemo } from "react";
 import { ApiErrorCode } from "../../../@types";
-import { useModalStore } from "../../stores/useModalStore.ts";
+import { useModalStore } from "../../stores/useModalStore";
 import { SMixinFlexRow } from "../../styles/emotion";
 
 export type DialogType = "info" | "success" | "error" | "warning" | "confirm";
