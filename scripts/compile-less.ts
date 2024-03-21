@@ -3,7 +3,7 @@ import * as fs from "fs-extra";
 import { themePalette } from "../../styles/theme";
 import * as less from "less";
 
-const srcPath = "../../styles/theme.ts";
+const srcPath = "../../styles/theme";
 const srcTheme = path.resolve(__dirname, srcPath);
 
 function compileLESS(from, to) {
